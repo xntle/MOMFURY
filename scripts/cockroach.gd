@@ -22,7 +22,7 @@ func _physics_process(delta):
 	if dash_timer <= 0.0:
 		is_dashing = true
 		dash_time_left = dash_duration
-		dash_timer = randf_range(1.0, 3.0)  
+		dash_timer = randf_range(1.0, 3.0)
 
 	# Dash or normal move
 	if is_dashing:
