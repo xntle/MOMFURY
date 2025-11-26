@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bve1pou0gt1v4"]
+[gd_scene load_steps=11 format=3 uid="uid://bve1pou0gt1v4"]
 
 [ext_resource type="PackedScene" uid="uid://kk3crf462xob" path="res://scene/House.tscn" id="1_e7hha"]
 [ext_resource type="PackedScene" uid="uid://5wrlhjc0vedk" path="res://scene/Cockroach.tscn" id="1_t585p"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://v1xuhkejwyw7" path="res://scene/main_menu.tscn" id="4_1qeit"]
 [ext_resource type="Script" uid="uid://lyimuq4183ha" path="res://scripts/pause_menu.gd" id="5_0qanc"]
 [ext_resource type="FontFile" uid="uid://box1b2tla1jkp" path="res://assets/fonts/MegamaxJonathanToo-YqOq2.ttf" id="6_qto5f"]
+[ext_resource type="Script" uid="uid://dloc7t0utspjp" path="res://scripts/health_label.gd" id="7_0qanc"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4cigq"]
 bg_color = Color(0.07058824, 0.20784314, 0.14117648, 1)
@@ -87,3 +88,12 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_4cigq")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_f6bub")
 theme_override_styles/hover = SubResource("StyleBoxFlat_r3aus")
 text = "Quit"
+
+[node name="HealthLabel" type="Label" parent="UI" node_paths=PackedStringArray("player")]
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_fonts/font = ExtResource("6_qto5f")
+theme_override_font_sizes/font_size = 32
+text = "Health: 100"
+script = ExtResource("7_0qanc")
+player = NodePath("../../Player")
