@@ -1,8 +1,35 @@
-[gd_scene load_steps=4 format=3 uid="uid://bve1pou0gt1v4"]
+[gd_scene load_steps=10 format=3 uid="uid://bve1pou0gt1v4"]
 
 [ext_resource type="PackedScene" uid="uid://kk3crf462xob" path="res://scene/House.tscn" id="1_e7hha"]
 [ext_resource type="PackedScene" uid="uid://5wrlhjc0vedk" path="res://scene/Cockroach.tscn" id="1_t585p"]
 [ext_resource type="PackedScene" uid="uid://ctnihbseogqdf" path="res://scene/Player.tscn" id="4_0qanc"]
+[ext_resource type="PackedScene" uid="uid://v1xuhkejwyw7" path="res://scene/main_menu.tscn" id="4_1qeit"]
+[ext_resource type="Script" uid="uid://lyimuq4183ha" path="res://scripts/pause_menu.gd" id="5_0qanc"]
+[ext_resource type="FontFile" uid="uid://box1b2tla1jkp" path="res://assets/fonts/MegamaxJonathanToo-YqOq2.ttf" id="6_qto5f"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4cigq"]
+bg_color = Color(0.07058824, 0.20784314, 0.14117648, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f6bub"]
+bg_color = Color(0, 0.36078432, 0.2901961, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r3aus"]
+bg_color = Color(0, 0.7019608, 0.57254905, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
 
 [node name="Game" type="Node2D"]
 
@@ -18,3 +45,45 @@ position = Vector2(64, 30)
 
 [node name="PoopEnemy2" parent="." instance=ExtResource("1_t585p")]
 position = Vector2(110, 44)
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Pause Menu" parent="UI" instance=ExtResource("4_1qeit")]
+process_mode = 3
+script = ExtResource("5_0qanc")
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="UI/Pause Menu"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 12
+
+[node name="ResumeButton" type="Button" parent="UI/Pause Menu/VBoxContainer2"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("6_qto5f")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_4cigq")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_f6bub")
+theme_override_styles/hover = SubResource("StyleBoxFlat_r3aus")
+text = "Resume"
+
+[node name="QuitButton" type="Button" parent="UI/Pause Menu/VBoxContainer2"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("6_qto5f")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_4cigq")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_f6bub")
+theme_override_styles/hover = SubResource("StyleBoxFlat_r3aus")
+text = "Quit"
