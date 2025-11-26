@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://vw2tidtvrrci"]
+
+[ext_resource type="Texture2D" uid="uid://dscd4y8ji3g6u" path="res://characters/pixel-art-cartoon-poop-character-png.png" id="1_hdd6w"]
+
+[node name="Poop" type="Node2D"]
+
+[node name="PixelArtCartoonPoopCharacterPng" type="Sprite2D" parent="."]
+position = Vector2(41, 39)
+scale = Vector2(0.111428574, 0.111428574)
+texture = ExtResource("1_hdd6w")

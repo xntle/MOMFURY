@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://cmnw0o6ebecwl" path="res://characters/IMG_0105.jpg" id="2_fvtld"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_onrkg"]
-radius = 4.0
+radius = 7.0
 
 [node name="Player" type="CharacterBody2D"]
 collision_mask = 6
@@ -18,10 +18,10 @@ limit_smoothed = true
 position_smoothing_enabled = true
 
 [node name="Img0105" type="Sprite2D" parent="."]
-position = Vector2(6, -7)
-scale = Vector2(0.011183456, 0.011159033)
+position = Vector2(8.531252, -3.187101)
+scale = Vector2(0.016916756, 0.016879812)
 texture = ExtResource("2_fvtld")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(6, -4)
+position = Vector2(9, 1)
 shape = SubResource("CircleShape2D_onrkg")
