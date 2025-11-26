@@ -1,15 +1,15 @@
 extends CharacterBody2D
 class_name PlayerController
 
-@export var move_speed = 20.0
-@export var roll_speed = 150.0
-@export var roll_time = 0.15
-@export var roll_cooldown = 0.4
+@export var move_speed: float = 30.0
+@export var roll_speed: float = 300.0
+@export var roll_time: float = 0.15
+@export var roll_cooldown: float = 0.4
 
 var direction: Vector2
-var is_rolling = false
-var roll_timer = 0.0
-var cooldown_timer = 0.0
+var is_rolling:bool = false
+var roll_timer:float = 0.0
+var cooldown_timer:float = 0.0
 var roll_dir: Vector2
 
 @export var roll_mask = 4
