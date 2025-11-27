@@ -16,5 +16,6 @@ scale = Vector2(49.77173, 44.141666)
 texture = SubResource("CanvasTexture_g70a0")
 
 [node name="PoisonArea" type="CollisionShape2D" parent="."]
+visibility_layer = 2
 scale = Vector2(2.7744212, 2.7744212)
 shape = SubResource("CircleShape2D_g70a0")
