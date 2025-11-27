@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://bscx3nave5tmx"]
+
+[ext_resource type="Script" uid="uid://dl0a44aax8e8q" path="res://scripts/slipper.gd" id="1_2b4ql"]
+[ext_resource type="Texture2D" uid="uid://cj80pxhbx6pxw" path="res://scene/slipper.png" id="1_bp77f"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2b4ql"]
+radius = 103.00485
+
+[node name="slip" type="Area2D"]
+light_mask = 0
+visibility_layer = 2
+script = ExtResource("1_2b4ql")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 1)
+shape = SubResource("CircleShape2D_2b4ql")
+
+[node name="WeaponPivot" type="Marker2D" parent="."]
+position = Vector2(0, 1)
+
+[node name="Slipper" type="Sprite2D" parent="WeaponPivot"]
+position = Vector2(26, 4)
+texture = ExtResource("1_bp77f")
+
+[node name="ShootingPoint" type="Marker2D" parent="WeaponPivot/Slipper"]

@@ -54,6 +54,7 @@ scale = Vector2(0.021696432, 0.021696432)
 texture = ExtResource("1_ofpi3")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+light_mask = 2
 position = Vector2(-1, 0)
 scale = Vector2(0.734375, 0.9038462)
 sprite_frames = SubResource("SpriteFrames_cevxh")

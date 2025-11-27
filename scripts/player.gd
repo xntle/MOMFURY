@@ -72,12 +72,7 @@ func _physics_process(delta):
 		roll_timer = roll_time
 		roll_dir = direction.normalized()
 		collision_mask = roll_mask
-		
-
 		return
-
-
-
 
 	# normal movement
 	velocity = move_speed * direction * delta * 200
