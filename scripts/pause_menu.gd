@@ -1,7 +1,6 @@
 extends Control
 
 func _ready():
-	# adjust node paths if your names differ
 	$VBoxContainer2/ResumeButton.pressed.connect(_on_resume_pressed)
 	$VBoxContainer2/QuitButton.pressed.connect(_on_quit_pressed)
 	visible = false

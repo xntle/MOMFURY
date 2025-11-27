@@ -1,12 +1,11 @@
 extends Control
 
 func _ready():
-	# adjust node paths if your names differ
 	$VBoxContainer/StartButton.pressed.connect(_on_start_pressed)
 	$VBoxContainer/QuitButton.pressed.connect(_on_quit_pressed)
 
 func _on_start_pressed():
-	get_tree().change_scene_to_file("res://scene/game.tscn") # <-- your game scene path
+	get_tree().change_scene_to_file("res://scene/game.tscn") 
 
 func _on_quit_pressed():
 	get_tree().quit()
