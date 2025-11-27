@@ -7,7 +7,7 @@ class_name PlayerController
 @export var roll_cooldown: float = 0.4
 @export var max_health: float = 100.0
 
-var current_health = max_health
+var current_health: float = max_health
 var direction: Vector2
 var is_rolling:bool = false
 var roll_timer:float = 0.0

@@ -6,7 +6,7 @@
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_g70a0"]
 
-[node name="BeerPoison" type="StaticBody2D"]
+[node name="BeerPoison" type="Area2D"]
 scale = Vector2(1, 0.9940951)
 script = ExtResource("1_g70a0")
 
@@ -19,3 +19,9 @@ texture = SubResource("CanvasTexture_g70a0")
 visibility_layer = 2
 scale = Vector2(2.7744212, 2.7744212)
 shape = SubResource("CircleShape2D_g70a0")
+
+[node name="DamageTimer" type="Timer" parent="."]
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
+[connection signal="timeout" from="DamageTimer" to="." method="_on_damage_timer_timeout"]
