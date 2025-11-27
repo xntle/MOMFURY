@@ -9,6 +9,7 @@
 [node name="House" parent="." instance=ExtResource("1_e7hha")]
 
 [node name="Player" parent="." instance=ExtResource("4_0qanc")]
+position = Vector2(-9, -1)
 
 [node name="PoopEnemy3" parent="." instance=ExtResource("1_t585p")]
 position = Vector2(74, 51)
