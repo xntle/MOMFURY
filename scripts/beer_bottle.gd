@@ -41,6 +41,6 @@ func _spawn_poison_floor() -> void:
 
 func _on_body_entered(body: Node2D) -> void:
 	if body is PlayerController:
-		_spawn_poison_floor()
+		call_deferred("_spawn_poison_floor")
 		queue_free()
 		body.take_damage(10)
