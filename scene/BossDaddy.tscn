@@ -43,17 +43,18 @@ animations = [{
 script = ExtResource("1_u22dk")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(6.079999, 6.079999)
 shape = SubResource("CircleShape2D_u22dk")
 
 [node name="PixelArtCartoonPoopCharacterPng" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(0, -3)
 scale = Vector2(0.021696432, 0.021696432)
 texture = ExtResource("2_3xl6v")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-visible = false
-position = Vector2(-5.9604645e-08, -5.9604645e-08)
-scale = Vector2(0.46875, 0.5769231)
+position = Vector2(-1, -1)
+scale = Vector2(2.8499994, 3.5076916)
 sprite_frames = SubResource("SpriteFrames_3xl6v")
 animation = &"new_animation_1"
 autoplay = "new_animation_1"

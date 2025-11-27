@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bve1pou0gt1v4"]
+[gd_scene load_steps=16 format=3 uid="uid://bve1pou0gt1v4"]
 
 [ext_resource type="PackedScene" uid="uid://kk3crf462xob" path="res://scene/House.tscn" id="1_e7hha"]
 [ext_resource type="PackedScene" uid="uid://5wrlhjc0vedk" path="res://scene/Cockroach.tscn" id="1_t585p"]
@@ -8,10 +8,10 @@
 [ext_resource type="Script" uid="uid://lyimuq4183ha" path="res://scripts/pause_menu.gd" id="5_0qanc"]
 [ext_resource type="PackedScene" path="res://scene/A-.tscn" id="5_4cigq"]
 [ext_resource type="FontFile" uid="uid://box1b2tla1jkp" path="res://assets/fonts/MegamaxJonathanToo-YqOq2.ttf" id="6_qto5f"]
-[ext_resource type="PackedScene" uid="uid://bog8uq3cg74nk" path="res://scene/BossDaddy.tscn" id="7_0qanc"]
+[ext_resource type="Script" uid="uid://dloc7t0utspjp" path="res://scripts/health_label.gd" id="7_0qanc"]
 [ext_resource type="PackedScene" uid="uid://h4wwf7ms8id4" path="res://scene/BeerBottle.tscn" id="8_qto5f"]
 [ext_resource type="PackedScene" uid="uid://btsx385fwub5g" path="res://scene/BeerPoison.tscn" id="9_4cigq"]
-[ext_resource type="Script" uid="uid://dloc7t0utspjp" path="res://scripts/health_label.gd" id="7_0qanc"]
+[ext_resource type="PackedScene" uid="uid://bog8uq3cg74nk" path="res://scene/BossDaddy.tscn" id="10_l37l5"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4cigq"]
 bg_color = Color(0.07058824, 0.20784314, 0.14117648, 1)
@@ -56,8 +56,10 @@ visible = false
 position = Vector2(110, 44)
 
 [node name="Poop" parent="." instance=ExtResource("4_qto5f")]
+visible = false
 
 [node name="A-" parent="." instance=ExtResource("5_4cigq")]
+visible = false
 
 [node name="UI" type="CanvasLayer" parent="."]
 
@@ -101,18 +103,6 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_f6bub")
 theme_override_styles/hover = SubResource("StyleBoxFlat_r3aus")
 text = "Quit"
 
-[node name="BossDaddy" parent="." instance=ExtResource("7_0qanc")]
-position = Vector2(72, 7)
-projectile_scene = ExtResource("8_qto5f")
-poison_floor_scene = ExtResource("9_4cigq")
-
-[node name="BeerProjectile" parent="." instance=ExtResource("8_qto5f")]
-visible = false
-speed = 120.0
-
-[node name="BeerPoison" parent="." instance=ExtResource("9_4cigq")]
-visible = false
-collision_layer = 3
 [node name="HealthLabel" type="Label" parent="UI" node_paths=PackedStringArray("player")]
 offset_right = 40.0
 offset_bottom = 23.0
@@ -121,3 +111,7 @@ theme_override_font_sizes/font_size = 32
 text = "Health: 100"
 script = ExtResource("7_0qanc")
 player = NodePath("../../Player")
+
+[node name="BossDaddy" parent="." instance=ExtResource("10_l37l5")]
+projectile_scene = ExtResource("8_qto5f")
+poison_floor_scene = ExtResource("9_4cigq")

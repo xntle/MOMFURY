@@ -15,7 +15,7 @@ var throw_time_left := 0.0
 
 func _ready():
 	# First random cooldown 1 to 3 seconds
-	throw_timer = randf_range(1.0, 10.0)  
+	throw_timer = randf_range(1.0, 4.0)  
 
 func _physics_process(delta):
 	throw_timer -= delta
