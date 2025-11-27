@@ -22,13 +22,11 @@ func _on_body_entered(body) -> void:
 	if body is PlayerController:
 		if body not in damage_bodies:
 			damage_bodies.append(body)
-			print("body entered")
 
 
 func _on_body_exited(body: Node2D) -> void:
 	if body in damage_bodies:
 		damage_bodies.erase(body) 
-		print("body exited")
 
 
 func _on_damage_timer_timeout() -> void:
