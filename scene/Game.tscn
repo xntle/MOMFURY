@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bve1pou0gt1v4"]
+[gd_scene load_steps=13 format=3 uid="uid://bve1pou0gt1v4"]
 
 [ext_resource type="PackedScene" uid="uid://kk3crf462xob" path="res://scene/House.tscn" id="1_e7hha"]
 [ext_resource type="PackedScene" uid="uid://5wrlhjc0vedk" path="res://scene/Cockroach.tscn" id="1_t585p"]
@@ -8,6 +8,7 @@
 [ext_resource type="FontFile" uid="uid://box1b2tla1jkp" path="res://assets/fonts/MegamaxJonathanToo-YqOq2.ttf" id="6_qto5f"]
 [ext_resource type="PackedScene" uid="uid://bog8uq3cg74nk" path="res://scene/BossDaddy.tscn" id="7_0qanc"]
 [ext_resource type="PackedScene" uid="uid://h4wwf7ms8id4" path="res://scene/BeerBottle.tscn" id="8_qto5f"]
+[ext_resource type="PackedScene" uid="uid://btsx385fwub5g" path="res://scene/BeerPoison.tscn" id="9_4cigq"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4cigq"]
 bg_color = Color(0.07058824, 0.20784314, 0.14117648, 1)
@@ -96,7 +97,12 @@ text = "Quit"
 [node name="BossDaddy" parent="." instance=ExtResource("7_0qanc")]
 position = Vector2(72, 7)
 projectile_scene = ExtResource("8_qto5f")
+poison_floor_scene = ExtResource("9_4cigq")
 
-[node name="Projectile" parent="." instance=ExtResource("8_qto5f")]
+[node name="BeerProjectile" parent="." instance=ExtResource("8_qto5f")]
 visible = false
 speed = 120.0
+
+[node name="BeerPoison" parent="." instance=ExtResource("9_4cigq")]
+visible = false
+collision_layer = 3

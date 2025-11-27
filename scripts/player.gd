@@ -68,3 +68,5 @@ func _physics_process(delta):
 
 	move_and_slide()
 	
+func _on_body_entered(body) -> void:
+	print("ENTERE", body)

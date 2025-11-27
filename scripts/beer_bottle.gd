@@ -1,22 +1,39 @@
 extends Area2D
 
-@export var speed: float = 150.0
-var direction: Vector2 = Vector2.RIGHT
-@export var life_time: float = 2.0
+@export var speed: float = 400.0
+@export var max_distance: float = 200.0
 
-var _time_alive: float = 0.0
+var direction: Vector2 = Vector2.ZERO
+var _start_position: Vector2
+var poison_floor_scene: PackedScene
+
+func _ready() -> void:
+	_start_position = global_position
 
 func _physics_process(delta: float) -> void:
-	# Move the projectile
-	position += direction * speed * delta
+	# Move grenade
+	global_position += direction * speed * delta
 
-	# Track lifetime and free when done
-	_time_alive += delta
-	if _time_alive >= life_time:
+	# Optional: rotate for style
+	rotation += 10.0 * delta
+
+	# Check distance traveled
+	var traveled := _start_position.distance_to(global_position)
+	if traveled >= max_distance:
+		_spawn_poison_floor()
 		queue_free()
 
-func _on_body_entered(body: Node) -> void:
-	# Example: if the body has a health script or is an enemy
-	if body.has_method("take_damage"):
-		body.take_damage(1)
-	queue_free()  # destroy projectile on hit
+func _stop_grenade() -> void:
+	speed = 0
+	direction = Vector2.ZERO
+		
+func _spawn_poison_floor() -> void:
+	if poison_floor_scene == null:
+		return
+
+	_stop_grenade()
+	var poison = poison_floor_scene.instantiate()
+
+	get_tree().current_scene.add_child(poison)
+	poison.global_position = global_position
+	poison.time_alive = 0
