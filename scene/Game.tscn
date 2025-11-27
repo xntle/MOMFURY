@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bve1pou0gt1v4"]
+[gd_scene load_steps=12 format=3 uid="uid://bve1pou0gt1v4"]
 
 [ext_resource type="PackedScene" uid="uid://kk3crf462xob" path="res://scene/House.tscn" id="1_e7hha"]
 [ext_resource type="PackedScene" uid="uid://5wrlhjc0vedk" path="res://scene/Cockroach.tscn" id="1_t585p"]
@@ -6,6 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://v1xuhkejwyw7" path="res://scene/main_menu.tscn" id="4_1qeit"]
 [ext_resource type="Script" uid="uid://lyimuq4183ha" path="res://scripts/pause_menu.gd" id="5_0qanc"]
 [ext_resource type="FontFile" uid="uid://box1b2tla1jkp" path="res://assets/fonts/MegamaxJonathanToo-YqOq2.ttf" id="6_qto5f"]
+[ext_resource type="PackedScene" uid="uid://bog8uq3cg74nk" path="res://scene/BossDaddy.tscn" id="7_0qanc"]
+[ext_resource type="PackedScene" uid="uid://h4wwf7ms8id4" path="res://scene/BeerBottle.tscn" id="8_qto5f"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4cigq"]
 bg_color = Color(0.07058824, 0.20784314, 0.14117648, 1)
@@ -38,12 +40,15 @@ border_color = Color(0, 0, 0, 1)
 [node name="Player" parent="." instance=ExtResource("4_0qanc")]
 
 [node name="PoopEnemy3" parent="." instance=ExtResource("1_t585p")]
+visible = false
 position = Vector2(74, 51)
 
 [node name="PoopEnemy" parent="." instance=ExtResource("1_t585p")]
+visible = false
 position = Vector2(64, 30)
 
 [node name="PoopEnemy2" parent="." instance=ExtResource("1_t585p")]
+visible = false
 position = Vector2(110, 44)
 
 [node name="UI" type="CanvasLayer" parent="."]
@@ -87,3 +92,11 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_4cigq")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_f6bub")
 theme_override_styles/hover = SubResource("StyleBoxFlat_r3aus")
 text = "Quit"
+
+[node name="BossDaddy" parent="." instance=ExtResource("7_0qanc")]
+position = Vector2(72, 7)
+projectile_scene = ExtResource("8_qto5f")
+
+[node name="Projectile" parent="." instance=ExtResource("8_qto5f")]
+visible = false
+speed = 120.0
