@@ -18,6 +18,7 @@ var normal_mask = 6
 
 func _ready():
 	normal_mask = collision_mask
+	$AnimationPlayer.play("idle_front")
 
 
 func _physics_process(delta):
@@ -38,7 +39,6 @@ func _physics_process(delta):
 			return
 
 		return  
-
 	# movement input
 	if Input.is_action_pressed("move_down"):
 		direction.y = 1
