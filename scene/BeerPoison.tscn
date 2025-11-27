@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://btsx385fwub5g"]
 
-[ext_resource type="Script" uid="uid://b4n15i8unfjm3" path="res://scene/beer_poison.gd" id="1_g70a0"]
+[ext_resource type="Script" uid="uid://b4n15i8unfjm3" path="res://scripts/beer_poison.gd" id="1_g70a0"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_g70a0"]
 

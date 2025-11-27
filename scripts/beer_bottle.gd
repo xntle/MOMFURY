@@ -1,7 +1,7 @@
 extends Area2D
 
 @export var speed: float = 400.0
-@export var max_distance: float = 200.0
+@export var max_distance: float = 100.0
 
 var direction: Vector2 = Vector2.ZERO
 var _start_position: Vector2
