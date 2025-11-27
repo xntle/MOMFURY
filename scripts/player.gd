@@ -83,6 +83,9 @@ func _physics_process(delta):
 	velocity = move_speed * direction * delta * 200
 
 	move_and_slide()
+	
+func _on_body_entered(body) -> void:
+	print("ENTERE", body)
 #Damage function
 func take_damage(amount: int) -> void:
 	current_health -= amount
