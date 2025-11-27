@@ -4,9 +4,9 @@
 [ext_resource type="PackedScene" uid="uid://5wrlhjc0vedk" path="res://scene/Cockroach.tscn" id="1_t585p"]
 [ext_resource type="PackedScene" uid="uid://ctnihbseogqdf" path="res://scene/Player.tscn" id="4_0qanc"]
 [ext_resource type="PackedScene" uid="uid://v1xuhkejwyw7" path="res://scene/main_menu.tscn" id="4_1qeit"]
-[ext_resource type="PackedScene" uid="uid://1582bhu2oips" path="res://scene/Poop.tscn" id="4_qto5f"]
+[ext_resource type="PackedScene" path="res://scene/Poop.tscn" id="4_qto5f"]
 [ext_resource type="Script" uid="uid://lyimuq4183ha" path="res://scripts/pause_menu.gd" id="5_0qanc"]
-[ext_resource type="PackedScene" uid="uid://8j2jb0aw2yif" path="res://scene/A-.tscn" id="5_4cigq"]
+[ext_resource type="PackedScene" path="res://scene/A-.tscn" id="5_4cigq"]
 [ext_resource type="FontFile" uid="uid://box1b2tla1jkp" path="res://assets/fonts/MegamaxJonathanToo-YqOq2.ttf" id="6_qto5f"]
 [ext_resource type="Script" uid="uid://dloc7t0utspjp" path="res://scripts/health_label.gd" id="7_0qanc"]
 
