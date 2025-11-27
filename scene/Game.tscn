@@ -1,12 +1,9 @@
-[gd_scene load_steps=16 format=3 uid="uid://bve1pou0gt1v4"]
+[gd_scene load_steps=13 format=3 uid="uid://bve1pou0gt1v4"]
 
 [ext_resource type="PackedScene" uid="uid://kk3crf462xob" path="res://scene/House.tscn" id="1_e7hha"]
-[ext_resource type="PackedScene" uid="uid://5wrlhjc0vedk" path="res://scene/Cockroach.tscn" id="1_t585p"]
 [ext_resource type="PackedScene" uid="uid://ctnihbseogqdf" path="res://scene/Player.tscn" id="4_0qanc"]
 [ext_resource type="PackedScene" uid="uid://v1xuhkejwyw7" path="res://scene/main_menu.tscn" id="4_1qeit"]
-[ext_resource type="PackedScene" path="res://scene/Poop.tscn" id="4_qto5f"]
 [ext_resource type="Script" uid="uid://lyimuq4183ha" path="res://scripts/pause_menu.gd" id="5_0qanc"]
-[ext_resource type="PackedScene" path="res://scene/A-.tscn" id="5_4cigq"]
 [ext_resource type="FontFile" uid="uid://box1b2tla1jkp" path="res://assets/fonts/MegamaxJonathanToo-YqOq2.ttf" id="6_qto5f"]
 [ext_resource type="Script" uid="uid://dloc7t0utspjp" path="res://scripts/health_label.gd" id="7_0qanc"]
 [ext_resource type="PackedScene" uid="uid://h4wwf7ms8id4" path="res://scene/BeerBottle.tscn" id="8_qto5f"]
@@ -42,24 +39,6 @@ border_color = Color(0, 0, 0, 1)
 [node name="House" parent="." instance=ExtResource("1_e7hha")]
 
 [node name="Player" parent="." instance=ExtResource("4_0qanc")]
-
-[node name="PoopEnemy3" parent="." instance=ExtResource("1_t585p")]
-visible = false
-position = Vector2(74, 51)
-
-[node name="PoopEnemy" parent="." instance=ExtResource("1_t585p")]
-visible = false
-position = Vector2(64, 30)
-
-[node name="PoopEnemy2" parent="." instance=ExtResource("1_t585p")]
-visible = false
-position = Vector2(110, 44)
-
-[node name="Poop" parent="." instance=ExtResource("4_qto5f")]
-visible = false
-
-[node name="A-" parent="." instance=ExtResource("5_4cigq")]
-visible = false
 
 [node name="UI" type="CanvasLayer" parent="."]
 

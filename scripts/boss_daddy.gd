@@ -35,8 +35,9 @@ func _physics_process(delta):
 		is_throwing = false
 	velocity = direction * normal_speed
 
-	move_and_slide()
-	rotation = direction.angle() +90
+	#move_and_slide()
+	position += velocity * delta
+	#rotation = direction.angle() +90
 
 func shoot() -> void:
 	if projectile_scene == null:
