@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://ctnihbseogqdf"]
 
 [ext_resource type="Script" uid="uid://cbrwihmwrf8c6" path="res://scripts/player.gd" id="1_hjaqi"]
-[ext_resource type="Texture2D" uid="uid://bm8gd545v53qa" path="res://characters/Idle_Front_Sprite_Sheet.png" id="2_62i1b"]
+[ext_resource type="Texture2D" uid="uid://b577ymmi4a0cj" path="res://characters/Idle_Front_Sprite_Sheet-removebg-preview.png" id="2_62i1b"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_onrkg"]
 radius = 7.0
