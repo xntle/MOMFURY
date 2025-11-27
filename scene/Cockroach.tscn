@@ -1,11 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://5wrlhjc0vedk"]
+[gd_scene load_steps=10 format=3 uid="uid://5wrlhjc0vedk"]
 
 [ext_resource type="Texture2D" uid="uid://dscd4y8ji3g6u" path="res://characters/pixel-art-cartoon-poop-character-png.png" id="1_ofpi3"]
 [ext_resource type="Script" uid="uid://big42lkxshamh" path="res://scripts/cockroach.gd" id="1_rlyor"]
 [ext_resource type="Texture2D" uid="uid://cvv328m4ol46m" path="res://characters/cockroach.png" id="2_t7awp"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_wjlx1"]
-radius = 6.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_euy66"]
+size = Vector2(7, 11)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_t7awp"]
 atlas = ExtResource("2_t7awp")
@@ -39,12 +39,16 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oyald"]
+size = Vector2(8.75, 11.25)
+
 [node name="Cockroach" type="CharacterBody2D"]
 collision_mask = 7
 script = ExtResource("1_rlyor")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_wjlx1")
+position = Vector2(0.5, 0.5)
+shape = SubResource("RectangleShape2D_euy66")
 
 [node name="PixelArtCartoonPoopCharacterPng" type="Sprite2D" parent="."]
 visible = false
@@ -53,9 +57,17 @@ scale = Vector2(0.021696432, 0.021696432)
 texture = ExtResource("1_ofpi3")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(-5.9604645e-08, -5.9604645e-08)
+position = Vector2(-0.5, 0)
 scale = Vector2(0.46875, 0.5769231)
 sprite_frames = SubResource("SpriteFrames_cevxh")
 animation = &"new_animation_1"
 autoplay = "new_animation_1"
 frame_progress = 0.98307717
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0.625, 0.375)
+shape = SubResource("RectangleShape2D_oyald")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
