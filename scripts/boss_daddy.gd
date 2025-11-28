@@ -51,5 +51,4 @@ func shoot() -> void:
 
 	# Choose direction: here, facing right or using input/aim direction
 	projectile.direction = (player.global_position - global_position).normalized()
-	projectile.poison_floor_scene = poison_floor_scene
 	

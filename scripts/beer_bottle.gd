@@ -1,11 +1,12 @@
 extends Area2D
 
-@export var speed: float = 400.0
+@export var speed: float = 300.0
 @export var max_distance: float = 200.0
+@export var poison_floor_scene: PackedScene
 
 var direction: Vector2 = Vector2.ZERO
 var _start_position: Vector2
-var poison_floor_scene: PackedScene
+
 
 func _ready() -> void:
 	_start_position = global_position
