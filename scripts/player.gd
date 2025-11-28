@@ -75,13 +75,22 @@ func _physics_process(delta):
 
 
 	# dodge rolling
-	if Input.is_action_just_pressed("roll") and cooldown_timer <= 0 and direction != Vector2.ZERO:
+	if Input.is_action_just_pressed("roll") and cooldown_timer <= 0.0:
+		var roll_input_dir := direction
+
+		# If no current input, roll in the last move direction (facing)
+		if roll_input_dir == Vector2.ZERO:
+			roll_input_dir = last_move_dir
+
+	# Safety: if last_move_dir was ever zero (just in case), don't start roll
+		if roll_input_dir == Vector2.ZERO:
+			return
+
 		is_rolling = true
 		roll_timer = roll_time
-		roll_dir = direction.normalized()
+		roll_dir = roll_input_dir.normalized()
 		collision_mask = roll_mask
-		
-
+		anim.play("roll")
 		return
 
 	# normal movement
@@ -118,6 +127,11 @@ func _get_anim_name(dir: Vector2, is_moving: bool) -> String:
 
 
 func _update_animation() -> void:
+	if is_rolling:
+		if anim.current_animation != "roll":
+			anim.play("roll")
+		return
+		
 	var is_moving := direction != Vector2.ZERO and not is_rolling
 	var dir_vec := last_move_dir
 
