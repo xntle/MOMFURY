@@ -3,7 +3,7 @@ class_name PlayerController
 
 @export var move_speed: float = 30.0
 @export var roll_speed: float = 300.0
-@export var roll_time: float = 0.15
+@export var roll_time: float = 0.25
 @export var roll_cooldown: float = 0.4
 @export var max_health: float = 100.0
 
@@ -15,14 +15,6 @@ var cooldown_timer:float = 0.0
 var roll_dir: Vector2
 
 signal health_changed(new_health:int)
-
-@export var roll_mask = 4
-var normal_mask = 6
-
-
-func _ready():
-	normal_mask = collision_mask
-
 
 func _physics_process(delta):
 	# cooldown
@@ -38,7 +30,7 @@ func _physics_process(delta):
 		if roll_timer <= 0:
 			is_rolling = false
 			cooldown_timer = roll_cooldown
-			collision_mask = normal_mask
+			collision_layer = 1
 			return
 
 		return  
@@ -71,7 +63,7 @@ func _physics_process(delta):
 		is_rolling = true
 		roll_timer = roll_time
 		roll_dir = direction.normalized()
-		collision_mask = roll_mask
+		collision_layer = 4
 		
 
 		return
