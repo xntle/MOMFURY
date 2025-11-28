@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bm8gd545v53qa"
-path="res://.godot/imported/Idle_Front_Sprite_Sheet.png-9e9e62d7bd44d8d87086edd9b536a897.ctex"
+uid="uid://cob6ob6cowun4"
+path="res://.godot/imported/spritesheet-removebg-preview.png-40077ea95034e39f485aec86067a2e90.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://characters/Idle_Front_Sprite_Sheet.png"
-dest_files=["res://.godot/imported/Idle_Front_Sprite_Sheet.png-9e9e62d7bd44d8d87086edd9b536a897.ctex"]
+source_file="res://characters/spritesheet-removebg-preview.png"
+dest_files=["res://.godot/imported/spritesheet-removebg-preview.png-40077ea95034e39f485aec86067a2e90.ctex"]
 
 [params]
 

@@ -3,11 +3,11 @@
 [ext_resource type="PackedScene" uid="uid://kk3crf462xob" path="res://scene/House.tscn" id="1_e7hha"]
 [ext_resource type="PackedScene" uid="uid://ctnihbseogqdf" path="res://scene/Player.tscn" id="4_0qanc"]
 [ext_resource type="PackedScene" uid="uid://v1xuhkejwyw7" path="res://scene/main_menu.tscn" id="4_1qeit"]
-[ext_resource type="Script" uid="uid://lyimuq4183ha" path="res://scripts/pause_menu.gd" id="5_0qanc"]
+[ext_resource type="Script" path="res://scripts/pause_menu.gd" id="5_0qanc"]
 [ext_resource type="FontFile" uid="uid://box1b2tla1jkp" path="res://assets/fonts/MegamaxJonathanToo-YqOq2.ttf" id="6_qto5f"]
-[ext_resource type="Script" uid="uid://dloc7t0utspjp" path="res://scripts/health_label.gd" id="7_0qanc"]
+[ext_resource type="Script" path="res://scripts/health_label.gd" id="7_0qanc"]
 [ext_resource type="PackedScene" uid="uid://h4wwf7ms8id4" path="res://scene/BeerBottle.tscn" id="8_qto5f"]
-[ext_resource type="PackedScene" path="res://scene/BossDaddy.tscn" id="10_l37l5"]
+[ext_resource type="PackedScene" uid="uid://bog8uq3cg74nk" path="res://scene/BossDaddy.tscn" id="10_l37l5"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4cigq"]
 bg_color = Color(0.07058824, 0.20784314, 0.14117648, 1)
@@ -38,7 +38,6 @@ border_color = Color(0, 0, 0, 1)
 [node name="House" parent="." instance=ExtResource("1_e7hha")]
 
 [node name="Player" parent="." instance=ExtResource("4_0qanc")]
-position = Vector2(-9, -1)
 
 [node name="UI" type="CanvasLayer" parent="."]
 
@@ -92,4 +91,5 @@ script = ExtResource("7_0qanc")
 player = NodePath("../../Player")
 
 [node name="BossDaddy" parent="." instance=ExtResource("10_l37l5")]
+position = Vector2(84, -2)
 projectile_scene = ExtResource("8_qto5f")

@@ -1,30 +1,14 @@
-[gd_scene load_steps=7 format=3 uid="uid://ctnihbseogqdf"]
+[gd_scene load_steps=12 format=3 uid="uid://ctnihbseogqdf"]
 
 [ext_resource type="Script" uid="uid://cbrwihmwrf8c6" path="res://scripts/player.gd" id="1_hjaqi"]
-[ext_resource type="Texture2D" uid="uid://b577ymmi4a0cj" path="res://characters/Idle_Front_Sprite_Sheet-removebg-preview.png" id="2_62i1b"]
+[ext_resource type="Texture2D" uid="uid://cob6ob6cowun4" path="res://characters/spritesheet-removebg-preview.png" id="2_62i1b"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_onrkg"]
-radius = 7.0
-
-[sub_resource type="Animation" id="Animation_62i1b"]
-resource_name = "idle_front"
-length = 0.4
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Img0105:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [0, 1, 2]
-}
+radius = 8.12884
 
 [sub_resource type="Animation" id="Animation_y30ri"]
-length = 0.001
+length = 0.4
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -35,13 +19,120 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [0]
+"values": [2]
+}
+
+[sub_resource type="Animation" id="Animation_waelg"]
+resource_name = "idle_down"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Img0105:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0001, 0.13333334, 0.26666668),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [18, 18, 19, 20]
+}
+
+[sub_resource type="Animation" id="Animation_82gks"]
+resource_name = "move_right"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Img0105:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.13333334, 0.26666668),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [9, 10, 11]
+}
+
+[sub_resource type="Animation" id="Animation_dc1pm"]
+resource_name = "move_left"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Img0105:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.13333334, 0.26666668),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [8, 7, 6]
+}
+
+[sub_resource type="Animation" id="Animation_ea7gk"]
+resource_name = "move_up"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Img0105:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.13333334, 0.26666668),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [12, 13, 14]
+}
+
+[sub_resource type="Animation" id="Animation_62i1b"]
+resource_name = "move_diag_right"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Img0105:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.13333334, 0.26666668),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [3, 4, 5]
+}
+
+[sub_resource type="Animation" id="Animation_kqvfm"]
+resource_name = "move_dig_left"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Img0105:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.13333334, 0.26666668),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [2, 1, 0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_waelg"]
 _data = {
 &"RESET": SubResource("Animation_y30ri"),
-&"idle_front": SubResource("Animation_62i1b")
+&"idle_down": SubResource("Animation_waelg"),
+&"move_diag_left": SubResource("Animation_kqvfm"),
+&"move_diag_right": SubResource("Animation_62i1b"),
+&"move_left": SubResource("Animation_dc1pm"),
+&"move_right": SubResource("Animation_82gks"),
+&"move_up": SubResource("Animation_ea7gk")
 }
 
 [node name="Player" type="CharacterBody2D"]
@@ -59,10 +150,12 @@ position_smoothing_enabled = true
 position = Vector2(9, 0.99999976)
 texture = ExtResource("2_62i1b")
 hframes = 3
+vframes = 7
+frame = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 top_level = true
-position = Vector2(9, -2)
+position = Vector2(10, 3)
 scale = Vector2(1.1090735, -2.1000402)
 shape = SubResource("CircleShape2D_onrkg")
 

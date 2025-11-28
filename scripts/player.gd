@@ -19,10 +19,13 @@ signal health_changed(new_health:int)
 @export var roll_mask = 4
 var normal_mask = 6
 
+var last_move_dir: Vector2 = Vector2.DOWN
+@onready var anim: AnimationPlayer = $AnimationPlayer
 
 func _ready():
 	normal_mask = collision_mask
-	$AnimationPlayer.play("idle_front")
+	#$AnimationPlayer.play("idle_down")
+	anim.play("idle_down")
 
 
 func _physics_process(delta):
@@ -57,6 +60,11 @@ func _physics_process(delta):
 		direction.x = -1
 	else:
 		direction.x = 0
+		
+	# normalize diagonal speed
+	if direction != Vector2.ZERO:
+		direction = direction.normalized()
+		last_move_dir = direction
 
 	if current_health >= max_health:
 		current_health = max_health
@@ -76,14 +84,49 @@ func _physics_process(delta):
 
 		return
 
-
-
-
 	# normal movement
 	velocity = move_speed * direction * delta * 200
 
 	move_and_slide()
 	
+	_update_animation()
+
+## Animation
+func _get_anim_name(dir: Vector2, is_moving: bool) -> String:
+	if not is_moving:
+		return "idle_down"  # your only idle anim for now
+
+	var x := dir.x
+	var y := dir.y
+
+	# PURE CARDINAL DIRECTIONS
+	if abs(x) < 0.4 and y < -0.4:
+		return "move_up"
+	elif x < -0.4 and abs(y) < 0.4:
+		return "move_left"
+	elif x > 0.4 and abs(y) < 0.4:
+		return "move_right"
+
+	# DIAGONALS (any time both x and y have a decent magnitude)
+	if x < 0.0:
+		return "move_diag_left"
+	elif x > 0.0:
+		return "move_diag_right"
+
+	# moving straight down but you don't have move_down yet → reuse idle_down
+	return "idle_down"
+
+
+func _update_animation() -> void:
+	var is_moving := direction != Vector2.ZERO and not is_rolling
+	var dir_vec := last_move_dir
+
+	var anim_name := _get_anim_name(dir_vec, is_moving)
+
+	if anim.current_animation != anim_name:
+		anim.play(anim_name)
+		
+		
 func _on_body_entered(body) -> void:
 	print("ENTERE", body)
 #Damage function

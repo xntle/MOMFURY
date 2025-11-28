@@ -1972,4 +1972,5 @@ shape = SubResource("RectangleShape2D_3oudf")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="Furniture"]
 position = Vector2(66, 57)
+tile_map_data = PackedByteArray("AAD3/wUAAAAFAAkAAAD3/wQAAAAFAAgAAAD3/wAAAAAJABEAAAD3////AAACABAAAAA=")
 tile_set = SubResource("TileSet_e7ep0")
