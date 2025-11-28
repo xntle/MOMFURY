@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://ctnihbseogqdf"]
+[gd_scene load_steps=13 format=3 uid="uid://ctnihbseogqdf"]
 
 [ext_resource type="Script" uid="uid://cbrwihmwrf8c6" path="res://scripts/player.gd" id="1_hjaqi"]
 [ext_resource type="Texture2D" uid="uid://cob6ob6cowun4" path="res://characters/spritesheet-removebg-preview.png" id="2_62i1b"]
@@ -39,8 +39,8 @@ tracks/0/keys = {
 "values": [18, 18, 19, 20]
 }
 
-[sub_resource type="Animation" id="Animation_82gks"]
-resource_name = "move_right"
+[sub_resource type="Animation" id="Animation_kqvfm"]
+resource_name = "move_dig_left"
 length = 0.4
 loop_mode = 1
 tracks/0/type = "value"
@@ -53,41 +53,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.13333334, 0.26666668),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
-"values": [9, 10, 11]
-}
-
-[sub_resource type="Animation" id="Animation_dc1pm"]
-resource_name = "move_left"
-length = 0.4
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Img0105:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.13333334, 0.26666668),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [8, 7, 6]
-}
-
-[sub_resource type="Animation" id="Animation_ea7gk"]
-resource_name = "move_up"
-length = 0.4
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Img0105:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.13333334, 0.26666668),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [12, 13, 14]
+"values": [2, 1, 0]
 }
 
 [sub_resource type="Animation" id="Animation_62i1b"]
@@ -107,8 +73,8 @@ tracks/0/keys = {
 "values": [3, 4, 5]
 }
 
-[sub_resource type="Animation" id="Animation_kqvfm"]
-resource_name = "move_dig_left"
+[sub_resource type="Animation" id="Animation_dc1pm"]
+resource_name = "move_left"
 length = 0.4
 loop_mode = 1
 tracks/0/type = "value"
@@ -121,7 +87,58 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.13333334, 0.26666668),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
-"values": [2, 1, 0]
+"values": [8, 7, 6]
+}
+
+[sub_resource type="Animation" id="Animation_82gks"]
+resource_name = "move_right"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Img0105:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.13333334, 0.26666668),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [9, 10, 11]
+}
+
+[sub_resource type="Animation" id="Animation_ea7gk"]
+resource_name = "move_up"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Img0105:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.13333334, 0.26666668),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [12, 13, 14]
+}
+
+[sub_resource type="Animation" id="Animation_63jwq"]
+resource_name = "roll"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Img0105:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.033333335, 0.13333334),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [15, 16, 17]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_waelg"]
@@ -132,7 +149,8 @@ _data = {
 &"move_diag_right": SubResource("Animation_62i1b"),
 &"move_left": SubResource("Animation_dc1pm"),
 &"move_right": SubResource("Animation_82gks"),
-&"move_up": SubResource("Animation_ea7gk")
+&"move_up": SubResource("Animation_ea7gk"),
+&"roll": SubResource("Animation_63jwq")
 }
 
 [node name="Player" type="CharacterBody2D"]
