@@ -3,7 +3,7 @@ class_name PlayerController
 
 @export var move_speed: float = 30.0
 @export var roll_speed: float = 300.0
-@export var roll_time: float = 0.15
+@export var roll_time: float = 0.25
 @export var roll_cooldown: float = 0.4
 @export var max_health: float = 100.0
 
