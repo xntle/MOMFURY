@@ -116,11 +116,20 @@ func _get_anim_name(dir: Vector2, is_moving: bool) -> String:
 	elif x > 0.4 and abs(y) < 0.4:
 		return "move_right"
 
-	# DIAGONALS (any time both x and y have a decent magnitude)
-	if x < 0.0:
-		return "move_diag_left"
-	elif x > 0.0:
-		return "move_diag_right"
+	## DIAGONALS (any time both x and y have a decent magnitude)
+	#if x < 0.0:
+		#return "move_diag_left_up"
+	#elif x > 0.0:
+		#return "move_diag_right_up"
+	if abs(x) > 0.4 and abs(y) > 0.4:
+		# UP
+		if y < 0.0:
+			return "move_diag_left_up" if x < 0.0 else "move_diag_right_up"
+		# DOWN
+		else:
+			return "move_diag_left_down" if x < 0.0 else "idle_down"
+
+	 
 
 	# moving straight down but you don't have move_down yet → reuse idle_down
 	return "idle_down"
