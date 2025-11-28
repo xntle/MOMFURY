@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://h4wwf7ms8id4"]
+[gd_scene load_steps=5 format=3 uid="uid://h4wwf7ms8id4"]
 
 [ext_resource type="Script" uid="uid://b7tqak68n8bx5" path="res://scripts/beer_bottle.gd" id="1_mo4lk"]
+[ext_resource type="PackedScene" uid="uid://btsx385fwub5g" path="res://scene/BeerPoison.tscn" id="2_fkyfo"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_mo4lk"]
 
@@ -8,6 +9,7 @@
 
 [node name="Projectile" type="Area2D"]
 script = ExtResource("1_mo4lk")
+poison_floor_scene = ExtResource("2_fkyfo")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(21.649572, -19.897646)
@@ -16,3 +18,5 @@ texture = SubResource("CanvasTexture_mo4lk")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visibility_layer = 2
 shape = SubResource("CircleShape2D_mo4lk")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -10,8 +10,6 @@ var throw_duration := 0.2
 var throw_time_left := 0.0
 
 @export var projectile_scene: PackedScene
-@export var poison_floor_scene: PackedScene
-
 
 func _ready():
 	# First random cooldown 1 to 3 seconds
@@ -51,5 +49,4 @@ func shoot() -> void:
 
 	# Choose direction: here, facing right or using input/aim direction
 	projectile.direction = (player.global_position - global_position).normalized()
-	projectile.poison_floor_scene = poison_floor_scene
 	
