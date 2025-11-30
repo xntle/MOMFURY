@@ -8,6 +8,7 @@
 
 [node name="BeerPoison" type="Area2D"]
 scale = Vector2(1, 0.9940951)
+collision_layer = 16
 script = ExtResource("1_g70a0")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
