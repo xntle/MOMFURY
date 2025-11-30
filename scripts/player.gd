@@ -16,14 +16,12 @@ var roll_dir: Vector2
 
 signal health_changed(new_health:int)
 
-@export var roll_mask = 4
-var normal_mask = 6
+
 
 var last_move_dir: Vector2 = Vector2.DOWN
 @onready var anim: AnimationPlayer = $AnimationPlayer
 
 func _ready():
-	normal_mask = collision_mask
 	#$AnimationPlayer.play("idle_down")
 	anim.play("idle_down")
 
@@ -42,7 +40,8 @@ func _physics_process(delta):
 		if roll_timer <= 0:
 			is_rolling = false
 			cooldown_timer = roll_cooldown
-			collision_mask = normal_mask
+			set_collision_mask_value(2, true)
+			collision_layer = 1
 			return
 
 		return  
@@ -89,7 +88,8 @@ func _physics_process(delta):
 		is_rolling = true
 		roll_timer = roll_time
 		roll_dir = roll_input_dir.normalized()
-		collision_mask = roll_mask
+		set_collision_mask_value(2, false)
+		collision_layer = 8
 		anim.play("roll")
 		return
 
