@@ -22,6 +22,10 @@ var normal_mask = 6
 var last_move_dir: Vector2 = Vector2.DOWN
 @onready var anim: AnimationPlayer = $AnimationPlayer
 
+# Slow effect tracking
+var is_slowed: bool = false
+var slow_multiplier: float = 1.0
+
 func _ready():
 	normal_mask = collision_mask
 	#$AnimationPlayer.play("idle_down")
@@ -94,7 +98,7 @@ func _physics_process(delta):
 		return
 
 	# normal movement
-	velocity = move_speed * direction * delta * 200
+	velocity = move_speed * slow_multiplier * direction * delta * 200
 
 	move_and_slide()
 	
@@ -156,3 +160,12 @@ func _on_body_entered(body) -> void:
 func take_damage(amount: int) -> void:
 	current_health -= amount
 	emit_signal("health_changed", current_health)
+
+# Slow effect functions
+func apply_slow(multiplier: float) -> void:
+	is_slowed = true
+	slow_multiplier = multiplier
+
+func remove_slow() -> void:
+	is_slowed = false
+	slow_multiplier = 1.0
