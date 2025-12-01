@@ -37,6 +37,10 @@ border_color = Color(0, 0, 0, 1)
 
 [node name="House" parent="." instance=ExtResource("1_e7hha")]
 
+[node name="BossDaddy" parent="." instance=ExtResource("10_l37l5")]
+position = Vector2(84, -2)
+projectile_scene = ExtResource("8_qto5f")
+
 [node name="Player" parent="." instance=ExtResource("4_0qanc")]
 
 [node name="UI" type="CanvasLayer" parent="."]
@@ -89,7 +93,3 @@ theme_override_font_sizes/font_size = 32
 text = "Health: 100"
 script = ExtResource("7_0qanc")
 player = NodePath("../../Player")
-
-[node name="BossDaddy" parent="." instance=ExtResource("10_l37l5")]
-position = Vector2(84, -2)
-projectile_scene = ExtResource("8_qto5f")
