@@ -8,6 +8,7 @@ var normal_speed := 25.0
 var is_throwing := false
 var throw_duration := 0.2
 var throw_time_left := 0.0
+var push_timer: = 0.0
 
 const projectile_scene := preload("res://scene/BeerBottle.tscn") 
 
@@ -34,6 +35,9 @@ func _physics_process(delta):
 	velocity = direction * normal_speed
 
 	move_and_slide()
+	if push_timer > 0.0:
+		push_timer = max(0,push_timer-delta)
+		player.move_and_collide(8 * player.move_speed * direction * delta)
 	#rotation = direction.angle() +90
 
 func shoot() -> void:
@@ -49,3 +53,13 @@ func shoot() -> void:
 	# Choose direction: here, facing right or using input/aim direction
 	projectile.direction = (player.global_position - global_position).normalized()
 	
+
+
+func _on_area_2d_body_entered(body: Node2D) -> void:
+	if body == player:
+		player.take_damage(15)
+		player.apply_stun(0.2)
+		player.apply_intangibility(0.4)
+		push_timer = 0.2
+		
+		
