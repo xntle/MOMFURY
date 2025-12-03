@@ -9,7 +9,7 @@ var is_throwing := false
 var throw_duration := 0.2
 var throw_time_left := 0.0
 
-@export var projectile_scene: PackedScene
+const projectile_scene := preload("res://scene/BeerBottle.tscn") 
 
 func _ready():
 	# First random cooldown 1 to 3 seconds
@@ -33,8 +33,7 @@ func _physics_process(delta):
 		is_throwing = false
 	velocity = direction * normal_speed
 
-	#move_and_slide()
-	position += velocity * delta
+	move_and_slide()
 	#rotation = direction.angle() +90
 
 func shoot() -> void:
