@@ -24723,6 +24723,7 @@ size = Vector2(16, 30)
 size = Vector2(78, 30)
 
 [node name="House" type="Node2D"]
+scale = Vector2(3, 3)
 
 [node name="Ground" type="TileMapLayer" parent="."]
 position = Vector2(66, 57)
