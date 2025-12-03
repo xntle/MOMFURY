@@ -13,6 +13,7 @@ var shoot_timer = 0.0
 var cooldown_timer = 0.0
 var shoot_duration = 3.0       # shoot for 5 seconds
 var cooldown_duration = 5.0    # wait 5 seconds before shooting again
+var push_timer = 0.0
 
 var shoot_interval = 1.0   
 var shoot_interval_timer = 0.0
@@ -85,6 +86,9 @@ func _physics_process(delta):
 			
 	# move enemy
 	move_and_slide()
+	if push_timer > 0.0:
+		push_timer = max(0,push_timer-delta)
+		player.move_and_collide(8 * player.move_speed * direction * delta)
 
 func shoot() -> void:
 	if projectile_scene == null:
@@ -107,3 +111,11 @@ func shoot() -> void:
 
 		projectile.global_position = global_position
 		projectile.direction = dir
+
+
+func _on_area_2d_body_entered(body: Node2D) -> void:
+	if body == player:
+		player.take_damage(15)
+		player.apply_stun(0.2)
+		player.apply_intangibility(0.4)
+		push_timer = 0.2 # Replace with function body.
