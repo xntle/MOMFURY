@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="momfury"
-run/main_scene="uid://kk3crf462xob"
+run/main_scene="uid://v1xuhkejwyw7"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 

@@ -178,7 +178,7 @@ script = ExtResource("1_hjaqi")
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(-4.7683716e-07, -4.7683716e-07)
 scale = Vector2(4, 4)
-zoom = Vector2(4, 4)
+zoom = Vector2(2, 2)
 limit_smoothed = true
 position_smoothing_enabled = true
 
