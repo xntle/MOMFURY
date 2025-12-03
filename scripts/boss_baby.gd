@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 @onready var player = get_node("/root/Game/Player")
 
-var throw_timer := 0.0
+var ability_timer := 0.0
 var throw_speed := 250.0
 var normal_speed := 25.0
 var is_throwing := false
@@ -18,11 +18,22 @@ var push_timer = 0.0
 var shoot_interval = 1.0   
 var shoot_interval_timer = 0.0
 
+var is_summoning := false
+var summon_timer := 0.0
+var summon_duration := 1.5          # how long the summon "state" lasts (short = one cast)
+var summon_cooldown_duration := 6.0 # cooldown after summoning
+var did_summon_this_cast := false
+
+
+@export var radius := 200.0
+@export var count := 5
 @export var projectile_scene: PackedScene
+@export var summon_scene: PackedScene
 
 func _ready():
-	# First random cooldown 1 to 3 seconds
-	throw_timer = randf_range(1.0, 4.0)  
+	ability_timer = randf_range(1.0, 4.0) 
+	
+	 
 
 func _physics_process(delta):
 	var direction = global_position.direction_to(player.global_position)
@@ -45,25 +56,39 @@ func _physics_process(delta):
 		if shoot_timer <= 0:
 			is_throwing = false
 			cooldown_timer = cooldown_duration
+	elif is_summoning:
+		summon_timer -= delta
+		velocity = Vector2.ZERO
 
+		if !did_summon_this_cast:
+			$Summoner.summon()
+			did_summon_this_cast = true
+
+		if summon_timer <= 0.0:
+			is_summoning = false
+			cooldown_timer = summon_cooldown_duration
+		
 	# MOVEMENT MODE
 	else:
 		cooldown_timer -= delta
 		velocity = direction * normal_speed
 
 		if cooldown_timer <= 0:
-			is_throwing = true
-			shoot_timer = shoot_duration
-			shoot_interval_timer = 0.0  # fire immediately when entering shooting mode
-
+			var random_ability = randi_range(1, 2)
+			if random_ability == 1:
+				is_throwing = true
+				shoot_timer = shoot_duration
+				shoot_interval_timer = 0.0  # fire immediately when entering shooting mode
+			else:
+				is_summoning = true
+				summon_timer = summon_duration
+				did_summon_this_cast = false
+			
 	# move enemy
 	move_and_slide()
 	if push_timer > 0.0:
 		push_timer = max(0,push_timer-delta)
 		player.move_and_collide(8 * player.move_speed * direction * delta)
-
-
-
 
 func shoot() -> void:
 	if projectile_scene == null:
