@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://de8c3he3rib60"]
 
 [ext_resource type="Texture2D" uid="uid://dscd4y8ji3g6u" path="res://characters/pixel-art-cartoon-poop-character-png.png" id="1_1jdcj"]
-[ext_resource type="Script" path="res://scripts/boss_baby.gd" id="1_yqcot"]
+[ext_resource type="Script" uid="uid://c3h2mokdbxtyo" path="res://scripts/boss_baby.gd" id="1_yqcot"]
 [ext_resource type="Texture2D" uid="uid://d3e1h6p4owowt" path="res://assets/baby.png" id="3_f2df1"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_u22dk"]

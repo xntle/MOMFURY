@@ -25,11 +25,11 @@ func _ready():
 	throw_timer = randf_range(1.0, 4.0)  
 
 func _physics_process(delta):
-	var direction = global_position.direction_to(player.global_position)
+	var direction = position.direction_to(player.global_position)
 
 	$animation.play("default")
 	# SHOOTING MODE
-	if is_throwing:
+	if is_throwing and (position.distance_to(player.position) < 150.0):
 		shoot_timer -= delta
 		shoot_interval_timer -= delta
 
@@ -58,7 +58,6 @@ func _physics_process(delta):
 
 	# move enemy
 	move_and_slide()
-
 
 
 
