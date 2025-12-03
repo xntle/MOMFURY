@@ -13,34 +13,15 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	# Move grenade
-	global_position += direction * speed * delta
-
-	# Rotate for style
-	rotation += 10.0 * delta
+	position += direction * speed * delta
 
 	# Check distance traveled
 	var traveled := _start_position.distance_to(global_position)
 	if traveled >= max_distance:
-		_spawn_poison_floor()
 		queue_free()
-
-func _stop_grenade() -> void:
-	speed = 0
-	direction = Vector2.ZERO
-		
-func _spawn_poison_floor() -> void:
-	if poison_floor_scene == null:
-		return
-
-	_stop_grenade()
-	var poison = poison_floor_scene.instantiate()
-
-	get_tree().current_scene.add_child(poison)
-	poison.global_position = global_position
-	poison.time_alive = 0
 
 
 func _on_body_entered(body: Node2D) -> void:
+	call_deferred("queue_free")
 	if body is PlayerController:
-		call_deferred("queue_free")
 		body.take_damage(5)

@@ -57,7 +57,7 @@ func _physics_process(delta):
 			shoot_interval_timer = 0.0  # fire immediately when entering shooting mode
 
 	# move enemy
-	position += velocity * delta
+	move_and_slide()
 
 
 
