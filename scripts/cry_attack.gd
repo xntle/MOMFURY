@@ -1,7 +1,7 @@
 extends Area2D
 
-@export var speed: float = 300.0
-@export var max_distance: float = 200.0
+@export var speed: float = 175.0
+@export var max_distance: float = 20000.0
 @export var poison_floor_scene: PackedScene
 
 var direction: Vector2 = Vector2.ZERO
@@ -11,18 +11,18 @@ var _start_position: Vector2
 func _ready() -> void:
 	_start_position = global_position
 
-#func _physics_process(delta: float) -> void:
-	## Move grenade
-	#global_position += direction * speed * delta
-#
-	## Rotate for style
-	#rotation += 10.0 * delta
-#
-	## Check distance traveled
-	#var traveled := _start_position.distance_to(global_position)
-	#if traveled >= max_distance:
-		#_spawn_poison_floor()
-		#queue_free()
+func _physics_process(delta: float) -> void:
+	# Move grenade
+	global_position += direction * speed * delta
+
+	# Rotate for style
+	rotation += 10.0 * delta
+
+	# Check distance traveled
+	var traveled := _start_position.distance_to(global_position)
+	if traveled >= max_distance:
+		_spawn_poison_floor()
+		queue_free()
 
 func _stop_grenade() -> void:
 	speed = 0
@@ -41,8 +41,6 @@ func _spawn_poison_floor() -> void:
 
 
 func _on_body_entered(body: Node2D) -> void:
-
-	call_deferred("_spawn_poison_floor")
-	call_deferred("queue_free")
 	if body is PlayerController:
-		body.take_damage(10)
+		call_deferred("queue_free")
+		body.take_damage(5)
