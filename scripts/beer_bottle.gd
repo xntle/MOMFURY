@@ -1,7 +1,7 @@
 extends Area2D
 
 @export var speed: float = 300.0
-@export var max_distance: float = 200.0
+@export var max_distance: float = 500.0
 @export var poison_floor_scene: PackedScene
 
 var direction: Vector2 = Vector2.ZERO
@@ -41,7 +41,8 @@ func _spawn_poison_floor() -> void:
 
 
 func _on_body_entered(body: Node2D) -> void:
+
+	call_deferred("_spawn_poison_floor")
+	call_deferred("queue_free")
 	if body is PlayerController:
-		call_deferred("_spawn_poison_floor")
-		queue_free()
 		body.take_damage(10)
