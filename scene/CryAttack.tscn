@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://d3rhifgrjpslh"]
+
+[ext_resource type="Script" uid="uid://bmw0w02boog7l" path="res://scripts/cry_attack.gd" id="1_ki4sy"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_mo4lk"]
+specular_color = Color(0, 0, 1, 1)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mo4lk"]
+radius = 4.0
+
+[node name="Projectile" type="Area2D"]
+collision_layer = 16
+collision_mask = 5
+script = ExtResource("1_ki4sy")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-9.536743e-07, 0)
+scale = Vector2(6.8247857, -6.2725105)
+texture = SubResource("CanvasTexture_mo4lk")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visibility_layer = 2
+shape = SubResource("CircleShape2D_mo4lk")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

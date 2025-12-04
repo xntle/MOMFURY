@@ -39,6 +39,57 @@ tracks/0/keys = {
 "values": [18, 18, 19, 20]
 }
 
+[sub_resource type="Animation" id="Animation_r6ll3"]
+resource_name = "move_diag_left_down"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Img0105:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.13333334, 0.26666668),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [23, 22, 21]
+}
+
+[sub_resource type="Animation" id="Animation_kqvfm"]
+resource_name = "move_dig_left"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Img0105:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.13333334, 0.26666668),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [2, 1, 0]
+}
+
+[sub_resource type="Animation" id="Animation_62i1b"]
+resource_name = "move_diag_right"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Img0105:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.13333334, 0.26666668),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [3, 4, 5]
+}
+
 [sub_resource type="Animation" id="Animation_dc1pm"]
 resource_name = "move_left"
 length = 0.4
@@ -107,57 +158,6 @@ tracks/0/keys = {
 "values": [15, 16, 17]
 }
 
-[sub_resource type="Animation" id="Animation_kqvfm"]
-resource_name = "move_dig_left"
-length = 0.4
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Img0105:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.13333334, 0.26666668),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [2, 1, 0]
-}
-
-[sub_resource type="Animation" id="Animation_62i1b"]
-resource_name = "move_diag_right"
-length = 0.4
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Img0105:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.13333334, 0.26666668),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [3, 4, 5]
-}
-
-[sub_resource type="Animation" id="Animation_r6ll3"]
-resource_name = "move_diag_left_down"
-length = 0.4
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Img0105:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.13333334, 0.26666668),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [23, 22, 21]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_waelg"]
 _data = {
 &"RESET": SubResource("Animation_y30ri"),
@@ -178,7 +178,7 @@ script = ExtResource("1_hjaqi")
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(-4.7683716e-07, -4.7683716e-07)
 scale = Vector2(4, 4)
-zoom = Vector2(4, 4)
+zoom = Vector2(2, 2)
 limit_smoothed = true
 position_smoothing_enabled = true
 

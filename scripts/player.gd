@@ -13,17 +13,22 @@ var is_rolling:bool = false
 var roll_timer:float = 0.0
 var cooldown_timer:float = 0.0
 var roll_dir: Vector2
+var is_stunned:bool = false
+var stun_timer:float = 0.0
+var intangibility_timer:float = 0.0
 
 signal health_changed(new_health:int)
 
-@export var roll_mask = 4
-var normal_mask = 6
+
 
 var last_move_dir: Vector2 = Vector2.DOWN
 @onready var anim: AnimationPlayer = $AnimationPlayer
 
+# Slow effect tracking
+var is_slowed: bool = false
+var slow_multiplier: float = 1.0
+
 func _ready():
-	normal_mask = collision_mask
 	#$AnimationPlayer.play("idle_down")
 	anim.play("idle_down")
 
@@ -42,7 +47,7 @@ func _physics_process(delta):
 		if roll_timer <= 0:
 			is_rolling = false
 			cooldown_timer = roll_cooldown
-			collision_mask = normal_mask
+			collision_layer = 1
 			return
 
 		return  
@@ -75,7 +80,7 @@ func _physics_process(delta):
 
 
 	# dodge rolling
-	if Input.is_action_just_pressed("roll") and cooldown_timer <= 0.0:
+	if Input.is_action_just_pressed("roll") and cooldown_timer <= 0.0 and (not is_stunned):
 		var roll_input_dir := direction
 
 		# If no current input, roll in the last move direction (facing)
@@ -89,19 +94,32 @@ func _physics_process(delta):
 		is_rolling = true
 		roll_timer = roll_time
 		roll_dir = roll_input_dir.normalized()
-		collision_mask = roll_mask
+		collision_layer = 8
 		anim.play("roll")
 		return
 
 	# normal movement
-	velocity = move_speed * direction * delta * 200
+	velocity = move_speed * slow_multiplier * direction * delta * 200
 
-	move_and_slide()
+	if not is_stunned:
+		move_and_slide()
+		
+	# stun duration logic
+	stun_timer = max(0,stun_timer-delta)
+	if stun_timer <= 0:
+		is_stunned = false
 	
+	# intangibility duration logic
+	intangibility_timer = max(0,intangibility_timer-delta)
+	if intangibility_timer <= 0:
+		if not is_rolling:
+			collision_layer = 1
 	_update_animation()
 
 ## Animation
 func _get_anim_name(dir: Vector2, is_moving: bool) -> String:
+	if is_stunned:
+		return "roll"
 	if not is_moving:
 		return "idle_down"  # your only idle anim for now
 
@@ -156,3 +174,21 @@ func _on_body_entered(body) -> void:
 func take_damage(amount: int) -> void:
 	current_health -= amount
 	emit_signal("health_changed", current_health)
+
+# Slow effect functions
+func apply_slow(multiplier: float) -> void:
+	is_slowed = true
+	slow_multiplier = multiplier
+
+func remove_slow() -> void:
+	is_slowed = false
+	slow_multiplier = 1.0
+	
+func apply_stun(duration) -> void:
+	stun_timer = duration
+	is_stunned = true
+
+func apply_intangibility(duration) -> void:
+	intangibility_timer = duration
+	collision_layer = 8
+	
