@@ -25,14 +25,13 @@ func _physics_process(delta):
 	dash_timer = max(0.0,dash_timer-delta)
 
 	var direction = global_position.direction_to(player.global_position)
-
 	
 	# Start a dash when timer hits zero
 	if dash_timer <= 0.0:
 		is_dashing = true
 		dash_time_left = dash_duration
 		dash_timer = randf_range(1.0, 3.0)
-
+		
 	# Dash or normal move or bounce
 	if is_dashing:
 		velocity = direction * dash_speed
@@ -40,7 +39,6 @@ func _physics_process(delta):
 		if dash_time_left <= 0:
 			is_dashing = false
 
-#Only bounces until the last 0.1s, then stands still to simulate recoil.
 	elif bounce_timer >= 0.1:
 		velocity = -4 * direction * speed
 	elif bounce_timer == 0:
