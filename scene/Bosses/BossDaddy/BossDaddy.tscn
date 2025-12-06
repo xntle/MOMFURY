@@ -1,9 +1,9 @@
 [gd_scene load_steps=11 format=3 uid="uid://bog8uq3cg74nk"]
 
-[ext_resource type="Script" uid="uid://bfafqyko2kyk6" path="res://scripts/boss_daddy.gd" id="1_u22dk"]
+[ext_resource type="Script" uid="uid://bfafqyko2kyk6" path="res://scripts/Bosses/BossDaddy/boss_daddy.gd" id="1_u22dk"]
 [ext_resource type="Texture2D" uid="uid://dscd4y8ji3g6u" path="res://characters/pixel-art-cartoon-poop-character-png.png" id="2_3xl6v"]
 [ext_resource type="Texture2D" uid="uid://cvv328m4ol46m" path="res://characters/cockroach.png" id="3_ih8qo"]
-[ext_resource type="Texture2D" uid="uid://clpqwo2bd34op" path="res://scene/KczF9_IxckW2p1C5mSmccYuTBdRjiolp1MoB87kWLoY.webp" id="4_3xl6v"]
+[ext_resource type="Texture2D" uid="uid://clpqwo2bd34op" path="res://scene/Bosses/BossDaddy/KczF9_IxckW2p1C5mSmccYuTBdRjiolp1MoB87kWLoY.webp" id="4_3xl6v"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3xl6v"]
 size = Vector2(6.907896, 10.526318)

@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://h4wwf7ms8id4"]
 
-[ext_resource type="Script" uid="uid://b7tqak68n8bx5" path="res://scripts/beer_bottle.gd" id="1_mo4lk"]
-[ext_resource type="PackedScene" uid="uid://btsx385fwub5g" path="res://scene/BeerPoison.tscn" id="2_fkyfo"]
+[ext_resource type="Script" uid="uid://b7tqak68n8bx5" path="res://scripts/Bosses/BossDaddy/beer_bottle.gd" id="1_mo4lk"]
+[ext_resource type="PackedScene" uid="uid://btsx385fwub5g" path="res://scene/Bosses/BossDaddy/BeerPoison.tscn" id="2_fkyfo"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_mo4lk"]
 

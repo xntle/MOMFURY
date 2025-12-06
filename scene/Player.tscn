@@ -2,10 +2,10 @@
 
 [ext_resource type="Script" uid="uid://cbrwihmwrf8c6" path="res://scripts/player.gd" id="1_hjaqi"]
 [ext_resource type="Texture2D" uid="uid://cl47t4xfgncs6" path="res://characters/spritesheet__1_-removebg-preview.png" id="2_62i1b"]
-[ext_resource type="PackedScene" uid="uid://cfwuhb3k8ao3" path="res://scene/Slip.tscn" id="3_y30ri"]
-[ext_resource type="PackedScene" uid="uid://b3h1b4y6h3e85" path="res://scene/Slipper.tscn" id="4_slipper"]
-[ext_resource type="PackedScene" uid="uid://5oeaucq136j6" path="res://scene/RiceBullet.tscn" id="5_rice"]
-[ext_resource type="PackedScene" uid="uid://b75t07ym54440" path="res://scene/Ricechine.tscn" id="6_ricechine"]
+[ext_resource type="PackedScene" uid="uid://cfwuhb3k8ao3" path="res://scene/Weapons/Slip.tscn" id="3_y30ri"]
+[ext_resource type="PackedScene" uid="uid://b3h1b4y6h3e85" path="res://scene/Weapons/Slipper.tscn" id="4_slipper"]
+[ext_resource type="PackedScene" uid="uid://5oeaucq136j6" path="res://scene/Weapons/RiceBullet.tscn" id="5_rice"]
+[ext_resource type="PackedScene" uid="uid://b75t07ym54440" path="res://scene/Weapons/Ricechine.tscn" id="6_ricechine"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_onrkg"]
 radius = 8.12884

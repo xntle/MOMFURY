@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://dsm7571yb3duy"]
 
-[ext_resource type="Script" path="res://scripts/Aminus.gd" id="1_48ekt"]
-[ext_resource type="Texture2D" uid="uid://ddac2xd0rjskg" path="res://characters/A.png" id="1_nmuar"]
+[ext_resource type="Script" uid="uid://4emgnu7jqpt8" path="res://scripts/Enemies/Aminus.gd" id="1_oi1qy"]
+[ext_resource type="Texture2D" uid="uid://ddac2xd0rjskg" path="res://characters/A.png" id="2_rb3vm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_48ekt"]
 size = Vector2(51, 63)
@@ -9,7 +9,7 @@ size = Vector2(51, 63)
 [node name="A-" type="CharacterBody2D"]
 collision_layer = 2
 collision_mask = 4
-script = ExtResource("1_48ekt")
+script = ExtResource("1_oi1qy")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(15.5, 29.5)
@@ -18,4 +18,4 @@ shape = SubResource("RectangleShape2D_48ekt")
 [node name="A" type="Sprite2D" parent="."]
 position = Vector2(16.000004, 29)
 scale = Vector2(0.43965518, 0.43965515)
-texture = ExtResource("1_nmuar")
+texture = ExtResource("2_rb3vm")

@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://cfwuhb3k8ao3"]
 
-[ext_resource type="Script" uid="uid://b70gjql05pb8w" path="res://scripts/slipper.gd" id="1_2b4ql"]
-[ext_resource type="Texture2D" uid="uid://dgn1lwaurj4ig" path="res://scene/st,small,507x507-pad,600x600,f8f8f8.u1.jpg" id="1_bp77f"]
+[ext_resource type="Script" uid="uid://b70gjql05pb8w" path="res://scripts/Weapons/slipper.gd" id="1_37psg"]
+[ext_resource type="Texture2D" uid="uid://dgn1lwaurj4ig" path="res://scene/Weapons/st,small,507x507-pad,600x600,f8f8f8.u1.jpg" id="2_7q3l8"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2b4ql"]
 radius = 103.00485
@@ -9,7 +9,7 @@ radius = 103.00485
 [node name="slip" type="Area2D"]
 light_mask = 0
 visibility_layer = 2
-script = ExtResource("1_2b4ql")
+script = ExtResource("1_37psg")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 1)
@@ -27,7 +27,7 @@ scale = Vector2(0.7317023, 0.59420913)
 position = Vector2(8.200033, -6.67575)
 rotation = 1.5858707
 scale = Vector2(-0.04961324, -0.086149104)
-texture = ExtResource("1_bp77f")
+texture = ExtResource("2_7q3l8")
 
 [node name="ShootingPoint" type="Marker2D" parent="WeaponPivot/Slipper"]
 position = Vector2(-14.998968, -4.988584)

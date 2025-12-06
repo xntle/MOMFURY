@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ibs2536glb7a"
-path="res://.godot/imported/baby.png-3a8c79daa5eb526a90fa51a88ca95581.ctex"
+uid="uid://clpqwo2bd34op"
+path="res://.godot/imported/KczF9_IxckW2p1C5mSmccYuTBdRjiolp1MoB87kWLoY.webp-74380339957b0c02c3393b5bc228503f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scene/baby.png"
-dest_files=["res://.godot/imported/baby.png-3a8c79daa5eb526a90fa51a88ca95581.ctex"]
+source_file="res://scene/Bosses/BossDaddy/KczF9_IxckW2p1C5mSmccYuTBdRjiolp1MoB87kWLoY.webp"
+dest_files=["res://.godot/imported/KczF9_IxckW2p1C5mSmccYuTBdRjiolp1MoB87kWLoY.webp-74380339957b0c02c3393b5bc228503f.ctex"]
 
 [params]
 

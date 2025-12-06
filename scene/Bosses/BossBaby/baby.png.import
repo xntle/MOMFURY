@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dgn1lwaurj4ig"
-path="res://.godot/imported/st,small,507x507-pad,600x600,f8f8f8.u1.jpg-3e12d63ec1c4006a73a52fcdc1e21fa4.ctex"
+uid="uid://ibs2536glb7a"
+path="res://.godot/imported/baby.png-9abf36cb40e3fecdf8b68f5d18aa2231.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scene/st,small,507x507-pad,600x600,f8f8f8.u1.jpg"
-dest_files=["res://.godot/imported/st,small,507x507-pad,600x600,f8f8f8.u1.jpg-3e12d63ec1c4006a73a52fcdc1e21fa4.ctex"]
+source_file="res://scene/Bosses/BossBaby/baby.png"
+dest_files=["res://.godot/imported/baby.png-9abf36cb40e3fecdf8b68f5d18aa2231.ctex"]
 
 [params]
 

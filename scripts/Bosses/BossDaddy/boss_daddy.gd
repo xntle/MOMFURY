@@ -12,7 +12,7 @@ var throw_duration := 0.2
 var throw_time_left := 0.0
 var push_timer: = 0.0
 
-const projectile_scene := preload("res://scene/BeerBottle.tscn") 
+const projectile_scene := preload("res://scene/Bosses/BossDaddy/BeerBottle.tscn") 
 
 func _ready():
 	# First random cooldown 1 to 3 seconds

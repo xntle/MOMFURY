@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://clpqwo2bd34op"
-path="res://.godot/imported/KczF9_IxckW2p1C5mSmccYuTBdRjiolp1MoB87kWLoY.webp-51907e8e403bb1580efa4ad956b94314.ctex"
+uid="uid://dgn1lwaurj4ig"
+path="res://.godot/imported/st,small,507x507-pad,600x600,f8f8f8.u1.jpg-a209e1fbc9d18553f2666ab96c873dc0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scene/KczF9_IxckW2p1C5mSmccYuTBdRjiolp1MoB87kWLoY.webp"
-dest_files=["res://.godot/imported/KczF9_IxckW2p1C5mSmccYuTBdRjiolp1MoB87kWLoY.webp-51907e8e403bb1580efa4ad956b94314.ctex"]
+source_file="res://scene/Weapons/st,small,507x507-pad,600x600,f8f8f8.u1.jpg"
+dest_files=["res://.godot/imported/st,small,507x507-pad,600x600,f8f8f8.u1.jpg-a209e1fbc9d18553f2666ab96c873dc0.ctex"]
 
 [params]
 

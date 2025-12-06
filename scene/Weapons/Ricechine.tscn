@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://b75t07ym54440"]
 
-[ext_resource type="Script" uid="uid://ci5rc6txagw2r" path="res://scripts/ricemachine.gd" id="1_minlv"]
-[ext_resource type="Texture2D" uid="uid://clpqwo2bd34op" path="res://scene/KczF9_IxckW2p1C5mSmccYuTBdRjiolp1MoB87kWLoY.webp" id="2_minlv"]
+[ext_resource type="Script" uid="uid://ci5rc6txagw2r" path="res://scripts/Weapons/ricemachine.gd" id="1_minlv"]
+[ext_resource type="Texture2D" uid="uid://clpqwo2bd34op" path="res://scene/Bosses/BossDaddy/KczF9_IxckW2p1C5mSmccYuTBdRjiolp1MoB87kWLoY.webp" id="2_minlv"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2b4ql"]
 radius = 103.00485

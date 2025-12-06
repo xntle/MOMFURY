@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://5oeaucq136j6"]
 
-[ext_resource type="Script" uid="uid://dwi0an6mcso8r" path="res://scripts/rice_bullet.gd" id="1_rice"]
-[ext_resource type="Texture2D" uid="uid://clpqwo2bd34op" path="res://scene/KczF9_IxckW2p1C5mSmccYuTBdRjiolp1MoB87kWLoY.webp" id="2_2u6l3"]
+[ext_resource type="Script" uid="uid://dwi0an6mcso8r" path="res://scripts/Weapons/rice_bullet.gd" id="1_6ylpv"]
+[ext_resource type="Texture2D" uid="uid://clpqwo2bd34op" path="res://scene/Bosses/BossDaddy/KczF9_IxckW2p1C5mSmccYuTBdRjiolp1MoB87kWLoY.webp" id="2_edrkl"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_rice"]
 radius = 2.0
@@ -9,7 +9,7 @@ radius = 2.0
 [node name="RiceBullet" type="Area2D"]
 collision_layer = 4
 collision_mask = 3
-script = ExtResource("1_rice")
+script = ExtResource("1_6ylpv")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_rice")
@@ -21,4 +21,4 @@ scale = Vector2(4, 4)
 [node name="KczF9IxckW2p1c5mSmccYuTBdRjiolp1MoB87kWLoY" type="Sprite2D" parent="."]
 position = Vector2(4.7683716e-07, -0.9999962)
 scale = Vector2(0.010076744, 0.0060050553)
-texture = ExtResource("2_2u6l3")
+texture = ExtResource("2_edrkl")
