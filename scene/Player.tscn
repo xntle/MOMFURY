@@ -1,7 +1,11 @@
-[gd_scene load_steps=14 format=3 uid="uid://ctnihbseogqdf"]
+[gd_scene load_steps=18 format=3 uid="uid://ctnihbseogqdf"]
 
 [ext_resource type="Script" uid="uid://cbrwihmwrf8c6" path="res://scripts/player.gd" id="1_hjaqi"]
 [ext_resource type="Texture2D" uid="uid://cl47t4xfgncs6" path="res://characters/spritesheet__1_-removebg-preview.png" id="2_62i1b"]
+[ext_resource type="PackedScene" uid="uid://cfwuhb3k8ao3" path="res://scene/Slip.tscn" id="3_y30ri"]
+[ext_resource type="PackedScene" uid="uid://b3h1b4y6h3e85" path="res://scene/Slipper.tscn" id="4_slipper"]
+[ext_resource type="PackedScene" uid="uid://5oeaucq136j6" path="res://scene/RiceBullet.tscn" id="5_rice"]
+[ext_resource type="PackedScene" uid="uid://b75t07ym54440" path="res://scene/Ricechine.tscn" id="6_ricechine"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_onrkg"]
 radius = 8.12884
@@ -174,11 +178,16 @@ _data = {
 [node name="Player" type="CharacterBody2D"]
 collision_mask = 6
 script = ExtResource("1_hjaqi")
+slipper_scene = ExtResource("4_slipper")
+rice_bullet_scene = ExtResource("5_rice")
+
+[node name="ShootingPoint" type="Marker2D" parent="."]
+position = Vector2(12, 0)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(-4.7683716e-07, -4.7683716e-07)
 scale = Vector2(4, 4)
-zoom = Vector2(2, 2)
+zoom = Vector2(2.5, 2.5)
 limit_smoothed = true
 position_smoothing_enabled = true
 
@@ -199,3 +208,10 @@ shape = SubResource("CircleShape2D_onrkg")
 libraries = {
 &"": SubResource("AnimationLibrary_waelg")
 }
+
+[node name="slip" parent="." instance=ExtResource("3_y30ri")]
+visible = false
+position = Vector2(31, 0)
+
+[node name="Ricechine" parent="." instance=ExtResource("6_ricechine")]
+position = Vector2(12, 4)

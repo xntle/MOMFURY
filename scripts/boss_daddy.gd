@@ -2,6 +2,8 @@ extends CharacterBody2D
 
 @onready var player = get_node("/root/Game/Player")
 
+@export var health: float = 200.0
+
 var throw_timer := 0.0
 var throw_speed := 250.0
 var normal_speed := 25.0
@@ -61,5 +63,12 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 		player.apply_stun(0.2)
 		player.apply_intangibility(0.4)
 		push_timer = 0.2
-		
-		
+
+# Damage function
+func take_damage(amount: float) -> void:
+	health -= amount
+	print("Boss Daddy took ", amount, " damage. Health: ", health)
+
+	if health <= 0:
+		print("Boss Daddy defeated!")
+		queue_free()

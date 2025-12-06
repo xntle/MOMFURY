@@ -1,0 +1,34 @@
+[gd_scene load_steps=4 format=3 uid="uid://b75t07ym54440"]
+
+[ext_resource type="Script" uid="uid://ci5rc6txagw2r" path="res://scripts/ricemachine.gd" id="1_minlv"]
+[ext_resource type="Texture2D" uid="uid://clpqwo2bd34op" path="res://scene/KczF9_IxckW2p1C5mSmccYuTBdRjiolp1MoB87kWLoY.webp" id="2_minlv"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2b4ql"]
+radius = 103.00485
+
+[node name="Ricechine" type="Area2D"]
+light_mask = 0
+visibility_layer = 2
+script = ExtResource("1_minlv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 1)
+shape = SubResource("CircleShape2D_2b4ql")
+
+[node name="WeaponPivot" type="Marker2D" parent="."]
+position = Vector2(0, 1)
+rotation = -0.0010377732
+
+[node name="Gun" type="Sprite2D" parent="WeaponPivot"]
+position = Vector2(26, 4)
+scale = Vector2(0.7317023, 0.59420913)
+
+[node name="KczF9IxckW2p1c5mSmccYuTBdRjiolp1MoB87kWLoY" type="Sprite2D" parent="WeaponPivot/Gun"]
+position = Vector2(23.240551, -15.071076)
+rotation = 0.0012779016
+scale = Vector2(0.076728, 0.1037191)
+skew = -0.00043523312
+texture = ExtResource("2_minlv")
+
+[node name="ShootingPoint" type="Marker2D" parent="WeaponPivot/Gun"]
+position = Vector2(95.66867, -8.246872)

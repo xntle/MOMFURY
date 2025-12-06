@@ -7,6 +7,14 @@ class_name PlayerController
 @export var roll_cooldown: float = 0.4
 @export var max_health: float = 100.0
 
+# Weapon system
+@export var slipper_scene: PackedScene
+@export var rice_bullet_scene: PackedScene
+@export var shoot_cooldown: float = 0.3
+
+enum Weapon { SLIPPER, RICE_MACHINE }
+var current_weapon: Weapon = Weapon.SLIPPER
+
 var current_health: float = max_health
 var direction: Vector2
 var is_rolling:bool = false
@@ -16,6 +24,7 @@ var roll_dir: Vector2
 var is_stunned:bool = false
 var stun_timer:float = 0.0
 var intangibility_timer:float = 0.0
+var shoot_timer: float = 0.0
 
 signal health_changed(new_health:int)
 
@@ -23,6 +32,9 @@ signal health_changed(new_health:int)
 
 var last_move_dir: Vector2 = Vector2.DOWN
 @onready var anim: AnimationPlayer = $AnimationPlayer
+@onready var shoot_point: Marker2D = $ShootingPoint
+@onready var slip_weapon: Node2D = $slip
+@onready var rice_weapon: Node2D = $Ricechine
 
 # Slow effect tracking
 var is_slowed: bool = false
@@ -32,11 +44,18 @@ func _ready():
 	#$AnimationPlayer.play("idle_down")
 	anim.play("idle_down")
 
+	# Initialize weapon visibility
+	_update_weapon_visibility()
+
 
 func _physics_process(delta):
 	# cooldown
 	if cooldown_timer > 0:
 		cooldown_timer -= delta
+
+	# shoot cooldown
+	if shoot_timer > 0:
+		shoot_timer -= delta
 
 	# dodge rolling condition
 	if is_rolling:
@@ -75,9 +94,17 @@ func _physics_process(delta):
 		current_health = max_health
 	if current_health <= 0.0:
 		current_health = 0.0
-		#Add death logic here 
-		get_tree().change_scene_to_file("res://scene/main_menu.tscn") 
+		#Add death logic here
+		get_tree().change_scene_to_file("res://scene/main_menu.tscn")
 
+	# weapon switching 
+	if Input.is_action_just_pressed("switch"):
+		_switch_weapon()
+
+	# shooting with current weapon
+	if Input.is_action_pressed("shoot") and shoot_timer <= 0.0 and not is_rolling and not is_stunned:
+		_shoot_current_weapon()
+		shoot_timer = shoot_cooldown
 
 	# dodge rolling
 	if Input.is_action_just_pressed("roll") and cooldown_timer <= 0.0 and (not is_stunned):
@@ -191,4 +218,63 @@ func apply_stun(duration) -> void:
 func apply_intangibility(duration) -> void:
 	intangibility_timer = duration
 	collision_layer = 8
-	
+
+func _shoot_slipper() -> void:
+	if slipper_scene == null:
+		print("ERROR: slipper_scene is null! Assign the Slipper scene in the Godot editor.")
+		return
+
+	var slipper = slipper_scene.instantiate()
+	get_tree().current_scene.add_child(slipper)
+
+	if shoot_point != null:
+		slipper.global_position = shoot_point.global_position
+	else:
+		slipper.global_position = global_position
+
+	var mouse_pos = get_global_mouse_position()
+	slipper.direction = (mouse_pos - global_position).normalized()
+
+# Shoot rice machine gun bullet
+func _shoot_rice() -> void:
+	if rice_bullet_scene == null:
+		print("ERROR: rice_bullet_scene is null!")
+		return
+
+	var bullet = rice_bullet_scene.instantiate()
+	get_tree().current_scene.add_child(bullet)
+
+	if shoot_point != null:
+		bullet.global_position = shoot_point.global_position
+	else:
+		bullet.global_position = global_position
+
+	var mouse_pos = get_global_mouse_position()
+	bullet.direction = (mouse_pos - global_position).normalized()
+
+# Shoot with current weapon
+func _shoot_current_weapon() -> void:
+	match current_weapon:
+		Weapon.SLIPPER:
+			_shoot_slipper()
+		Weapon.RICE_MACHINE:
+			_shoot_rice()
+
+# Switch between weapons
+func _switch_weapon() -> void:
+	if current_weapon == Weapon.SLIPPER:
+		current_weapon = Weapon.RICE_MACHINE
+		print("Switched to Rice Machine Gun")
+	else:
+		current_weapon = Weapon.SLIPPER
+		print("Switched to Slipper")
+
+	_update_weapon_visibility()
+
+# Update weapon visibility based on current weapon
+func _update_weapon_visibility() -> void:
+	if slip_weapon != null:
+		slip_weapon.visible = (current_weapon == Weapon.SLIPPER)
+
+	if rice_weapon != null:
+		rice_weapon.visible = (current_weapon == Weapon.RICE_MACHINE)
