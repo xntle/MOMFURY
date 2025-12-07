@@ -5,6 +5,8 @@ extends CharacterBody2D
 var normal_speed := 40.0
 var stop_distance := 70.0
 
+@export var health := 25.0
+
 func _physics_process(delta):
 	var direction = global_position.direction_to(player.global_position)
 	var distance_to_player = global_position.distance_to(player.global_position)
@@ -16,3 +18,10 @@ func _physics_process(delta):
 		velocity = Vector2.ZERO
 
 	move_and_slide()
+	
+func take_damage(amount: float) -> void:
+	health -= amount
+
+	if health <= 0:
+		print("Boss Daddy defeated!")
+		queue_free()

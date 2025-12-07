@@ -1,4 +1,4 @@
-[gd_scene load_steps=69 format=4 uid="uid://kk3crf462xob"]
+[gd_scene load_steps=67 format=4 uid="uid://kk3crf462xob"]
 
 [ext_resource type="Texture2D" uid="uid://pw6gsslykjt3" path="res://assets/background/interior full/basics/wallpapers.png" id="1_vg7sv"]
 [ext_resource type="Texture2D" uid="uid://dh4j3kqtw5i1n" path="res://assets/background/nature free/global.png" id="2_ripxc"]
@@ -17432,7 +17432,7 @@ size = Vector2(431.8125, 25)
 size = Vector2(29, 241.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rfh4g"]
-size = Vector2(166, 7)
+size = Vector2(202.66667, 4.833332)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4yt68"]
 size = Vector2(6, 85)
@@ -17442,12 +17442,6 @@ size = Vector2(80, 17)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_an8ke"]
 size = Vector2(88, 15.5)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_uvbfn"]
-size = Vector2(17.5, 19)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_h28a8"]
-size = Vector2(6, 64)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hsjbm"]
 size = Vector2(8, 30)
@@ -29190,7 +29184,7 @@ sources/11 = SubResource("TileSetAtlasSource_8f31r")
 sources/12 = SubResource("TileSetAtlasSource_xadsq")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3oudf"]
-size = Vector2(207.25, 19)
+size = Vector2(206.91667, 16.666666)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_n3gr7"]
 size = Vector2(29, 20)
@@ -29216,9 +29210,6 @@ size = Vector2(20, 63)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2fque"]
 size = Vector2(16, 30)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_1bh2x"]
-size = Vector2(78, 30)
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_84e0i"]
 radius = 27.802877
 
@@ -29238,6 +29229,12 @@ size = Vector2(129, 20)
 size = Vector2(31, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_piqx8"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_dexg3"]
+vertices = PackedVector2Array(-652.1328, 4904.3516, -639.71875, 6074.047, -866.03906, 5971.9063, -853.6172, 4907.0703, -1463.3906, -323.89063, -1463.3906, -2981.8125, -714.2969, -2876.5234, -714.2969, -642.1719, -1012.9219, -322.10156, -1077.6328, -217.20313, -1025.5078, 325.09375, -1077.6328, 323.89063, -567.4375, 325.09375, -554.9922, -3408.6484, 243.85156, -3303.2734, 219.02344, 1382.0938, -639.5781, 1382.0938, -36, 4914.047, 281.1875, 6076.8438, -592.25, 6076.8438, -579.85156, 5013.5234, -42.328125, 4911.547, -1423.5703, 6076.8438, -1475.7969, 6076.8438, -1463.4063, 3631.961, -1411.1328, 4584.117, -965.6328, 4474.9766, -853.6328, 3525.2578, -677.03906, 4379.6563, -145.50781, 2885.8672, -42.328125, 2885.8672, -232.07813, 3204, -580.71875, 4379.6563, -381.21094, 3310.5469, -644.71094, 4902.3125, -925.7969, 6076.8438, -965.6328, 6076.8438, -913.3672, 4797.4063, -905.5703, 4795.7188, -853.6328, 2235.6719, -1463.3906, 2235.6719, -1463.3906, 430.60156, 141.78125, 2885.8672, 268.78906, 2885.8672, 129.34375, 3526.0625, 67.203125, 4803.4375, 79.609375, 3526.0625)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 5, 6, 7, 8), PackedInt32Array(9, 4, 8), PackedInt32Array(9, 8, 10, 11), PackedInt32Array(12, 13, 14, 15), PackedInt32Array(12, 15, 16, 10), PackedInt32Array(17, 18, 19, 20, 21), PackedInt32Array(22, 23, 24, 25), PackedInt32Array(26, 25, 24, 27, 28), PackedInt32Array(29, 30, 21, 31), PackedInt32Array(32, 33, 31, 21, 20, 34), PackedInt32Array(35, 36, 26, 37), PackedInt32Array(38, 37, 26), PackedInt32Array(39, 40, 41, 11, 10, 16), PackedInt32Array(39, 16, 28, 27), PackedInt32Array(42, 43, 18, 44), PackedInt32Array(45, 46, 44, 18), PackedInt32Array(17, 45, 18), PackedInt32Array(38, 26, 28, 32, 34, 0, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(248.87912, -3307.664, 223.99121, 1387.0848, -634.6418, 1387.0848, -671.97363, 4374.6523, -584.86597, 4374.6523, -385.76263, 3307.664, -236.43517, 3200.965, -149.32748, 2880.8687, -37.33187, 2880.8687, -37.33187, 4908.1465, 62.21978, 4801.4478, 74.66374, 3521.0615, 124.43956, 3521.0615, 136.88351, 2880.8687, 273.76703, 2880.8687, 286.211, 6081.8335, -597.30994, 6081.8335, -584.86597, 5014.845, -647.08575, 4908.1465, -634.6418, 6081.8335, -871.07697, 5975.135, -858.633, 4908.1465, -908.4088, 4801.4478, -920.8528, 6081.8335, -970.6286, 6081.8335, -970.6286, 4481.351, -1406.1671, 4588.05, -1418.6111, 6081.8335, -1480.8308, 6081.8335, -1468.3868, 3627.7605, -858.633, 3521.0615, -858.633, 2240.6755, -1468.3868, 2240.6755, -1468.3868, 426.79535, -1082.6241, 320.0965, -1082.6241, -213.39767, -1468.3868, -320.0965, -1468.3868, -2987.5674, -709.30554, -2880.8687, -709.30554, -640.193, -1007.96045, -320.0965, -1020.4044, 320.0965, -572.422, 320.0965, -559.978, -3414.3628)])
+agent_radius = 5.0
 
 [node name="House" type="Node2D"]
 scale = Vector2(3, 3)
@@ -29275,7 +29272,7 @@ position = Vector2(129, -100)
 shape = SubResource("RectangleShape2D_e7ep0")
 
 [node name="CollisionShape2D5" type="CollisionShape2D" parent="Wall"]
-position = Vector2(4, 43)
+position = Vector2(22.333336, 44.083336)
 shape = SubResource("RectangleShape2D_rfh4g")
 
 [node name="CollisionShape2D7" type="CollisionShape2D" parent="Wall"]
@@ -29290,14 +29287,6 @@ shape = SubResource("RectangleShape2D_dryb0")
 position = Vector2(286, 1.25)
 shape = SubResource("RectangleShape2D_an8ke")
 
-[node name="CollisionShape2D10" type="CollisionShape2D" parent="Wall"]
-position = Vector2(277, 36)
-shape = SubResource("RectangleShape2D_uvbfn")
-
-[node name="CollisionShape2D6" type="CollisionShape2D" parent="Wall"]
-position = Vector2(133, 73)
-shape = SubResource("RectangleShape2D_h28a8")
-
 [node name="CollisionShape2D14" type="CollisionShape2D" parent="Wall"]
 position = Vector2(-53, -85)
 shape = SubResource("RectangleShape2D_hsjbm")
@@ -29309,10 +29298,6 @@ shape = SubResource("RectangleShape2D_hsjbm")
 [node name="CollisionShape2D12" type="CollisionShape2D" parent="Wall"]
 position = Vector2(255, 64.5)
 shape = SubResource("RectangleShape2D_8f31r")
-
-[node name="CollisionShape2D15" type="CollisionShape2D" parent="Wall"]
-position = Vector2(132, 146.25)
-shape = SubResource("RectangleShape2D_xadsq")
 
 [node name="CollisionShape2D13" type="CollisionShape2D" parent="Wall"]
 position = Vector2(192, 138)
@@ -29327,7 +29312,7 @@ tile_map_data = PackedByteArray("AAD3/wAAAAAJABEAAAD3////AAACABAAAAD5/wAAAAAAAAc
 tile_set = SubResource("TileSet_e7ep0")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Furniture"]
-position = Vector2(26.375, 48.5)
+position = Vector2(26.208336, 49.666668)
 shape = SubResource("RectangleShape2D_3oudf")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Furniture"]
@@ -29362,10 +29347,6 @@ shape = SubResource("RectangleShape2D_rvyth")
 position = Vector2(-69, 106)
 shape = SubResource("RectangleShape2D_2fque")
 
-[node name="CollisionShape2D10" type="CollisionShape2D" parent="Furniture"]
-position = Vector2(217, -36)
-shape = SubResource("RectangleShape2D_1bh2x")
-
 [node name="CollisionShape2D11" type="CollisionShape2D" parent="Furniture"]
 position = Vector2(-14, -28)
 shape = SubResource("CircleShape2D_84e0i")
@@ -29393,3 +29374,7 @@ shape = SubResource("RectangleShape2D_71ics")
 [node name="CollisionShape2D17" type="CollisionShape2D" parent="Furniture"]
 position = Vector2(34, -2)
 shape = SubResource("RectangleShape2D_piqx8")
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+scale = Vector2(-0.21429412, 0.02499246)
+navigation_polygon = SubResource("NavigationPolygon_dexg3")
