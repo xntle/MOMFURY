@@ -24,10 +24,6 @@ func _process(delta):
 			can_attack = true
 			_on_cooldown_finished()
 
-	# Rotate to face mouse cursor
-	var mouse_pos = get_global_mouse_position()
-	look_at(mouse_pos)
-
 
 # Virtual method - override in subclasses
 func attack() -> bool:

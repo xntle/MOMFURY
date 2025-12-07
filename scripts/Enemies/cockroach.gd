@@ -5,6 +5,9 @@ extends CharacterBody2D
 @export var health: float = 10.0
 @export var speed: float = 50.0
 @export var damage: float = 10.0
+@export var health_pickup_scene: PackedScene
+@export var drop_chance: float = 0.5  # 50% chance
+@export var death_particles_scene: PackedScene
 
 var dash_timer: float = 0.0
 var dash_speed: float = 250.0
@@ -65,7 +68,24 @@ func take_damage(amount: float) -> void:
 	health -= amount
 
 	if health <= 0:
+		_drop_health()
+		_spawn_death_particles()
 		queue_free()
+
+
+func _drop_health() -> void:
+	# 50% chance to drop health
+	if randf() < drop_chance and health_pickup_scene != null:
+		var health_drop = health_pickup_scene.instantiate()
+		get_tree().current_scene.add_child(health_drop)
+		health_drop.global_position = global_position
+
+
+func _spawn_death_particles() -> void:
+	if death_particles_scene != null:
+		var particles = death_particles_scene.instantiate()
+		get_tree().current_scene.add_child(particles)
+		particles.global_position = global_position
 
 
 func _on_area_2d_body_entered(body: Node2D) -> void:

@@ -1,7 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://dsm7571yb3duy"]
+[gd_scene load_steps=6 format=3 uid="uid://dsm7571yb3duy"]
 
 [ext_resource type="Script" uid="uid://4emgnu7jqpt8" path="res://scripts/Enemies/Aminus.gd" id="1_oi1qy"]
 [ext_resource type="Texture2D" uid="uid://ddac2xd0rjskg" path="res://characters/A.png" id="2_rb3vm"]
+[ext_resource type="PackedScene" uid="uid://aminus_bullet_01" path="res://scene/Enemies/AMinusBullet.tscn" id="3_aminus_bullet"]
+[ext_resource type="PackedScene" uid="uid://health_pickup_01" path="res://scene/HealthPickup.tscn" id="4_health"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_48ekt"]
 size = Vector2(51, 63)
@@ -13,6 +15,8 @@ radius = 24.0
 collision_layer = 2
 collision_mask = 4
 script = ExtResource("1_oi1qy")
+bullet_scene = ExtResource("3_aminus_bullet")
+health_pickup_scene = ExtResource("4_health")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(1.2201691, -16.22668)

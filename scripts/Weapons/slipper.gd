@@ -10,13 +10,23 @@ func _ready():
 	cooldown = 0.3
 
 func _process(delta):
-	# Call parent to handle cooldown and rotation
+	# Call parent to handle cooldown
 	super._process(delta)
 
 	# Rotate the weapon pivot to face mouse
 	if weapon_pivot != null:
 		var mouse_pos = get_global_mouse_position()
-		weapon_pivot.look_at(mouse_pos)
+		var angle_to_mouse = global_position.angle_to_point(mouse_pos)
+
+		# Flip weapon when pointing left to prevent upside-down appearance
+		if abs(angle_to_mouse) > PI / 2:
+			# Pointing left - flip it
+			scale.y = -1
+			weapon_pivot.rotation = angle_to_mouse
+		else:
+			# Pointing right - normal
+			scale.y = 1
+			weapon_pivot.rotation = angle_to_mouse
 
 # Override attack method from WeaponBase
 func attack() -> bool:

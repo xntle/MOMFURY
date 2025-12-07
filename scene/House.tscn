@@ -29312,7 +29312,7 @@ tile_map_data = PackedByteArray("AAD3/wAAAAAJABEAAAD3////AAACABAAAAD5/wAAAAAAAAc
 tile_set = SubResource("TileSet_e7ep0")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Furniture"]
-position = Vector2(26.208336, 49.666668)
+position = Vector2(29.333332, 54.666668)
 shape = SubResource("RectangleShape2D_3oudf")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Furniture"]
@@ -29324,7 +29324,7 @@ position = Vector2(17, 58)
 shape = SubResource("RectangleShape2D_84e0i")
 
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="Furniture"]
-position = Vector2(-38, 63)
+position = Vector2(-30, 79.666664)
 shape = SubResource("RectangleShape2D_dexg3")
 
 [node name="CollisionShape2D5" type="CollisionShape2D" parent="Furniture"]

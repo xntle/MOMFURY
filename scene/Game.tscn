@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bve1pou0gt1v4"]
+[gd_scene load_steps=19 format=3 uid="uid://bve1pou0gt1v4"]
 
 [ext_resource type="PackedScene" uid="uid://kk3crf462xob" path="res://scene/House.tscn" id="1_e7hha"]
 [ext_resource type="PackedScene" uid="uid://ctnihbseogqdf" path="res://scene/Player.tscn" id="4_0qanc"]
@@ -7,8 +7,12 @@
 [ext_resource type="Texture2D" uid="uid://bhxxlr7ih651e" path="res://assets/SplashScreen.png" id="5_qto5f"]
 [ext_resource type="FontFile" uid="uid://box1b2tla1jkp" path="res://assets/fonts/MegamaxJonathanToo-YqOq2.ttf" id="6_qto5f"]
 [ext_resource type="Script" uid="uid://dloc7t0utspjp" path="res://scripts/health_label.gd" id="7_0qanc"]
-[ext_resource type="PackedScene" uid="uid://fxb838o4s043" path="res://scene/Enemies/Spawner.tscn" id="10_f6bub"]
+[ext_resource type="PackedScene" path="res://scene/Spawners/AMinusSpawner.tscn" id="8_6okl4"]
+[ext_resource type="PackedScene" path="res://scene/Spawners/CockroachSpawner.tscn" id="9_w73ac"]
+[ext_resource type="PackedScene" path="res://scene/Spawners/MixedSpawner.tscn" id="10_7sjor"]
+[ext_resource type="PackedScene" path="res://scene/Enemies/Spawner.tscn" id="10_f6bub"]
 [ext_resource type="PackedScene" uid="uid://dsm7571yb3duy" path="res://scene/Enemies/A-.tscn" id="10_r3aus"]
+[ext_resource type="PackedScene" path="res://scene/Spawners/PoopSpawner.tscn" id="11_7ftmx"]
 [ext_resource type="PackedScene" uid="uid://5wrlhjc0vedk" path="res://scene/Enemies/Cockroach.tscn" id="12_64o46"]
 [ext_resource type="PackedScene" uid="uid://ixi501xwduk4" path="res://scene/Enemies/Poop.tscn" id="13_msms8"]
 
@@ -106,7 +110,19 @@ player = NodePath("../../Player")
 [node name="Enemies" type="Node2D" parent="."]
 unique_name_in_owner = true
 
+[node name="AMinusSpawner" parent="." instance=ExtResource("8_6okl4")]
+
+[node name="CockroachSpawner" parent="." instance=ExtResource("9_w73ac")]
+position = Vector2(-95, 40)
+
+[node name="MixedSpawner" parent="." instance=ExtResource("10_7sjor")]
+position = Vector2(466, -106)
+
+[node name="PoopSpawner" parent="." instance=ExtResource("11_7ftmx")]
+position = Vector2(326, 269)
+
 [node name="Spawner" parent="." instance=ExtResource("10_f6bub")]
+position = Vector2(557, 66)
 enemy_scenes = Array[PackedScene]([ExtResource("12_64o46"), ExtResource("10_r3aus"), ExtResource("13_msms8")])
 spawn_points = Array[NodePath]([NodePath("SpawnPoint1"), NodePath("SpawnPoint2"), NodePath("SpawnPoint3")])
 
