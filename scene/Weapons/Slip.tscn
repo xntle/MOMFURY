@@ -2,10 +2,8 @@
 
 [ext_resource type="Script" uid="uid://b70gjql05pb8w" path="res://scripts/Weapons/slipper.gd" id="1_37psg"]
 [ext_resource type="Texture2D" uid="uid://6xhl3fuu1e6v" path="res://assets/weapons/1.png" id="2_37psg"]
+[ext_resource type="Texture2D" uid="uid://s1hx2hdp8w7d" path="res://assets/weapons/HandSlipper.png" id="4_1urmk"]
 [ext_resource type="PackedScene" uid="uid://b3h1b4y6h3e85" path="res://scene/Weapons/Slipper.tscn" id="4_slipper"]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_2b4ql"]
-radius = 103.00485
 
 [node name="slip" type="Node2D"]
 light_mask = 0
@@ -22,11 +20,17 @@ position = Vector2(26, 4)
 scale = Vector2(0.7317023, 0.59420913)
 
 [node name="SlipperHand" type="Sprite2D" parent="WeaponPivot/Slipper"]
-position = Vector2(-32.794548, -13.459776)
+visible = false
+position = Vector2(-20.493055, -15.126966)
 rotation = 0.8579166
 scale = Vector2(0.088234395, 0.08950191)
 skew = -0.20616984
 texture = ExtResource("2_37psg")
 
 [node name="ShootingPoint" type="Marker2D" parent="WeaponPivot/Slipper"]
-position = Vector2(-14.998968, -4.988584)
+position = Vector2(-2.7064214, -38.664978)
+
+[node name="HandSlipper" type="Sprite2D" parent="WeaponPivot/Slipper"]
+position = Vector2(-16.385942, -23.536268)
+scale = Vector2(0.0832036, 0.0832036)
+texture = ExtResource("4_1urmk")
