@@ -1,4 +1,3 @@
-class_name PlayerController
 extends Area2D
 
 @export var speed: float = 300.0
