@@ -25,12 +25,12 @@ var intangibility_timer: float = 0.0
 var is_hit: bool = false
 var hit_timer: float = 0.0
 var hit_duration: float = 0.25
-var is_dead: bool = false   # <-- NEW
+var is_dead: bool = false    # <-- NEW (Manages the death state)
 
 
 signal health_changed(new_health:int)
 
-var last_move_dir: Vector2 = Vector2.DOWN 
+var last_move_dir: Vector2 = Vector2.DOWN  
 
 @onready var anim: AnimatedSprite2D = $animation
 
@@ -51,7 +51,6 @@ func _ready():
 	anim.animation_finished.connect(_on_animation_finished)
 
 
-
 func _physics_process(delta):
 	# cooldown
 	if cooldown_timer > 0.0:
@@ -62,6 +61,18 @@ func _physics_process(delta):
 		hit_timer -= delta
 		if hit_timer <= 0.0:
 			is_hit = false
+
+	# === DEATH STATE MANAGEMENT ===
+	if is_dead:
+		# Lock movement, reset roll, stop effects, and return to skip input processing
+		velocity = Vector2.ZERO
+		is_rolling = false
+		if movement_trail:
+			movement_trail.emitting = false
+		move_and_slide()
+		_update_animation()
+		return
+	# ==============================
 
 	# dodge rolling condition
 	if is_rolling:
@@ -78,7 +89,7 @@ func _physics_process(delta):
 			is_rolling = false
 			cooldown_timer = roll_cooldown
 			collision_layer = 1
-		return  
+		return  # Skip all movement/input when rolling
 
 	# movement input
 	if Input.is_action_pressed("move_down"):
@@ -101,12 +112,12 @@ func _physics_process(delta):
 		last_move_dir = direction
 		_update_weapon_layering()
 
-	# health clamp + death
+	# health clamp
 	if current_health >= max_health:
 		current_health = max_health
 	if current_health <= 0.0:
 		current_health = 0.0
-		get_tree().change_scene_to_file("res://scene/main_menu.tscn")
+		# REMOVED: Immediate scene change here. Death is handled by take_damage.
 
 	# weapon switching
 	if Input.is_action_just_pressed("switch"):
@@ -221,6 +232,12 @@ func _update_animation() -> void:
 	if anim == null:
 		return
 
+	# === Death has highest priority ===
+	if is_dead:
+		if anim.animation != "die":
+			anim.play("die")
+		return
+
 	# hit has top priority (unless rolling)
 	if is_hit and not is_rolling:
 		var hit_name := _get_hit_anim_name(last_move_dir)
@@ -244,21 +261,15 @@ func _update_animation() -> void:
 func _on_body_entered(body) -> void:
 	print("ENTERE", body)
 
-# Damage function
+# Damage function (Initiates the death sequence)
 func take_damage(amount: int) -> void:
+	if is_dead: return # Prevent damage if already dead
+	
 	current_health -= amount
 	emit_signal("health_changed", current_health)
 
 	is_hit = true
 	hit_timer = hit_duration
-#
-	#if current_health <= 0.0:
-		#current_health = 0.0
-	#
-		#anim.play("die") # make sure you have a "die" animation
-		#await get_tree().create_timer(0.2).timeout 
-#
-		#get_tree().change_scene_to_file("res://scene/main_menu.tscn")
 		
 	if current_health <= 0.0 and not is_dead:
 		current_health = 0.0
@@ -270,19 +281,27 @@ func take_damage(amount: int) -> void:
 		direction = Vector2.ZERO
 		velocity = Vector2.ZERO
 
-	# Stop trail effect if active
-	if movement_trail:
-		movement_trail.emitting = false
+		# Stop trail effect if active
+		if movement_trail:
+			movement_trail.emitting = false
 
-	# Play the death animation once
-	if anim:
-		anim.play("die")
+		# Play the death animation once
+		if anim:
+			anim.play("die")
 		
+# Scene change occurs only after the 'die' animation finishes, followed by a delay.
 func _on_animation_finished(anim_name: StringName) -> void:
 	if is_dead and anim_name == "die":
-		get_tree().change_scene_to_file("res://scene/main_menu.tscn")
-
-
+		var delay_time = 2.0
+		
+		# 1. Create a Timer (no need for await/async)
+		var timer = get_tree().create_timer(delay_time)
+		
+		# 2. Connect the timer's 'timeout' signal to an anonymous function
+		#    that executes the scene change.
+		timer.timeout.connect(func():
+			get_tree().change_scene_to_file("res://scene/main_menu.tscn")
+		)
 # Slow effect functions
 func apply_slow(multiplier: float) -> void:
 	is_slowed = true
