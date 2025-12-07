@@ -3,6 +3,7 @@ extends Area2D
 @export var speed: float = 500.0
 @export var max_distance: float = 400.0
 @export var damage: float = 10.0
+@export var hit_effect_scene: PackedScene
 
 var direction: Vector2 = Vector2.ZERO
 var _start_position: Vector2
@@ -34,6 +35,12 @@ func _on_body_entered(body):
 	if body.has_method("take_damage"):
 		body.take_damage(damage)
 		print("Rice bullet hit: ", body.name, " for ", damage, " damage")
+
+		# Spawn hit effect
+		if hit_effect_scene != null:
+			var hit_effect = hit_effect_scene.instantiate()
+			get_tree().current_scene.add_child(hit_effect)
+			hit_effect.global_position = global_position
 
 	# Destroy bullet on impact
 	queue_free()

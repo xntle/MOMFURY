@@ -1,22 +1,26 @@
-[gd_scene load_steps=4 format=3 uid="uid://b3h1b4y6h3e85"]
+[gd_scene load_steps=5 format=3 uid="uid://b3h1b4y6h3e85"]
 
 [ext_resource type="Script" uid="uid://c2k3pg7xnkl76" path="res://scripts/Weapons/slipper_bullet.gd" id="1_141rr"]
-[ext_resource type="Texture2D" uid="uid://dgn1lwaurj4ig" path="res://scene/Weapons/st,small,507x507-pad,600x600,f8f8f8.u1.jpg" id="2_c17ra"]
+[ext_resource type="Texture2D" uid="uid://cd21m8rgkk0ca" path="res://assets/ThrownSlipper.png" id="2_141rr"]
+[ext_resource type="PackedScene" path="res://scene/Effects/HitImpact.tscn" id="3_hit"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_v4rvk"]
-size = Vector2(3.8170967, 3.8624382)
+[sub_resource type="CircleShape2D" id="CircleShape2D_c17ra"]
+radius = 2.8239067
 
 [node name="SlipperBullet" type="Area2D"]
 collision_layer = 4
 collision_mask = 3
 script = ExtResource("1_141rr")
+hit_effect_scene = ExtResource("3_hit")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(1, -1.9999962)
+position = Vector2(2, -4)
+rotation = -1.6240911
 scale = Vector2(3.5581992, 3.9103477)
-shape = SubResource("RectangleShape2D_v4rvk")
+shape = SubResource("CircleShape2D_c17ra")
 
-[node name="St,small,507x507Pad,600x600,f8f8f8_u1" type="Sprite2D" parent="."]
-position = Vector2(0.9999981, -2)
-scale = Vector2(0.02634578, 0.026233427)
-texture = ExtResource("2_c17ra")
+[node name="ThrownSlipper" type="Sprite2D" parent="."]
+position = Vector2(2.0000005, -4)
+rotation = -0.18775332
+scale = Vector2(0.066250004, 0.066250004)
+texture = ExtResource("2_141rr")

@@ -8,11 +8,7 @@ class_name PlayerController
 @export var max_health: float = 100.0
 
 # Weapon system
-@export var slipper_scene: PackedScene
-@export var rice_bullet_scene: PackedScene
-@export var shoot_cooldown: float = 0.3
-
-enum Weapon { SLIPPER, RICE_MACHINE }
+enum Weapon { SLIPPER, RICE_MACHINE, BROOM }
 var current_weapon: Weapon = Weapon.SLIPPER
 
 var current_health: float = max_health
@@ -24,17 +20,18 @@ var roll_dir: Vector2
 var is_stunned:bool = false
 var stun_timer:float = 0.0
 var intangibility_timer:float = 0.0
-var shoot_timer: float = 0.0
 
 signal health_changed(new_health:int)
 
 
 
-var last_move_dir: Vector2 = Vector2.DOWN
+var last_move_dir: Vector2 = Vector2.DOWN 
 @onready var anim: AnimationPlayer = $AnimationPlayer
 @onready var shoot_point: Marker2D = $ShootingPoint
 @onready var slip_weapon: Node2D = $slip
 @onready var rice_weapon: Node2D = $Ricechine
+@onready var broom_weapon: Node2D = $Broom
+@onready var movement_trail: CPUParticles2D = $MovementTrail
 
 # Slow effect tracking
 var is_slowed: bool = false
@@ -53,15 +50,17 @@ func _physics_process(delta):
 	if cooldown_timer > 0:
 		cooldown_timer -= delta
 
-	# shoot cooldown
-	if shoot_timer > 0:
-		shoot_timer -= delta
-
 	# dodge rolling condition
 	if is_rolling:
 		roll_timer -= delta
 
 		move_and_collide(roll_dir * roll_speed * delta)
+
+		# Emit intense trail during roll
+		if movement_trail != null:
+			movement_trail.emitting = true
+			movement_trail.amount = 15
+			movement_trail.scale_amount_max = 6.0
 
 		if roll_timer <= 0:
 			is_rolling = false
@@ -89,6 +88,7 @@ func _physics_process(delta):
 	if direction != Vector2.ZERO:
 		direction = direction.normalized()
 		last_move_dir = direction
+		_update_weapon_layering()
 
 	if current_health >= max_health:
 		current_health = max_health
@@ -97,14 +97,13 @@ func _physics_process(delta):
 		#Add death logic here
 		get_tree().change_scene_to_file("res://scene/main_menu.tscn")
 
-	# weapon switching 
+	# weapon switching
 	if Input.is_action_just_pressed("switch"):
 		_switch_weapon()
 
-	# shooting with current weapon
-	if Input.is_action_pressed("shoot") and shoot_timer <= 0.0 and not is_rolling and not is_stunned:
+	# shooting with current weapon (weapons handle their own cooldowns)
+	if Input.is_action_pressed("shoot") and not is_rolling and not is_stunned:
 		_shoot_current_weapon()
-		shoot_timer = shoot_cooldown
 
 	# dodge rolling
 	if Input.is_action_just_pressed("roll") and cooldown_timer <= 0.0 and (not is_stunned):
@@ -130,7 +129,18 @@ func _physics_process(delta):
 
 	if not is_stunned:
 		move_and_slide()
-		
+
+	# Update movement trail
+	if movement_trail != null:
+		if direction != Vector2.ZERO and not is_stunned:
+			# Light trail during normal movement
+			movement_trail.emitting = true
+			movement_trail.amount = 8
+			movement_trail.scale_amount_max = 4.0
+		else:
+			# Stop trail when idle
+			movement_trail.emitting = false
+
 	# stun duration logic
 	stun_timer = max(0,stun_timer-delta)
 	if stun_timer <= 0:
@@ -219,55 +229,35 @@ func apply_intangibility(duration) -> void:
 	intangibility_timer = duration
 	collision_layer = 8
 
-func _shoot_slipper() -> void:
-	if slipper_scene == null:
-		print("ERROR: slipper_scene is null! Assign the Slipper scene in the Godot editor.")
-		return
-
-	var slipper = slipper_scene.instantiate()
-	get_tree().current_scene.add_child(slipper)
-
-	if shoot_point != null:
-		slipper.global_position = shoot_point.global_position
-	else:
-		slipper.global_position = global_position
-
-	var mouse_pos = get_global_mouse_position()
-	slipper.direction = (mouse_pos - global_position).normalized()
-
-# Shoot rice machine gun bullet
-func _shoot_rice() -> void:
-	if rice_bullet_scene == null:
-		print("ERROR: rice_bullet_scene is null!")
-		return
-
-	var bullet = rice_bullet_scene.instantiate()
-	get_tree().current_scene.add_child(bullet)
-
-	if shoot_point != null:
-		bullet.global_position = shoot_point.global_position
-	else:
-		bullet.global_position = global_position
-
-	var mouse_pos = get_global_mouse_position()
-	bullet.direction = (mouse_pos - global_position).normalized()
-
-# Shoot with current weapon
+# Attack with current weapon using unified WeaponBase interface
 func _shoot_current_weapon() -> void:
+	var weapon: WeaponBase = _get_current_weapon()
+	if weapon != null and weapon.has_method("attack"):
+		weapon.attack()
+
+# Get the current weapon instance
+func _get_current_weapon() -> WeaponBase:
 	match current_weapon:
 		Weapon.SLIPPER:
-			_shoot_slipper()
+			return slip_weapon as WeaponBase
 		Weapon.RICE_MACHINE:
-			_shoot_rice()
+			return rice_weapon as WeaponBase
+		Weapon.BROOM:
+			return broom_weapon as WeaponBase
+	return null
 
 # Switch between weapons
 func _switch_weapon() -> void:
-	if current_weapon == Weapon.SLIPPER:
-		current_weapon = Weapon.RICE_MACHINE
-		print("Switched to Rice Machine Gun")
-	else:
-		current_weapon = Weapon.SLIPPER
-		print("Switched to Slipper")
+	match current_weapon:
+		Weapon.SLIPPER:
+			current_weapon = Weapon.RICE_MACHINE
+			print("Switched to Rice Machine Gun")
+		Weapon.RICE_MACHINE:
+			current_weapon = Weapon.BROOM
+			print("Switched to Broom")
+		Weapon.BROOM:
+			current_weapon = Weapon.SLIPPER
+			print("Switched to Slipper")
 
 	_update_weapon_visibility()
 
@@ -278,3 +268,30 @@ func _update_weapon_visibility() -> void:
 
 	if rice_weapon != null:
 		rice_weapon.visible = (current_weapon == Weapon.RICE_MACHINE)
+
+	if broom_weapon != null:
+		broom_weapon.visible = (current_weapon == Weapon.BROOM)
+
+# Update weapon layering based on facing direction
+func _update_weapon_layering() -> void:
+	# If facing up (negative Y), put weapons behind player
+	# If facing down/forward (positive Y), put weapons in front
+	var weapon_z = 1 if last_move_dir.y >= 0 else -1
+
+	# Calculate weapon position based on direction
+	var weapon_offset = last_move_dir.normalized() * 6.0
+	# Add slight offset perpendicular to direction for better positioning
+	var perpendicular = Vector2(-last_move_dir.y, last_move_dir.x) * 4.0
+	var weapon_pos = weapon_offset + perpendicular
+
+	if slip_weapon != null:
+		slip_weapon.z_index = weapon_z
+		slip_weapon.position = weapon_pos
+
+	if rice_weapon != null:
+		rice_weapon.z_index = weapon_z
+		rice_weapon.position = weapon_pos
+
+	if broom_weapon != null:
+		broom_weapon.z_index = weapon_z
+		broom_weapon.position = weapon_pos

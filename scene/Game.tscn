@@ -1,9 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://bve1pou0gt1v4"]
+[gd_scene load_steps=12 format=3 uid="uid://bve1pou0gt1v4"]
 
 [ext_resource type="PackedScene" uid="uid://kk3crf462xob" path="res://scene/House.tscn" id="1_e7hha"]
 [ext_resource type="PackedScene" uid="uid://ctnihbseogqdf" path="res://scene/Player.tscn" id="4_0qanc"]
 [ext_resource type="PackedScene" uid="uid://v1xuhkejwyw7" path="res://scene/main_menu.tscn" id="4_1qeit"]
 [ext_resource type="Script" uid="uid://lyimuq4183ha" path="res://scripts/pause_menu.gd" id="5_0qanc"]
+[ext_resource type="Texture2D" uid="uid://bhxxlr7ih651e" path="res://assets/SplashScreen.png" id="5_qto5f"]
 [ext_resource type="FontFile" uid="uid://box1b2tla1jkp" path="res://assets/fonts/MegamaxJonathanToo-YqOq2.ttf" id="6_qto5f"]
 [ext_resource type="Script" uid="uid://dloc7t0utspjp" path="res://scripts/health_label.gd" id="7_0qanc"]
 [ext_resource type="PackedScene" uid="uid://bog8uq3cg74nk" path="res://scene/Bosses/BossDaddy/BossDaddy.tscn" id="7_qto5f"]
@@ -46,6 +47,12 @@ collision_mask = 4
 [node name="Pause Menu" parent="UI" instance=ExtResource("4_1qeit")]
 process_mode = 3
 script = ExtResource("5_0qanc")
+
+[node name="SplashScreen" type="Sprite2D" parent="UI/Pause Menu"]
+position = Vector2(577.00006, 325)
+rotation = -0.0042014257
+scale = Vector2(0.41929471, 0.41929471)
+texture = ExtResource("5_qto5f")
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="UI/Pause Menu"]
 custom_minimum_size = Vector2(400, 0)

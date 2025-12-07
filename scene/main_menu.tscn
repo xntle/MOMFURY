@@ -1,7 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://v1xuhkejwyw7"]
+[gd_scene load_steps=8 format=3 uid="uid://v1xuhkejwyw7"]
 
 [ext_resource type="Script" uid="uid://q4n5kf84hv1v" path="res://scripts/main_menu.gd" id="1_3er1b"]
+[ext_resource type="Texture2D" uid="uid://bhxxlr7ih651e" path="res://assets/SplashScreen.png" id="2_2fwvj"]
 [ext_resource type="FontFile" uid="uid://box1b2tla1jkp" path="res://assets/fonts/MegamaxJonathanToo-YqOq2.ttf" id="2_hxu56"]
+[ext_resource type="Texture2D" path="res://assets/ThrownSlipper.png" id="4_slipper"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2fwvj"]
 bg_color = Color(0.07058824, 0.20784314, 0.14117648, 1)
@@ -20,11 +22,11 @@ border_width_bottom = 5
 border_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sepwh"]
-bg_color = Color(0, 0.7019608, 0.57254905, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
 border_color = Color(0, 0, 0, 1)
 
 [node name="Main Menu" type="Control"]
@@ -35,6 +37,11 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_3er1b")
+
+[node name="SplashScreen" type="Sprite2D" parent="."]
+position = Vector2(577.5, 330)
+scale = Vector2(0.421875, 0.421875)
+texture = ExtResource("2_2fwvj")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 custom_minimum_size = Vector2(400, 0)
@@ -55,6 +62,7 @@ theme_override_constants/separation = 12
 [node name="StartButton" type="Button" parent="VBoxContainer"]
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("2_hxu56")
 theme_override_font_sizes/font_size = 32
 theme_override_styles/normal = SubResource("StyleBoxFlat_2fwvj")
@@ -62,12 +70,43 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_0iwki")
 theme_override_styles/hover = SubResource("StyleBoxFlat_sepwh")
 text = "Start"
 
+[node name="SlipperIcon" type="TextureRect" parent="VBoxContainer/StartButton"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 15.0
+offset_top = -20.0
+offset_right = 55.0
+offset_bottom = 20.0
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("4_slipper")
+expand_mode = 1
+stretch_mode = 5
+
 [node name="QuitButton" type="Button" parent="VBoxContainer"]
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("2_hxu56")
 theme_override_font_sizes/font_size = 32
 theme_override_styles/normal = SubResource("StyleBoxFlat_2fwvj")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_0iwki")
 theme_override_styles/hover = SubResource("StyleBoxFlat_sepwh")
 text = "Quit"
+
+[node name="SlipperIcon" type="TextureRect" parent="VBoxContainer/QuitButton"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 15.0
+offset_top = -20.0
+offset_right = 55.0
+offset_bottom = 20.0
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("4_slipper")
+expand_mode = 1
+stretch_mode = 5

@@ -1,11 +1,10 @@
-[gd_scene load_steps=18 format=3 uid="uid://ctnihbseogqdf"]
+[gd_scene load_steps=17 format=3 uid="uid://ctnihbseogqdf"]
 
 [ext_resource type="Script" uid="uid://cbrwihmwrf8c6" path="res://scripts/player.gd" id="1_hjaqi"]
 [ext_resource type="Texture2D" uid="uid://cl47t4xfgncs6" path="res://characters/spritesheet__1_-removebg-preview.png" id="2_62i1b"]
 [ext_resource type="PackedScene" uid="uid://cfwuhb3k8ao3" path="res://scene/Weapons/Slip.tscn" id="3_y30ri"]
-[ext_resource type="PackedScene" uid="uid://b3h1b4y6h3e85" path="res://scene/Weapons/Slipper.tscn" id="4_slipper"]
-[ext_resource type="PackedScene" uid="uid://5oeaucq136j6" path="res://scene/Weapons/RiceBullet.tscn" id="5_rice"]
 [ext_resource type="PackedScene" uid="uid://b75t07ym54440" path="res://scene/Weapons/Ricechine.tscn" id="6_ricechine"]
+[ext_resource type="PackedScene" uid="uid://ljl3f4jpnmhv" path="res://scene/Weapons/Broom.tscn" id="7_broom"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_onrkg"]
 radius = 8.12884
@@ -178,8 +177,6 @@ _data = {
 [node name="Player" type="CharacterBody2D"]
 collision_mask = 6
 script = ExtResource("1_hjaqi")
-slipper_scene = ExtResource("4_slipper")
-rice_bullet_scene = ExtResource("5_rice")
 
 [node name="ShootingPoint" type="Marker2D" parent="."]
 position = Vector2(12, 0)
@@ -209,9 +206,36 @@ libraries = {
 &"": SubResource("AnimationLibrary_waelg")
 }
 
+[node name="MovementTrail" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 8
+lifetime = 0.3
+preprocess = 0.1
+explosiveness = 0.1
+randomness = 0.3
+local_coords = false
+emission_shape = 1
+emission_sphere_radius = 5.0
+direction = Vector2(0, 0)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 10.0
+initial_velocity_max = 30.0
+angular_velocity_min = -100.0
+angular_velocity_max = 100.0
+scale_amount_min = 2.0
+scale_amount_max = 4.0
+color = Color(1, 1, 1, 0.5)
+
 [node name="slip" parent="." instance=ExtResource("3_y30ri")]
 visible = false
-position = Vector2(31, 0)
+position = Vector2(10, 6)
 
 [node name="Ricechine" parent="." instance=ExtResource("6_ricechine")]
+visible = false
 position = Vector2(12, 4)
+bullet_scene = null
+
+[node name="Broom" parent="." instance=ExtResource("7_broom")]
+position = Vector2(19, 9)
+script = null
