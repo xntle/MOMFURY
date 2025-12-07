@@ -17426,6 +17426,7 @@ sources/9 = SubResource("TileSetAtlasSource_e8xd4")
 sources/7 = SubResource("TileSetAtlasSource_2fque")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dexg3"]
+size = Vector2(80, 20)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_70hri"]
 texture = ExtResource("4_m5rmj")
@@ -32301,6 +32302,7 @@ tile_set = SubResource("TileSet_r3aus")
 [node name="Wall" type="StaticBody2D" parent="."]
 visible = false
 z_index = -2
+position = Vector2(-41.333344, 438.33334)
 collision_layer = 4
 collision_mask = 255
 
