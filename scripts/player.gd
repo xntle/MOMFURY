@@ -1,5 +1,5 @@
 extends CharacterBody2D
-class_name PlayerController
+class_name Player
 
 @export var move_speed: float = 30.0
 @export var roll_speed: float = 300.0

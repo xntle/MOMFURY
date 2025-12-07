@@ -1,7 +1,11 @@
+<<<<<<< Updated upstream
 [gd_scene load_steps=22 format=3 uid="uid://bve1pou0gt1v4"]
+=======
+[gd_scene load_steps=21 format=3 uid="uid://bve1pou0gt1v4"]
+>>>>>>> Stashed changes
 
 [ext_resource type="PackedScene" uid="uid://kk3crf462xob" path="res://scene/House.tscn" id="1_e7hha"]
-[ext_resource type="Script" path="res://scripts/game_manager.gd" id="2_game"]
+[ext_resource type="Script" uid="uid://bg4wxh4k8pviy" path="res://scripts/game_manager.gd" id="2_game"]
 [ext_resource type="PackedScene" uid="uid://ctnihbseogqdf" path="res://scene/Player.tscn" id="4_0qanc"]
 [ext_resource type="PackedScene" uid="uid://v1xuhkejwyw7" path="res://scene/main_menu.tscn" id="4_1qeit"]
 [ext_resource type="Script" path="res://scripts/pause_menu.gd" id="5_0qanc"]
@@ -116,28 +120,29 @@ player = NodePath("../../Player")
 unique_name_in_owner = true
 
 [node name="AMinusSpawner" parent="." instance=ExtResource("8_6okl4")]
+position = Vector2(256, 239)
 
 [node name="CockroachSpawner" parent="." instance=ExtResource("9_w73ac")]
-position = Vector2(-95, 40)
+position = Vector2(242, 401)
 
 [node name="MixedSpawner" parent="." instance=ExtResource("10_7sjor")]
-position = Vector2(466, -106)
+position = Vector2(235, 307)
 
 [node name="PoopSpawner" parent="." instance=ExtResource("11_7ftmx")]
-position = Vector2(326, 269)
+position = Vector2(389, 354)
 
 [node name="BossDaddy" parent="." instance=ExtResource("14_7ftmx")]
 
 [node name="Spawner" parent="." instance=ExtResource("10_f6bub")]
-position = Vector2(557, 66)
+position = Vector2(173, 372)
 enemy_scenes = Array[PackedScene]([ExtResource("12_64o46"), ExtResource("10_r3aus"), ExtResource("13_msms8")])
 spawn_points = Array[NodePath]([NodePath("SpawnPoint1"), NodePath("SpawnPoint2"), NodePath("SpawnPoint3")])
 
 [node name="SpawnPoint1" type="Marker2D" parent="Spawner"]
-position = Vector2(327, 285)
+position = Vector2(412, 178)
 
 [node name="SpawnPoint2" type="Marker2D" parent="Spawner"]
-position = Vector2(-72, -159)
+position = Vector2(-228, 243)
 
 [node name="SpawnPoint3" type="Marker2D" parent="Spawner"]
 position = Vector2(619, 63)
