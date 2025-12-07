@@ -19,6 +19,12 @@ func _physics_process(delta):
 
 	move_and_slide()
 	
+func _on_timer_timeout():
+	if $NavigationAgent2D.target_position != player.global_position:
+		$NavigationAgent2D.target_position = player.global_position
+	$Timer.start()
+	
+	
 func take_damage(amount: float) -> void:
 	health -= amount
 	print("Boss Daddy took ", amount, " damage. Health: ", health)
