@@ -1,8 +1,4 @@
-<<<<<<< Updated upstream
-[gd_scene load_steps=22 format=3 uid="uid://bve1pou0gt1v4"]
-=======
 [gd_scene load_steps=21 format=3 uid="uid://bve1pou0gt1v4"]
->>>>>>> Stashed changes
 
 [ext_resource type="PackedScene" uid="uid://kk3crf462xob" path="res://scene/House.tscn" id="1_e7hha"]
 [ext_resource type="Script" uid="uid://bg4wxh4k8pviy" path="res://scripts/game_manager.gd" id="2_game"]
