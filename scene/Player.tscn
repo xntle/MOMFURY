@@ -232,7 +232,6 @@ rotation = 1.415462
 [node name="Ricechine" parent="." instance=ExtResource("6_ricechine")]
 visible = false
 position = Vector2(10, 4)
-bullet_scene = null
 
 [node name="Broom" parent="." instance=ExtResource("7_broom")]
 visible = false

@@ -81,3 +81,10 @@ func _spawn_death_particles() -> void:
 		var particles = death_particles_scene.instantiate()
 		get_tree().current_scene.add_child(particles)
 		particles.global_position = global_position
+
+	# Spawn soul escape effect
+	var soul_scene = load("res://scene/Effects/SoulEscape.tscn")
+	if soul_scene != null:
+		var soul = soul_scene.instantiate()
+		get_tree().current_scene.add_child(soul)
+		soul.global_position = global_position
