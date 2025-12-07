@@ -157,36 +157,37 @@ func _physics_process(delta):
 func _get_anim_name(dir: Vector2, is_moving: bool) -> String:
 	if is_stunned:
 		return "roll"
-	if not is_moving:
-		return "idle_down"  # your only idle anim for now
 
 	var x := dir.x
 	var y := dir.y
 
+	# Use "move" animations when moving, "idle" when stationary
+	var prefix := "move_" if is_moving else "idle_"
+
 	# PURE CARDINAL DIRECTIONS
 	if abs(x) < 0.4 and y < -0.4:
-		return "move_up"
+		return prefix + "up" if is_moving else "idle_down"  # No idle_up, fallback
 	elif x < -0.4 and abs(y) < 0.4:
-		return "move_left"
+		return prefix + "left" if is_moving else "idle_down"  # No idle_left, fallback
 	elif x > 0.4 and abs(y) < 0.4:
-		return "move_right"
+		return prefix + "right" if is_moving else "idle_down"  # No idle_right, fallback
 
 	## DIAGONALS (any time both x and y have a decent magnitude)
-	#if x < 0.0:
-		#return "move_diag_left_up"
-	#elif x > 0.0:
-		#return "move_diag_right_up"
 	if abs(x) > 0.4 and abs(y) > 0.4:
 		# UP
 		if y < 0.0:
-			return "move_diag_left_up" if x < 0.0 else "move_diag_right_up"
+			if is_moving:
+				return "move_diag_left_up" if x < 0.0 else "move_diag_right_up"
+			else:
+				return "idle_down"  # No diagonal idles, fallback
 		# DOWN
 		else:
-			return "move_diag_left_down" if x < 0.0 else "idle_down"
+			if is_moving:
+				return "move_diag_left_down" if x < 0.0 else "idle_down"
+			else:
+				return "idle_down"
 
-	 
-
-	# moving straight down but you don't have move_down yet → reuse idle_down
+	# Default fallback
 	return "idle_down"
 
 
@@ -195,11 +196,13 @@ func _update_animation() -> void:
 		if anim.current_animation != "roll":
 			anim.play("roll")
 		return
-		
-	var is_moving := direction != Vector2.ZERO and not is_rolling
-	var dir_vec := last_move_dir
 
-	var anim_name := _get_anim_name(dir_vec, is_moving)
+	# Animation is now based on mouse direction, not movement
+	var mouse_pos = get_global_mouse_position()
+	var mouse_dir = (mouse_pos - global_position).normalized()
+	var is_moving := direction != Vector2.ZERO and not is_rolling
+
+	var anim_name := _get_anim_name(mouse_dir, is_moving)
 
 	if anim.current_animation != anim_name:
 		anim.play(anim_name)
@@ -274,24 +277,20 @@ func _update_weapon_visibility() -> void:
 
 # Update weapon layering based on facing direction
 func _update_weapon_layering() -> void:
-	# If facing up (negative Y), put weapons behind player
-	# If facing down/forward (positive Y), put weapons in front
-	var weapon_z = 1 if last_move_dir.y >= 0 else -1
+	# Use mouse direction to determine if weapons should be in front or behind
+	var mouse_pos = get_global_mouse_position()
+	var mouse_dir = (mouse_pos - global_position).normalized()
 
-	# Calculate weapon position based on direction
-	var weapon_offset = last_move_dir.normalized() * 6.0
-	# Add slight offset perpendicular to direction for better positioning
-	var perpendicular = Vector2(-last_move_dir.y, last_move_dir.x) * 4.0
-	var weapon_pos = weapon_offset + perpendicular
+	# If aiming up (negative Y), put weapons behind player
+	# If aiming down (positive Y), put weapons in front
+	var weapon_z = 1 if mouse_dir.y >= 0 else -1
 
+	# Weapons stay at their fixed position - only update layering
 	if slip_weapon != null:
 		slip_weapon.z_index = weapon_z
-		slip_weapon.position = weapon_pos
 
 	if rice_weapon != null:
 		rice_weapon.z_index = weapon_z
-		rice_weapon.position = weapon_pos
 
 	if broom_weapon != null:
 		broom_weapon.z_index = weapon_z
-		broom_weapon.position = weapon_pos

@@ -12,7 +12,6 @@ var attack_timer: float = 0.0
 
 
 func _ready():
-	# Override in subclass if needed
 	pass
 
 
@@ -23,7 +22,6 @@ func _process(delta):
 		if attack_timer <= 0:
 			can_attack = true
 			_on_cooldown_finished()
-
 
 # Virtual method - override in subclasses
 func attack() -> bool:
