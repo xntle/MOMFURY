@@ -21,6 +21,9 @@ func _ready():
 	current_health = max_health
 	spawn_timer = spawn_interval  # Spawn first enemy immediately after interval
 
+	# Add to spawners group for tracking
+	add_to_group("spawners")
+
 
 func _process(delta):
 	if is_destroyed:

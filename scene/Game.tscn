@@ -1,6 +1,7 @@
-[gd_scene load_steps=19 format=3 uid="uid://bve1pou0gt1v4"]
+[gd_scene load_steps=20 format=3 uid="uid://bve1pou0gt1v4"]
 
 [ext_resource type="PackedScene" uid="uid://kk3crf462xob" path="res://scene/House.tscn" id="1_e7hha"]
+[ext_resource type="Script" path="res://scripts/game_manager.gd" id="2_game"]
 [ext_resource type="PackedScene" uid="uid://ctnihbseogqdf" path="res://scene/Player.tscn" id="4_0qanc"]
 [ext_resource type="PackedScene" uid="uid://v1xuhkejwyw7" path="res://scene/main_menu.tscn" id="4_1qeit"]
 [ext_resource type="Script" uid="uid://lyimuq4183ha" path="res://scripts/pause_menu.gd" id="5_0qanc"]
@@ -15,6 +16,7 @@
 [ext_resource type="PackedScene" path="res://scene/Spawners/PoopSpawner.tscn" id="11_7ftmx"]
 [ext_resource type="PackedScene" uid="uid://5wrlhjc0vedk" path="res://scene/Enemies/Cockroach.tscn" id="12_64o46"]
 [ext_resource type="PackedScene" uid="uid://ixi501xwduk4" path="res://scene/Enemies/Poop.tscn" id="13_msms8"]
+[ext_resource type="PackedScene" uid="uid://cb0mab3mammy4" path="res://scene/BossBaby.tscn" id="14_boss"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4cigq"]
 bg_color = Color(0.07058824, 0.20784314, 0.14117648, 1)
@@ -41,6 +43,9 @@ border_width_bottom = 2
 border_color = Color(0, 0, 0, 1)
 
 [node name="Game" type="Node2D"]
+script = ExtResource("2_game")
+boss_scene = ExtResource("14_boss")
+boss_spawn_position = Vector2(300, 150)
 
 [node name="House" parent="." instance=ExtResource("1_e7hha")]
 scale = Vector2(2, 2)

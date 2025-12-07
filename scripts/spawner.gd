@@ -18,6 +18,9 @@ func _ready() -> void:
 	randomize()
 	current_health = max_health
 
+	# Add to spawners group for tracking
+	add_to_group("spawners")
+
 	_timer = Timer.new()
 	_timer.one_shot = true
 	add_child(_timer)
