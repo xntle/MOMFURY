@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 @onready var player: CharacterBody2D = get_node("/root/Game/Player")
 
-@export var health: float = 100.0
+@export var health: float = 10.0
 @export var speed: float = 50.0
 @export var damage: float = 10.0
 
@@ -18,6 +18,7 @@ var default_bounce_timer: float = 0.25
 func _ready():
 	# First random cooldown 1 to 3 seconds
 	dash_timer = randf_range(1.0, 3.0)  
+	$NavigationAgent2D.target_position = player.global_position
 
 func _physics_process(delta):
 	
@@ -42,7 +43,10 @@ func _physics_process(delta):
 	elif bounce_timer >= 0.1:
 		velocity = -4 * direction * speed
 	elif bounce_timer == 0:
-		velocity = direction * speed
+		if !$NavigationAgent2D.is_target_reached():
+			var nav_point = to_local($NavigationAgent2D.get_next_path_position()).normalized()
+			velocity = nav_point * speed * delta
+			move_and_slide()
 	else:
 		velocity = Vector2(0,0)
 
@@ -51,6 +55,17 @@ func _physics_process(delta):
 	if (not (dash_timer>0 and dash_timer<=0.5)):
 		move_and_slide()
 	rotation = direction.angle() +90
+	
+func _on_timer_timeout():
+	if $NavigationAgent2D.target_position != player.global_position:
+		$NavigationAgent2D.target_position = player.global_position
+	$Timer.start()
+	
+func take_damage(amount: float) -> void:
+	health -= amount
+
+	if health <= 0:
+		queue_free()
 
 
 func _on_area_2d_body_entered(body: Node2D) -> void:

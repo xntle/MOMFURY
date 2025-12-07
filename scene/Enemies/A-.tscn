@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://dsm7571yb3duy"]
+[gd_scene load_steps=5 format=3 uid="uid://dsm7571yb3duy"]
 
 [ext_resource type="Script" uid="uid://4emgnu7jqpt8" path="res://scripts/Enemies/Aminus.gd" id="1_oi1qy"]
 [ext_resource type="Texture2D" uid="uid://ddac2xd0rjskg" path="res://characters/A.png" id="2_rb3vm"]
@@ -6,16 +6,32 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_48ekt"]
 size = Vector2(51, 63)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_oi1qy"]
+radius = 24.0
+
 [node name="A-" type="CharacterBody2D"]
 collision_layer = 2
 collision_mask = 4
 script = ExtResource("1_oi1qy")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(15.5, 29.5)
+position = Vector2(1.2201691, -16.22668)
+scale = Vector2(0.5772617, 0.5772617)
 shape = SubResource("RectangleShape2D_48ekt")
 
 [node name="A" type="Sprite2D" parent="."]
-position = Vector2(16.000004, 29)
-scale = Vector2(0.43965518, 0.43965515)
+position = Vector2(1.7201738, -16.72668)
+scale = Vector2(0.2537961, 0.25379607)
 texture = ExtResource("2_rb3vm")
+
+[node name="PathfindingCollision" type="CollisionShape2D" parent="."]
+position = Vector2(2, 1)
+scale = Vector2(0.5772617, 0.5772617)
+shape = SubResource("CircleShape2D_oi1qy")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+path_desired_distance = 3.0
+target_desired_distance = 3.0
+path_postprocessing = 1
+
+[node name="Timer" type="Timer" parent="."]

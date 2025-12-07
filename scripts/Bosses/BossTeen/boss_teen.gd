@@ -19,7 +19,7 @@ var shoot_interval = 1.0
 var shoot_interval_timer = 0.0
 
 var beam: Node2D = null  
-var health := 200.0
+var health := 2000.0
 
 @export var projectile_scene: PackedScene
 @export var turn_speed: float = 6.0 # radians/sec (smaller = more lag)

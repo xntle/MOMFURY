@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://5wrlhjc0vedk"]
+[gd_scene load_steps=11 format=3 uid="uid://5wrlhjc0vedk"]
 
 [ext_resource type="Script" uid="uid://big42lkxshamh" path="res://scripts/Enemies/cockroach.gd" id="1_jbinx"]
 [ext_resource type="Texture2D" uid="uid://dscd4y8ji3g6u" path="res://characters/pixel-art-cartoon-poop-character-png.png" id="2_q61ie"]
@@ -43,6 +43,8 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oyald"]
 size = Vector2(12, 20)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_jbinx"]
+
 [node name="Cockroach" type="CharacterBody2D"]
 collision_layer = 2
 collision_mask = 4
@@ -70,5 +72,18 @@ collision_layer = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("RectangleShape2D_oyald")
+
+[node name="PathfindingCollision" type="CollisionShape2D" parent="."]
+position = Vector2(3.5527137e-15, 9.000001)
+scale = Vector2(-0.5151236, -0.5151236)
+shape = SubResource("CircleShape2D_jbinx")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+path_desired_distance = 3.0
+target_desired_distance = 3.0
+path_postprocessing = 1
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
