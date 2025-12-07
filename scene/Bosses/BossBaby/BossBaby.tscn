@@ -1,51 +1,172 @@
-[gd_scene load_steps=10 format=3 uid="uid://de8c3he3rib60"]
+[gd_scene load_steps=21 format=3 uid="uid://drw5trv1gsjtw"]
 
 [ext_resource type="Script" uid="uid://c3h2mokdbxtyo" path="res://scripts/Bosses/BossBaby/boss_baby.gd" id="1_yqcot"]
-[ext_resource type="Texture2D" uid="uid://d3e1h6p4owowt" path="res://assets/baby.png" id="3_f2df1"]
+[ext_resource type="Texture2D" uid="uid://dscd4y8ji3g6u" path="res://characters/pixel-art-cartoon-poop-character-png.png" id="3_jeojg"]
+[ext_resource type="Texture2D" uid="uid://npejrfaiiyt2" path="res://scene/Bosses/BossBaby/spritesheet__5_-removebg-preview.png" id="3_pf1v4"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_u22dk"]
 radius = 1.838872
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_8ah3l"]
-atlas = ExtResource("3_f2df1")
-region = Rect2(425, 210, 50, 50)
+[sub_resource type="AtlasTexture" id="AtlasTexture_s22hv"]
+atlas = ExtResource("3_pf1v4")
+region = Rect2(0, 96, 72, 96)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_tf8c6"]
-atlas = ExtResource("3_f2df1")
-region = Rect2(725, 210, 50, 50)
+[sub_resource type="AtlasTexture" id="AtlasTexture_pf1v4"]
+atlas = ExtResource("3_pf1v4")
+region = Rect2(72, 96, 72, 96)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_1xo51"]
-atlas = ExtResource("3_f2df1")
-region = Rect2(1025, 210, 50, 50)
+[sub_resource type="AtlasTexture" id="AtlasTexture_jeojg"]
+atlas = ExtResource("3_pf1v4")
+region = Rect2(360, 288, 72, 96)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_bc6uu"]
-atlas = ExtResource("3_f2df1")
-region = Rect2(1325, 210, 50, 50)
+[sub_resource type="AtlasTexture" id="AtlasTexture_favrq"]
+atlas = ExtResource("3_pf1v4")
+region = Rect2(288, 288, 72, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mtxyn"]
+atlas = ExtResource("3_pf1v4")
+region = Rect2(144, 0, 72, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0karn"]
+atlas = ExtResource("3_pf1v4")
+region = Rect2(216, 0, 72, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k5k1l"]
+atlas = ExtResource("3_pf1v4")
+region = Rect2(0, 96, 72, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hofnf"]
+atlas = ExtResource("3_pf1v4")
+region = Rect2(144, 192, 72, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jpcgn"]
+atlas = ExtResource("3_pf1v4")
+region = Rect2(0, 192, 72, 96)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_sdx6e"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_8ah3l")
+"texture": SubResource("AtlasTexture_s22hv")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_tf8c6")
+"texture": SubResource("AtlasTexture_pf1v4")
 }, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_1xo51")
+"duration": 1.51,
+"texture": SubResource("AtlasTexture_pf1v4")
 }, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_bc6uu")
+"duration": 1.31,
+"texture": SubResource("AtlasTexture_jeojg")
 }],
 "loop": true,
-"name": &"default",
+"name": &"baby_hit",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_favrq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mtxyn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0karn")
+}],
+"loop": true,
+"name": &"baby_throw_diaper",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 2.01,
+"texture": SubResource("AtlasTexture_k5k1l")
+}, {
+"duration": 0.31,
+"texture": SubResource("AtlasTexture_hofnf")
+}, {
+"duration": 0.51,
+"texture": SubResource("AtlasTexture_jpcgn")
+}],
+"loop": true,
+"name": &"default_walk",
 "speed": 5.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f2df1"]
 size = Vector2(18, 29)
 
-[node name="CharacterBody2D" type="CharacterBody2D"]
+[sub_resource type="Animation" id="Animation_jeojg"]
+resource_name = "baby_walk"
+length = 0.3
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("bossbaby:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.03333334, 0.13333334, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [6, 12, 14]
+}
+
+[sub_resource type="Animation" id="Animation_favrq"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("bossbaby:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [6]
+}
+
+[sub_resource type="Animation" id="Animation_pf1v4"]
+resource_name = "baby_hit"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("bossbaby:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.16666667, 0.2, 0.26666668),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [6, 7, 7, 7, 12]
+}
+
+[sub_resource type="Animation" id="Animation_mtxyn"]
+resource_name = "baby_throw_diaper"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("bossbaby:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.033333335, 0.13333334, 0.26666668),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [22, 2, 3]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mtxyn"]
+_data = {
+&"RESET": SubResource("Animation_favrq"),
+&"baby_hit": SubResource("Animation_pf1v4"),
+&"baby_throw_diaper": SubResource("Animation_mtxyn"),
+&"baby_walk": SubResource("Animation_jeojg")
+}
+
+[node name="BossBaby" type="CharacterBody2D"]
 scale = Vector2(1.9999994, 1.9999994)
 collision_layer = 2
 collision_mask = 4
@@ -57,9 +178,11 @@ scale = Vector2(6.079999, 6.079999)
 shape = SubResource("CircleShape2D_u22dk")
 
 [node name="animation" type="AnimatedSprite2D" parent="."]
-visible = false
+position = Vector2(0.5, -1.4901161e-08)
+scale = Vector2(0.43055564, 0.43055567)
 sprite_frames = SubResource("SpriteFrames_sdx6e")
-frame_progress = 0.56089085
+animation = &"default_walk"
+frame_progress = 0.02148038
 
 [node name="Area2D" type="Area2D" parent="."]
 
@@ -68,5 +191,22 @@ position = Vector2(1, -3.5)
 shape = SubResource("RectangleShape2D_f2df1")
 
 [node name="bossbaby" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-0.5, -4.500002)
+scale = Vector2(0.43868694, 0.43868697)
+texture = ExtResource("3_pf1v4")
+hframes = 6
+vframes = 6
+frame = 6
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_mtxyn")
+}
+
+[node name="PixelArtCartoonPoopCharacterPng" type="Sprite2D" parent="."]
+position = Vector2(-15.500004, 6.000001)
+scale = Vector2(0.021696432, 0.021696432)
+texture = ExtResource("3_jeojg")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
