@@ -1,12 +1,19 @@
 extends Area2D
 
 @export var life_time: float = 3.0
-@export var damage_per_second: float = 10.0
 @export var tick_interval: float = 0.1
-@export var slow_multiplier: float = 0.5  # Player moves at 50% speed in poison
 
-var time_alive: float = 5.0
-var damage_bodies: Array[Node] = []
+@export var base_dps: float = 10.0      # starting damage per second
+@export var ramp_dps_per_sec: float = 15.0  # how much DPS increases per second stayed in beam
+@export var max_dps: float = 120.0      # cap (optional)
+@onready var player = get_node("/root/Game/Player")
+@export var turn_speed: float = 1.0 
+
+
+var time_alive := 0.0
+
+# Store time-in-beam per body
+var bodies_in_beam: Dictionary = {} # body -> time_inside_seconds
 
 @onready var damage_timer: Timer = $DamageTimer
 
@@ -16,31 +23,41 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	time_alive += delta
+	
+	if is_instance_valid(player):
+		var target_angle = (player.global_position - global_position).angle()
+		rotation = lerp_angle(rotation, target_angle, turn_speed * delta)
+			
 	if time_alive >= life_time:
-		_cleanup()
 		queue_free()
 
-func _cleanup() -> void:
-	# Remove slow effect from all players still in the poison when it expires
-	for body in damage_bodies:
-		if is_instance_valid(body) and body is PlayerController:
-			body.remove_slow()
-
-func _on_body_entered(body) -> void:
+func _on_body_entered(body: Node2D) -> void:
 	if body is PlayerController:
-		if body not in damage_bodies:
-			damage_bodies.append(body)
-			body.apply_slow(slow_multiplier)
-
+		# start tracking time inside
+		bodies_in_beam[body] = 0.0
 
 func _on_body_exited(body: Node2D) -> void:
-	if body in damage_bodies:
-		damage_bodies.erase(body)
-		if body is PlayerController:
-			body.remove_slow() 
-
+	if bodies_in_beam.has(body):
+		bodies_in_beam.erase(body)
 
 func _on_damage_timer_timeout() -> void:
-	for body in damage_bodies:
-		if is_instance_valid(body):
-			body.take_damage(damage_per_second*tick_interval)
+	# Copy keys so we can safely erase invalid ones while iterating
+	for body in bodies_in_beam.keys():
+		if not is_instance_valid(body):
+			bodies_in_beam.erase(body)
+			continue
+		if not (body is PlayerController):
+			continue
+
+		# ramp time
+		bodies_in_beam[body] += tick_interval
+		var t: float = bodies_in_beam[body]
+
+		# ramping DPS: base + (ramp * seconds inside)
+		var dps := base_dps + ramp_dps_per_sec * t
+		dps = min(dps, max_dps)
+
+		var damage := dps * tick_interval
+		body.take_damage(damage)
+
+		print("Beam tick: t=%.2f dps=%.1f dmg=%.2f HP=%s" % [t, dps, damage, str(body.current_health)])

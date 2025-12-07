@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://bbhu5dry8x0xc"]
+
+[ext_resource type="Script" uid="uid://b4n15i8unfjm3" path="res://scripts/Bosses/BossDaddy/beer_poison.gd" id="1_fpuwr"]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_3f86c"]
+b = Vector2(54.06533, 0)
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_3f86c"]
+
+[node name="Projectile" type="Area2D"]
+scale = Vector2(1, 0.9940951)
+collision_layer = 16
+script = ExtResource("1_fpuwr")
+
+[node name="PoisonArea" type="CollisionShape2D" parent="."]
+visibility_layer = 2
+position = Vector2(27.07901, 0.66095036)
+scale = Vector2(7.6209025, 7.459044)
+shape = SubResource("SegmentShape2D_3f86c")
+
+[node name="DamageTimer" type="Timer" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(239, 1.00594)
+scale = Vector2(422.6597, 19.78078)
+texture = SubResource("CanvasTexture_3f86c")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
+[connection signal="timeout" from="DamageTimer" to="." method="_on_damage_timer_timeout"]
