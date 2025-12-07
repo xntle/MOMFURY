@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://aminus_spawner"]
+
+[ext_resource type="PackedScene" uid="uid://spawner_base_01" path="res://scene/Spawner.tscn" id="1_base"]
+[ext_resource type="PackedScene" uid="uid://dr2rntx2yt3e8" path="res://scene/Enemies/A-.tscn" id="2_aminus"]
+
+[node name="AMinusSpawner" instance=ExtResource("1_base")]
+max_health = 70.0
+spawn_interval = 5.0
+enemy_scenes = Array[PackedScene]([ExtResource("2_aminus")])
+
+[node name="Sprite2D" parent="." index="0"]
+modulate = Color(0.8, 0.2, 0.8, 1)
+
+[node name="Label" parent="." index="2"]
+text = "A-"

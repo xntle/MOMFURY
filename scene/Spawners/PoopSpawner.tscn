@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://poop_spawner"]
+
+[ext_resource type="PackedScene" uid="uid://spawner_base_01" path="res://scene/Spawner.tscn" id="1_base"]
+[ext_resource type="PackedScene" uid="uid://cqnwo76q2wad8" path="res://scene/Enemies/Poop.tscn" id="2_poop"]
+
+[node name="PoopSpawner" instance=ExtResource("1_base")]
+modulate = Color(0.6, 0.4, 0.2, 1)
+max_health = 60.0
+spawn_interval = 3.0
+enemy_scenes = Array[PackedScene]([ExtResource("2_poop")])
+
+[node name="Sprite2D" parent="." index="0"]
+modulate = Color(0.6, 0.4, 0.2, 1)
+
+[node name="Label" parent="." index="2"]
+text = "POOP"

@@ -1,0 +1,17 @@
+[gd_scene load_steps=5 format=3 uid="uid://mixed_spawner"]
+
+[ext_resource type="PackedScene" uid="uid://spawner_base_01" path="res://scene/Spawner.tscn" id="1_base"]
+[ext_resource type="PackedScene" uid="uid://c8gkrndwhtnhv" path="res://scene/Enemies/Cockroach.tscn" id="2_cockroach"]
+[ext_resource type="PackedScene" uid="uid://cqnwo76q2wad8" path="res://scene/Enemies/Poop.tscn" id="3_poop"]
+[ext_resource type="PackedScene" uid="uid://dr2rntx2yt3e8" path="res://scene/Enemies/A-.tscn" id="4_aminus"]
+
+[node name="MixedSpawner" instance=ExtResource("1_base")]
+max_health = 120.0
+spawn_interval = 2.5
+enemy_scenes = Array[PackedScene]([ExtResource("2_cockroach"), ExtResource("3_poop"), ExtResource("4_aminus")])
+
+[node name="Sprite2D" parent="." index="0"]
+modulate = Color(0.5, 0.5, 0.8, 1)
+
+[node name="Label" parent="." index="2"]
+text = "MIXED"
