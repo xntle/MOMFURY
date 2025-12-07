@@ -1,22 +1,160 @@
-[gd_scene load_steps=6 format=3 uid="uid://ljl3f4jpnmhv"]
+[gd_scene load_steps=9 format=3 uid="uid://ljl3f4jpnmhv"]
 
 [ext_resource type="Script" uid="uid://bdexbpdn3b2op" path="res://scripts/Weapons/broom.gd" id="1_broom"]
-[ext_resource type="Texture2D" uid="uid://fji2vvtldfy3" path="res://assets/weapons/Broom.png" id="2_l2ybq"]
+[ext_resource type="Texture2D" uid="uid://cdp607p1ck0c1" path="res://assets/weapons/broomsprite.png" id="3_25nkj"]
 [ext_resource type="Texture2D" uid="uid://bfr0n4tj4nnmm" path="res://assets/weapons/6.png" id="3_k58ik"]
-[ext_resource type="PackedScene" uid="uid://cqh7hit_impact" path="res://scene/Effects/HitImpact.tscn" id="4_hit"]
+[ext_resource type="PackedScene" path="res://scene/Effects/HitImpact.tscn" id="4_hit"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hitbox"]
 size = Vector2(39, 12)
+
+[sub_resource type="Animation" id="Animation_25nkj"]
+resource_name = "broom_swing"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Broom:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.033333335, 0.06666667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("6:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.17026882, 0.33333334),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 0, 0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Broom:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.03333333, 0.06666668, 0.4),
+"transitions": PackedFloat32Array(1, 0.5, 1, 1),
+"update": 0,
+"values": [Vector2(8, 13), Vector2(13, 21), Vector2(11, 31), Vector2(11, 31)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Broom:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.03333333, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 0.933033, 1, 1),
+"update": 0,
+"values": [0.0, 0.0, 0.0, 0.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Broom:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0.2, 0.2), Vector2(0.2, 0.2), Vector2(0.2, 0.2)]
+}
+
+[sub_resource type="Animation" id="Animation_k58ik"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Broom:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("6:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Broom:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(13, 21)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Broom:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Broom:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.2, 0.2)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gcgye"]
+_data = {
+&"RESET": SubResource("Animation_k58ik"),
+&"broom_swing": SubResource("Animation_25nkj")
+}
 
 [node name="Broom" type="Node2D"]
 script = ExtResource("1_broom")
 hit_effect_scene = ExtResource("4_hit")
 
+[node name="6" type="Sprite2D" parent="."]
+position = Vector2(-0.99999994, 1.4210855e-14)
+scale = Vector2(0.05, 0.05)
+texture = ExtResource("3_k58ik")
+
 [node name="Broom" type="Sprite2D" parent="."]
-position = Vector2(20, 1.9999995)
-rotation = 0.83686346
-scale = Vector2(0.08624999, 0.08624999)
-texture = ExtResource("2_l2ybq")
+position = Vector2(13, 21)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("3_25nkj")
+hframes = 3
 
 [node name="Hitbox" type="Area2D" parent="."]
 collision_layer = 4
@@ -27,7 +165,7 @@ monitoring = false
 position = Vector2(19, 1)
 shape = SubResource("RectangleShape2D_hitbox")
 
-[node name="6" type="Sprite2D" parent="Hitbox"]
-position = Vector2(-0.9999999, -1.1920929e-07)
-scale = Vector2(0.03625, 0.03625)
-texture = ExtResource("3_k58ik")
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_gcgye")
+}

@@ -6,6 +6,7 @@ extends WeaponBase
 var is_attacking: bool = false
 
 @onready var hitbox: Area2D = $Hitbox
+@onready var anim: AnimationPlayer = $AnimationPlayer
 
 
 func _ready():
@@ -29,6 +30,12 @@ func attack() -> bool:
 		return false
 
 	is_attacking = true
+	
+	# Play swing animation ONLY when we attack
+	if anim:
+		anim.stop()          # restart from frame 0
+		anim.play("broom_swing")
+
 
 	# Enable hitbox for attack duration
 	if hitbox != null:
