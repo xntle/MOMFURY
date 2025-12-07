@@ -1,6 +1,7 @@
-[gd_scene load_steps=20 format=3 uid="uid://drw5trv1gsjtw"]
+[gd_scene load_steps=21 format=3 uid="uid://drw5trv1gsjtw"]
 
 [ext_resource type="Script" uid="uid://c3h2mokdbxtyo" path="res://scripts/Bosses/BossBaby/boss_baby.gd" id="1_yqcot"]
+[ext_resource type="Texture2D" uid="uid://dscd4y8ji3g6u" path="res://characters/pixel-art-cartoon-poop-character-png.png" id="3_jeojg"]
 [ext_resource type="Texture2D" uid="uid://npejrfaiiyt2" path="res://scene/Bosses/BossBaby/spritesheet__5_-removebg-preview.png" id="3_pf1v4"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_u22dk"]
@@ -34,13 +35,13 @@ region = Rect2(216, 0, 72, 96)
 atlas = ExtResource("3_pf1v4")
 region = Rect2(0, 96, 72, 96)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_jpcgn"]
-atlas = ExtResource("3_pf1v4")
-region = Rect2(0, 192, 72, 96)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_hofnf"]
 atlas = ExtResource("3_pf1v4")
 region = Rect2(144, 192, 72, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jpcgn"]
+atlas = ExtResource("3_pf1v4")
+region = Rect2(0, 192, 72, 96)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_sdx6e"]
 animations = [{
@@ -76,14 +77,14 @@ animations = [{
 "speed": 5.0
 }, {
 "frames": [{
-"duration": 1.0,
+"duration": 2.01,
 "texture": SubResource("AtlasTexture_k5k1l")
 }, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_jpcgn")
-}, {
-"duration": 1.0,
+"duration": 0.31,
 "texture": SubResource("AtlasTexture_hofnf")
+}, {
+"duration": 0.51,
+"texture": SubResource("AtlasTexture_jpcgn")
 }],
 "loop": true,
 "name": &"default_walk",
@@ -180,9 +181,8 @@ shape = SubResource("CircleShape2D_u22dk")
 position = Vector2(0.5, -1.4901161e-08)
 scale = Vector2(0.43055564, 0.43055567)
 sprite_frames = SubResource("SpriteFrames_sdx6e")
-animation = &"baby_throw_diaper"
-frame_progress = 0.6149315
-speed_scale = 1.5
+animation = &"default_walk"
+frame_progress = 0.02148038
 
 [node name="Area2D" type="Area2D" parent="."]
 
@@ -203,5 +203,10 @@ frame = 6
 libraries = {
 &"": SubResource("AnimationLibrary_mtxyn")
 }
+
+[node name="PixelArtCartoonPoopCharacterPng" type="Sprite2D" parent="."]
+position = Vector2(-15.500004, 6.000001)
+scale = Vector2(0.021696432, 0.021696432)
+texture = ExtResource("3_jeojg")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
