@@ -26,8 +26,10 @@ var intangibility_timer: float = 0.0
 var is_hit: bool = false
 var hit_timer: float = 0.0
 var hit_duration: float = 0.25
-var is_dead: bool = false    # <-- NEW (Manages the death state)
+var is_dead: bool = false    # <-- Manages the death state
 
+# Variable to hold the persistent timer object created at runtime
+var death_delay_timer: SceneTreeTimer = null 
 
 signal health_changed(new_health:int)
 signal points_changed(new_points: int)
@@ -109,7 +111,7 @@ func _physics_process(delta):
 		if hit_timer <= 0.0:
 			is_hit = false
 
-	# === DEATH STATE MANAGEMENT ===
+	# === DEATH STATE MANAGEMENT: Locks all movement and input ===
 	if is_dead:
 		# Lock movement, reset roll, stop effects, and return to skip input processing
 		velocity = Vector2.ZERO
@@ -120,7 +122,7 @@ func _physics_process(delta):
 		_update_animation()
 		return
 	# ==============================
-
+	
 	# dodge rolling condition
 	if is_rolling:
 		roll_timer -= delta
@@ -132,11 +134,17 @@ func _physics_process(delta):
 			movement_trail.amount = 15
 			movement_trail.scale_amount_max = 6.0
 
+		# ⬇️ FORCE roll animation while rolling
+		if anim and anim.animation != "roll":
+			anim.play("roll")
+
 		if roll_timer <= 0.0:
 			is_rolling = false
 			cooldown_timer = roll_cooldown
 			collision_layer = 1
-		return  # Skip all movement/input when rolling
+
+		return  # Skip normal input while rolling
+
 
 	# movement input
 	if Input.is_action_pressed("move_down"):
@@ -232,42 +240,49 @@ func _physics_process(delta):
 
 	_update_animation()
 
-## Animation name helpers
+## Animation name helpers (UPDATED)
 func _get_anim_name(dir: Vector2, is_moving: bool) -> String:
-	if is_stunned:
+	# If stunned, always roll animation
+	if is_rolling:
 		return "roll"
+
+	# If not moving, always play idle_down
 	if not is_moving:
 		return "idle_down"
 
 	var x := dir.x
 	var y := dir.y
 
-	# Use "move" animations when moving, "idle" when stationary
-	var prefix := "move_" if is_moving else "idle_"
+	# Use simple thresholds to determine direction
+	var threshold = 0.5 
 
-	# PURE CARDINAL DIRECTIONS
-	if abs(x) < 0.4 and y < -0.4:
-		return prefix + "up" if is_moving else "idle_down"  # No idle_up, fallback
-	elif x < -0.4 and abs(y) < 0.4:
-		return prefix + "left" if is_moving else "idle_down"  # No idle_left, fallback
-	elif x > 0.4 and abs(y) < 0.4:
-		return prefix + "right" if is_moving else "idle_down"  # No idle_right, fallback
+	# === UP DIAGONALS & CARDINAL UP ===
+	if y < -threshold: # Moving Up
+		if x < -threshold: # Moving Left
+			return "move_diag_left_up"
+		elif x > threshold: # Moving Right
+			return "move_diag_right_up"
+		else: # Pure Up
+			return "move_up"
 
-	## DIAGONALS (any time both x and y have a decent magnitude)
-	if abs(x) > 0.4 and abs(y) > 0.4:
-		if y < 0.0:
-			if is_moving:
-				return "move_diag_left_up" if x < 0.0 else "move_diag_right_up"
-			else:
-				return "idle_down"  # No diagonal idles, fallback
-		# DOWN
-		else:
-			if is_moving:
-				return "move_diag_left_down" if x < 0.0 else "idle_down"
-			else:
-				return "idle_down"
+	# === DOWN DIAGONALS & CARDINAL DOWN ===
+	elif y > threshold: # Moving Down
+		if x < -threshold: # Moving Left
+			return "move_diag_left_down"
+		elif x > threshold: # Moving Right
+			# Using idle_down as the down-right animation fallback/proxy
+			return "idle_down" 
+		else: # Pure Down
+			# Using idle_down as the straight down movement animation
+			return "idle_down" 
 
-	# Default fallback
+	# === CARDINAL LEFT/RIGHT (when Y is near 0) ===
+	if x < -threshold: # Pure Left
+		return "move_left"
+	elif x > threshold: # Pure Right
+		return "move_right"
+
+	# Fallback (shouldn't happen if is_moving is true)
 	return "idle_down"
 
 
@@ -318,12 +333,14 @@ func _update_animation() -> void:
 			anim.play("roll")
 		return
 
-	# Animation is now based on mouse direction, not movement
-	var mouse_pos = get_global_mouse_position()
-	var mouse_dir = (mouse_pos - global_position).normalized()
+	# Determine if the player is moving (direction != Vector2.ZERO)
 	var is_moving := direction != Vector2.ZERO and not is_rolling
-
-	var anim_name := _get_anim_name(mouse_dir, is_moving)
+	
+	# Use the last direction the player faced/moved as the animation direction
+	var dir_vec := last_move_dir 
+	
+	# Get the correct animation name based on the current state and direction
+	var anim_name := _get_anim_name(dir_vec, is_moving)
 
 	if anim.animation != anim_name:
 		anim.play(anim_name)
@@ -363,28 +380,36 @@ func take_damage(amount: int) -> void:
 		if anim:
 			anim.play("die")
 		
-		var end_scene := load("res://scene/end_screen.tscn") as PackedScene
-		var end := end_scene.instantiate()
-		end.final_points = current_points
-		end.final_round = current_round
-		get_tree().root.add_child(end)
+		# REMOVED: Immediate End Screen loading is removed from here.
+		# It is now handled by _on_animation_finished after a delay.
 
-		# remove the current game scene
-		get_tree().current_scene.queue_free()
-		get_tree().current_scene = end
+
 # Scene change occurs only after the 'die' animation finishes, followed by a delay.
 func _on_animation_finished(anim_name: StringName) -> void:
 	if is_dead and anim_name == "die":
 		var delay_time = 2.0
 		
-		# 1. Create a Timer (no need for await/async)
-		var timer = get_tree().create_timer(delay_time)
+		# 1. Create and store the persistent timer object
+		death_delay_timer = get_tree().create_timer(delay_time)
 		
-		# 2. Connect the timer's 'timeout' signal to an anonymous function
-		#    that executes the scene change.
-		timer.timeout.connect(func():
-			get_tree().change_scene_to_file("res://scene/main_menu.tscn")
+		# 2. Connect the timer's 'timeout' signal to the End Screen transition logic
+		death_delay_timer.timeout.connect(func():
+			# This code executes AFTER the 2.0 second delay
+			
+			# Instantiate and pass data to the End Screen
+			var end_scene := load("res://scene/end_screen.tscn") as PackedScene
+			var end := end_scene.instantiate()
+			end.final_points = current_points
+			end.final_round = current_round
+			
+			# Add the End Screen to the root and switch scenes
+			get_tree().root.add_child(end)
+			
+			# Clean up the old (current) scene
+			get_tree().current_scene.queue_free()
+			get_tree().current_scene = end
 		)
+
 # Slow effect functions
 func apply_slow(multiplier: float) -> void:
 	is_slowed = true
