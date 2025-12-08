@@ -20,6 +20,8 @@ var bodies_in_beam: Dictionary = {} # body -> time_inside_seconds
 func _ready() -> void:
 	damage_timer.wait_time = tick_interval
 	damage_timer.start()
+	$animation.play("default")
+	
 
 func _physics_process(delta: float) -> void:
 	time_alive += delta

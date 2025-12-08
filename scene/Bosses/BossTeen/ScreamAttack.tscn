@@ -1,11 +1,53 @@
-[gd_scene load_steps=4 format=3 uid="uid://bbhu5dry8x0xc"]
+[gd_scene load_steps=10 format=3 uid="uid://bbhu5dry8x0xc"]
 
 [ext_resource type="Script" uid="uid://b4n15i8unfjm3" path="res://scripts/Bosses/BossDaddy/beer_poison.gd" id="1_fpuwr"]
+[ext_resource type="Texture2D" uid="uid://cvvfg5s2ufu3m" path="res://scene/Bosses/BossTeen/!#()%)!)$&@)$@!)(#)#$.png" id="2_w051k"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_3f86c"]
 b = Vector2(54.06533, 0)
 
-[sub_resource type="CanvasTexture" id="CanvasTexture_3f86c"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_tvud6"]
+atlas = ExtResource("2_w051k")
+region = Rect2(0, 3, 500, 49)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sxl2j"]
+atlas = ExtResource("2_w051k")
+region = Rect2(0, 52, 500, 49)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k11gf"]
+atlas = ExtResource("2_w051k")
+region = Rect2(0, 101, 500, 49)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8703o"]
+atlas = ExtResource("2_w051k")
+region = Rect2(0, 150, 500, 49)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oyiml"]
+atlas = ExtResource("2_w051k")
+region = Rect2(0, 199, 500, 49)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_g1cy5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tvud6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sxl2j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k11gf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8703o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oyiml")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="Projectile" type="Area2D"]
 scale = Vector2(1, 0.9940951)
@@ -20,10 +62,10 @@ shape = SubResource("SegmentShape2D_3f86c")
 
 [node name="DamageTimer" type="Timer" parent="."]
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(239, 1.00594)
-scale = Vector2(422.6597, 19.78078)
-texture = SubResource("CanvasTexture_3f86c")
+[node name="animation" type="AnimatedSprite2D" parent="."]
+position = Vector2(213, 7.04158)
+sprite_frames = SubResource("SpriteFrames_g1cy5")
+frame_progress = 0.963646
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]
