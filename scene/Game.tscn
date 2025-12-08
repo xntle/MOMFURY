@@ -17,7 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://ixi501xwduk4" path="res://scene/Enemies/Poop.tscn" id="13_msms8"]
 [ext_resource type="PackedScene" uid="uid://bog8uq3cg74nk" path="res://scene/Bosses/BossDaddy/BossDaddy.tscn" id="14_7ftmx"]
 [ext_resource type="PackedScene" uid="uid://de8c3he3rib60" path="res://scene/BossBaby.tscn" id="14_boss"]
-[ext_resource type="PackedScene" uid="uid://drw5trv1gsjtw" path="res://scene/Bosses/BossBaby/BossBaby.tscn" id="19_ls1fb"]
+[ext_resource type="PackedScene" uid="uid://de8c3he3rib60" path="res://scene/Bosses/BossBaby/BossBaby.tscn" id="19_ls1fb"]
 [ext_resource type="PackedScene" uid="uid://cr5n8d10hvgdh" path="res://scene/Bosses/BossTeen/BossTeen.tscn" id="20_cg8ds"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4cigq"]

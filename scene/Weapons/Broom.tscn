@@ -169,3 +169,5 @@ shape = SubResource("RectangleShape2D_hitbox")
 libraries = {
 &"": SubResource("AnimationLibrary_gcgye")
 }
+
+[node name="ShootSound" type="AudioStreamPlayer2D" parent="."]

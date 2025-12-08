@@ -107,4 +107,77 @@ func take_damage(amount: float) -> void:
 
 	if health <= 0:
 		print("Boss Daddy defeated!")
+		_play_death_sound()
 		queue_free()
+		return
+
+	# Play hit sound
+	_play_hit_sound()
+
+
+func _play_death_sound() -> void:
+	# Array of death sound paths
+	var death_sounds = [
+		"res://assets/sound/Death/DSGNImpt_EXPLOSION-Mecha Piercing Punch_HY_PC-001.wav",
+		"res://assets/sound/Death/DSGNImpt_EXPLOSION-Mecha Piercing Punch_HY_PC-002.wav",
+		"res://assets/sound/Death/DSGNImpt_EXPLOSION-Mecha Piercing Punch_HY_PC-003.wav",
+		"res://assets/sound/Death/DSGNImpt_EXPLOSION-Mecha Piercing Punch_HY_PC-004.wav",
+		"res://assets/sound/Death/DSGNImpt_EXPLOSION-Mecha Piercing Punch_HY_PC-005.wav",
+		"res://assets/sound/Death/DSGNImpt_EXPLOSION-Mecha Piercing Punch_HY_PC-006.wav"
+	]
+
+	# Pick random sound and play it
+	var random_sound_path = death_sounds[randi() % death_sounds.size()]
+	var sound = load(random_sound_path) as AudioStream
+
+	if sound != null:
+		var audio_player = AudioStreamPlayer2D.new()
+		get_tree().current_scene.add_child(audio_player)
+		audio_player.stream = sound
+		audio_player.global_position = global_position
+
+		# Ensure sound doesn't loop
+		if sound is AudioStreamWAV:
+			sound.loop_mode = AudioStreamWAV.LOOP_DISABLED
+
+		audio_player.play()
+
+		# Auto-cleanup after 3 seconds max (in case finished signal doesn't fire)
+		get_tree().create_timer(3.0).timeout.connect(func():
+			if is_instance_valid(audio_player):
+				audio_player.queue_free()
+		)
+
+		# Also cleanup when finished normally
+		audio_player.finished.connect(func():
+			if is_instance_valid(audio_player):
+				audio_player.queue_free()
+		)
+
+
+func _play_hit_sound() -> void:
+	var hit_sound = load("res://assets/sound/Hit/Hit.wav") as AudioStream
+
+	if hit_sound != null:
+		var audio_player = AudioStreamPlayer2D.new()
+		get_tree().current_scene.add_child(audio_player)
+		audio_player.stream = hit_sound
+		audio_player.global_position = global_position
+
+		# Ensure sound doesn't loop
+		if hit_sound is AudioStreamWAV:
+			hit_sound.loop_mode = AudioStreamWAV.LOOP_DISABLED
+
+		audio_player.play()
+
+		# Auto-cleanup after 2 seconds max
+		get_tree().create_timer(2.0).timeout.connect(func():
+			if is_instance_valid(audio_player):
+				audio_player.queue_free()
+		)
+
+		# Also cleanup when finished normally
+		audio_player.finished.connect(func():
+			if is_instance_valid(audio_player):
+				audio_player.queue_free()
+		)

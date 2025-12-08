@@ -25,3 +25,5 @@ texture = ExtResource("2_35fuf")
 
 [node name="ShootingPoint" type="Marker2D" parent="WeaponPivot/Gun"]
 position = Vector2(2.737587, -11.731461)
+
+[node name="ShootSound" type="AudioStreamPlayer2D" parent="."]

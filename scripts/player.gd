@@ -43,17 +43,34 @@ var current_round: int = 1
 @onready var rice_weapon: Node2D = $Ricechine
 @onready var broom_weapon: Node2D = $Broom
 @onready var movement_trail: CPUParticles2D = $MovementTrail
+@onready var damage_audio: AudioStreamPlayer2D = $DamageAudio
 
 # Slow effect tracking
 var is_slowed: bool = false
 var slow_multiplier: float = 1.0
 
+# Damage sound system
+var damage_sounds: Array[AudioStream] = []
+var last_damage_sound_time: float = 0.0
+var damage_sound_cooldown: float = 1.0
+
 func _ready():
+	# Load damage sounds
+	_load_damage_sounds()
+
 	reset_run_state()
 	if anim:
 		anim.play("idle_down")
 	_update_weapon_visibility()
 	anim.animation_finished.connect(_on_animation_finished)
+
+func _load_damage_sounds() -> void:
+	# Load all 10 damage sounds
+	for i in range(1, 11):
+		var sound_path = "res://assets/sound/Damage/damage_%d_karen.wav" % i
+		var sound = load(sound_path) as AudioStream
+		if sound:
+			damage_sounds.append(sound)
 
 
 func _physics_process(delta):
@@ -282,9 +299,12 @@ func _on_body_entered(body) -> void:
 # Damage function (Initiates the death sequence)
 func take_damage(amount: int) -> void:
 	if is_dead: return # Prevent damage if already dead
-	
+
 	current_health -= amount
 	emit_signal("health_changed", current_health)
+
+	# Play random damage sound with cooldown
+	_play_damage_sound()
 
 	is_hit = true
 	hit_timer = hit_duration
@@ -337,6 +357,19 @@ func apply_slow(multiplier: float) -> void:
 func remove_slow() -> void:
 	is_slowed = false
 	slow_multiplier = 1.0
+
+func _play_damage_sound() -> void:
+	# Check cooldown
+	var current_time = Time.get_ticks_msec() / 1000.0
+	if current_time - last_damage_sound_time < damage_sound_cooldown:
+		return
+
+	# Play random damage sound
+	if damage_sounds.size() > 0 and damage_audio:
+		var random_sound = damage_sounds[randi() % damage_sounds.size()]
+		damage_audio.stream = random_sound
+		damage_audio.play()
+		last_damage_sound_time = current_time
 	
 func apply_stun(duration) -> void:
 	stun_timer = duration
