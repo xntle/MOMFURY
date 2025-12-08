@@ -6,7 +6,7 @@ var normal_speed := 40.0
 var stop_distance := 200.0  # Stay much further back to shoot
 var shoot_range := 250.0    # Long range shooter
 
-@export var health := 85
+@export var health := 85.0
 @export var bullet_scene: PackedScene
 @export var health_pickup_scene: PackedScene
 @export var drop_chance: float = 0.5  # 50% chance

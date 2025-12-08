@@ -19,15 +19,18 @@ var shoot_interval = 1.0
 var shoot_interval_timer = 0.0
 
 var beam: Node2D = null  
-var health := 2000.0
+@export var max_health: float = 2000.0
+var health:float = max_health
 
 const projectile_scene := preload("res://scene/Bosses/BossTeen/ScreamAttack.tscn")
 @export var turn_speed: float = 6.0 # radians/sec (smaller = more lag)
-
+signal health_changed(new_health:int)
 
 func _ready():
 	ability_timer = randf_range(1.0, 4.0) 
-	
+	var health_bar = get_tree().current_scene.get_node("UI/BossHealthBar")
+	health_bar.connect_boss(self)
+
 func _physics_process(delta):
 	var direction = global_position.direction_to(player.global_position)
 
@@ -104,6 +107,7 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 func take_damage(amount: float) -> void:
 	health -= amount
 	print("Boss Daddy took ", amount, " damage. Health: ", health)
+	emit_signal("health_changed", health)
 
 	if health <= 0:
 		print("Boss Daddy defeated!")

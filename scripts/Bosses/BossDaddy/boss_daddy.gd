@@ -3,7 +3,9 @@ extends CharacterBody2D
 @onready var player = get_node("/root/Game/Player")
 @onready var anim: AnimatedSprite2D = null  # we'll assign in _ready
 
-@export var health: float = 200.0
+@export var max_health: float = 200.0
+var health: float = max_health
+
 
 var throw_timer := 0.0
 var normal_speed := 25.0
@@ -20,11 +22,15 @@ var push_timer := 0.0
 
 const projectile_scene := preload("res://scene/Bosses/BossDaddy/BeerBottle.tscn")
 
+signal health_changed(new_health:int)
 
 func _ready() -> void:
 	randomize()
 	throw_timer = randf_range(1.0, 4.0)
-
+	
+	#Connecting the boss health logic
+	var health_bar = get_tree().current_scene.get_node("UI/BossHealthBar")
+	health_bar.connect_boss(self)
 	# Try common node names: "AnimatedSprite2D" OR "animation"
 	anim = get_node_or_null("AnimatedSprite2D")
 	if anim == null:
@@ -111,7 +117,7 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 func take_damage(amount: float) -> void:
 	health -= amount
 	print("Boss Daddy took ", amount, " damage. Health: ", health)
-
+	emit_signal("health_changed", health)
 	is_hit = true
 	hit_time_left = hit_duration
 
