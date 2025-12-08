@@ -34,3 +34,5 @@ position = Vector2(-2.7064214, -38.664978)
 position = Vector2(-16.385942, -23.536268)
 scale = Vector2(0.0832036, 0.0832036)
 texture = ExtResource("4_1urmk")
+
+[node name="ShootSound" type="AudioStreamPlayer2D" parent="."]

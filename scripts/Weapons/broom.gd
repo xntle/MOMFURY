@@ -8,12 +8,18 @@ var is_attacking: bool = false
 
 @onready var hitbox: Area2D = $Hitbox
 @onready var anim: AnimationPlayer = $AnimationPlayer
+@onready var shoot_sound: AudioStreamPlayer2D = $ShootSound
+
+var broom_sound: AudioStream
 
 
 func _ready():
 	weapon_type = "Broom"
 	damage = 25.0
 	cooldown = 0.5
+
+	# Load broom swing sound
+	broom_sound = load("res://assets/sound/Mom/Broom.wav") as AudioStream
 
 	if hitbox != null:
 		hitbox.monitoring = false
@@ -36,7 +42,12 @@ func attack() -> bool:
 		return false
 
 	is_attacking = true
-	
+
+	# Play broom swing sound
+	if shoot_sound != null and broom_sound != null:
+		shoot_sound.stream = broom_sound
+		shoot_sound.play()
+
 	# Play swing animation ONLY when we attack
 	if anim:
 		anim.stop()          # restart from frame 0

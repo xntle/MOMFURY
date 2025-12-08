@@ -13,6 +13,37 @@ var travel_time: float = 0.0
 func _ready():
 	body_entered.connect(_on_body_entered)
 
+	# Play rice gun sound
+	_play_shoot_sound()
+
+
+func _play_shoot_sound() -> void:
+	var shoot_sound = load("res://assets/sound/Mom/RicechineGun.wav") as AudioStream
+
+	if shoot_sound != null:
+		var audio_player = AudioStreamPlayer2D.new()
+		get_tree().current_scene.add_child(audio_player)
+		audio_player.stream = shoot_sound
+		audio_player.global_position = global_position
+
+		# Ensure sound doesn't loop
+		if shoot_sound is AudioStreamWAV:
+			shoot_sound.loop_mode = AudioStreamWAV.LOOP_DISABLED
+
+		audio_player.play()
+
+		# Auto-cleanup after 2 seconds max
+		get_tree().create_timer(2.0).timeout.connect(func():
+			if is_instance_valid(audio_player):
+				audio_player.queue_free()
+		)
+
+		# Also cleanup when finished normally
+		audio_player.finished.connect(func():
+			if is_instance_valid(audio_player):
+				audio_player.queue_free()
+		)
+
 
 func _physics_process(delta):
 	# Move bullet fast in preset direction
