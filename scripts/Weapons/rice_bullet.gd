@@ -18,7 +18,7 @@ func _ready():
 
 
 func _play_shoot_sound() -> void:
-	var shoot_sound = load("res://assets/sound/Mom/RicechineGun.wav") as AudioStream
+	var shoot_sound = load("res://assets/Sound/Mom/RicechineGun.wav") as AudioStream
 
 	if shoot_sound != null:
 		var audio_player = AudioStreamPlayer2D.new()

@@ -19,7 +19,7 @@ func _ready():
 	cooldown = 0.5
 
 	# Load broom swing sound
-	broom_sound = load("res://assets/sound/Mom/Broom.wav") as AudioStream
+	broom_sound = load("res://assets/Sound/Mom/Broom.wav") as AudioStream
 
 	if hitbox != null:
 		hitbox.monitoring = false

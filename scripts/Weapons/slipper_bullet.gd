@@ -19,12 +19,12 @@ func _ready():
 func _play_throw_sound() -> void:
 	# Array of throw sound paths
 	var throw_sounds = [
-		"res://assets/sound/Throw/SWSH_MOVEMENT-Bamboo Whip_HY_PC-001.wav",
-		"res://assets/sound/Throw/SWSH_MOVEMENT-Bamboo Whip_HY_PC-002.wav",
-		"res://assets/sound/Throw/SWSH_MOVEMENT-Bamboo Whip_HY_PC-003.wav",
-		"res://assets/sound/Throw/SWSH_MOVEMENT-Bamboo Whip_HY_PC-004.wav",
-		"res://assets/sound/Throw/SWSH_MOVEMENT-Bamboo Whip_HY_PC-005.wav",
-		"res://assets/sound/Throw/SWSH_MOVEMENT-Bamboo Whip_HY_PC-006.wav"
+		"res://assets/Sound/Throw/SWSH_MOVEMENT-Bamboo Whip_HY_PC-001.wav",
+		"res://assets/Sound/Throw/SWSH_MOVEMENT-Bamboo Whip_HY_PC-002.wav",
+		"res://assets/Sound/Throw/SWSH_MOVEMENT-Bamboo Whip_HY_PC-003.wav",
+		"res://assets/Sound/Throw/SWSH_MOVEMENT-Bamboo Whip_HY_PC-004.wav",
+		"res://assets/Sound/Throw/SWSH_MOVEMENT-Bamboo Whip_HY_PC-005.wav",
+		"res://assets/Sound/Throw/SWSH_MOVEMENT-Bamboo Whip_HY_PC-006.wav"
 	]
 
 	# Pick random throw sound

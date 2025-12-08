@@ -49,7 +49,7 @@ func _ready() -> void:
 	add_child(sfx_player)
 	
 	# Load the voice file
-	voice_stream = load("res://assets/sound/Mom/women.mp3") 
+	voice_stream = load("res://assets/Sound/Mom/women.mp3") 
 	sfx_player.stream = voice_stream
 	sfx_player.volume_db = -5.0
 

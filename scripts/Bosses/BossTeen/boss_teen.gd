@@ -159,12 +159,12 @@ func take_damage(amount: float) -> void:
 
 func _play_death_sound() -> void:
 	var death_sounds = [
-		"res://assets/sound/Death/DSGNImpt_EXPLOSION-Mecha Piercing Punch_HY_PC-001.wav",
-		"res://assets/sound/Death/DSGNImpt_EXPLOSION-Mecha Piercing Punch_HY_PC-002.wav",
-		"res://assets/sound/Death/DSGNImpt_EXPLOSION-Mecha Piercing Punch_HY_PC-003.wav",
-		"res://assets/sound/Death/DSGNImpt_EXPLOSION-Mecha Piercing Punch_HY_PC-004.wav",
-		"res://assets/sound/Death/DSGNImpt_EXPLOSION-Mecha Piercing Punch_HY_PC-005.wav",
-		"res://assets/sound/Death/DSGNImpt_EXPLOSION-Mecha Piercing Punch_HY_PC-006.wav"
+		"res://assets/Sound/Death/DSGNImpt_EXPLOSION-Mecha Piercing Punch_HY_PC-001.wav",
+		"res://assets/Sound/Death/DSGNImpt_EXPLOSION-Mecha Piercing Punch_HY_PC-002.wav",
+		"res://assets/Sound/Death/DSGNImpt_EXPLOSION-Mecha Piercing Punch_HY_PC-003.wav",
+		"res://assets/Sound/Death/DSGNImpt_EXPLOSION-Mecha Piercing Punch_HY_PC-004.wav",
+		"res://assets/Sound/Death/DSGNImpt_EXPLOSION-Mecha Piercing Punch_HY_PC-005.wav",
+		"res://assets/Sound/Death/DSGNImpt_EXPLOSION-Mecha Piercing Punch_HY_PC-006.wav"
 	]
 
 	var random_sound_path = death_sounds[randi() % death_sounds.size()]
@@ -192,7 +192,7 @@ func _play_death_sound() -> void:
 		)
 
 func _play_hit_sound() -> void:
-	var hit_sound = load("res://assets/sound/Hit/Hit.wav") as AudioStream
+	var hit_sound = load("res://assets/Sound/Hit/Hit.wav") as AudioStream
 
 	if hit_sound != null:
 		var audio_player = AudioStreamPlayer2D.new()

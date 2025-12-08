@@ -4,7 +4,7 @@
 #@onready var weapon_pivot: Marker2D = $WeaponPivot
 #@onready var shooting_point: Marker2D = $WeaponPivot/Gun/ShootingPoint
 #@onready var player = get_tree().current_scene.get_node("Player")
-#@onready var rice_gun_sound =  load("res://assets/sound/Mom/RicechineGun.wav") as AudioStream
+#@onready var rice_gun_sound =  load("res://assets/Sound/Mom/RicechineGun.wav") as AudioStream
 #
 #
 #
@@ -58,7 +58,7 @@ extends WeaponBase
 @onready var weapon_pivot: Marker2D = $WeaponPivot
 @onready var shooting_point: Marker2D = $WeaponPivot/Gun/ShootingPoint
 @onready var player = get_tree().current_scene.get_node("Player")
-@onready var rice_gun_sound = load("res://assets/sound/Mom/RicechineGun.wav") as AudioStream
+@onready var rice_gun_sound = load("res://assets/Sound/Mom/RicechineGun.wav") as AudioStream
 
 # NEW: AnimationPlayer for the gun firing animation
 @onready var gun_anim_player: AnimationPlayer = $AnimationPlayer

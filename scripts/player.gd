@@ -77,7 +77,7 @@ func _ready():
 func _load_damage_sounds() -> void:
 	# Load all 10 damage sounds
 	for i in range(1, 11):
-		var sound_path = "res://assets/sound/Damage/damage_%d_karen.wav" % i
+		var sound_path = "res://assets/Sound/Damage/damage_%d_karen.wav" % i
 		var sound = load(sound_path) as AudioStream
 		if sound:
 			damage_sounds.append(sound)
@@ -86,16 +86,16 @@ func _load_damage_sounds() -> void:
 func _load_movement_sounds() -> void:
 	# Load walk sounds
 	for i in range(1, 4):
-		var sound_path = "res://assets/sound/Movement/Walk/16_human_walk_stone_%d.wav" % i
+		var sound_path = "res://assets/Sound/Movement/Walk/16_human_walk_stone_%d.wav" % i
 		var sound = load(sound_path) as AudioStream
 		if sound:
 			walk_sounds.append(sound)
 
 	# Load dodge roll sound
-	dodgeroll_sound = load("res://assets/sound/Movement/Dodgeroll.wav") as AudioStream
+	dodgeroll_sound = load("res://assets/Sound/Movement/Dodgeroll.wav") as AudioStream
 
 	# Load weapon switch sound
-	weapon_switch_sound = load("res://assets/sound/Movement/WeaponSwitch.wav") as AudioStream
+	weapon_switch_sound = load("res://assets/Sound/Movement/WeaponSwitch.wav") as AudioStream
 
 
 func _physics_process(delta):

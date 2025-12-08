@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://bve1pou0gt1v4"]
+[gd_scene load_steps=27 format=3 uid="uid://bve1pou0gt1v4"]
 
 [ext_resource type="PackedScene" uid="uid://kk3crf462xob" path="res://scene/House.tscn" id="1_e7hha"]
 [ext_resource type="Script" uid="uid://bg4wxh4k8pviy" path="res://scripts/game_manager.gd" id="2_game"]
@@ -14,13 +14,13 @@
 [ext_resource type="Script" path="res://scene/enemies.gd" id="10_w73ac"]
 [ext_resource type="Script" uid="uid://dvsj8h3wm3su0" path="res://scene/new_round_label.gd" id="12_7sjor"]
 [ext_resource type="PackedScene" uid="uid://5wrlhjc0vedk" path="res://scene/Enemies/Cockroach.tscn" id="12_64o46"]
-[ext_resource type="Script" path="res://scripts/boss_health_bar.gd" id="12_cg8ds"]
+[ext_resource type="Script" uid="uid://1qi0tmmw7efp" path="res://scripts/boss_health_bar.gd" id="12_cg8ds"]
 [ext_resource type="PackedScene" uid="uid://ixi501xwduk4" path="res://scene/Enemies/Poop.tscn" id="13_msms8"]
 [ext_resource type="PackedScene" uid="uid://bog8uq3cg74nk" path="res://scene/Bosses/BossDaddy/BossDaddy.tscn" id="14_7ftmx"]
 [ext_resource type="AudioStream" uid="uid://dpo2yv5rj8hu2" path="res://assets/Sound/BG.mp3" id="19_cg8ds"]
 [ext_resource type="PackedScene" uid="uid://drw5trv1gsjtw" path="res://scene/Bosses/BossBaby/BossBaby.tscn" id="19_ls1fb"]
 [ext_resource type="PackedScene" uid="uid://cr5n8d10hvgdh" path="res://scene/Bosses/BossTeen/BossTeen.tscn" id="20_cg8ds"]
-[ext_resource type="Script" path="res://scripts/UI/weapon_label.gd" id="21_weapon"]
+[ext_resource type="Script" uid="uid://b5mfrjax5l6sn" path="res://scripts/UI/weapon_label.gd" id="21_weapon"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4cigq"]
 bg_color = Color(0, 0, 0, 0.3)
@@ -264,8 +264,6 @@ position = Vector2(1573, 212)
 
 [node name="Bosses" type="Node2D" parent="."]
 unique_name_in_owner = true
-
-[node name="CharacterBody2D2" parent="." instance=ExtResource("19_ls1fb")]
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("19_cg8ds")
