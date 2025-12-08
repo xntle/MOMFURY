@@ -69,6 +69,7 @@ func _on_body_entered(body):
 	if body is PlayerController:
 		print("  -> Ignoring player")
 		return
+		
 
 	if body.has_method("take_damage"):
 		print("  -> Dealing ", damage, " damage")
@@ -79,6 +80,7 @@ func _on_body_entered(body):
 			var hit_effect = hit_effect_scene.instantiate()
 			get_tree().current_scene.add_child(hit_effect)
 			hit_effect.global_position = global_position
+		
 	else:
 		print("  -> No take_damage method found")
 
