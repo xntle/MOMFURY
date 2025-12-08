@@ -1,7 +1,6 @@
-[gd_scene load_steps=9 format=3 uid="uid://v1xuhkejwyw7"]
+[gd_scene load_steps=8 format=3 uid="uid://v1xuhkejwyw7"]
 
 [ext_resource type="Script" uid="uid://q4n5kf84hv1v" path="res://scripts/main_menu.gd" id="1_3er1b"]
-[ext_resource type="Texture2D" uid="uid://bhxxlr7ih651e" path="res://assets/SplashScreen.png" id="2_2fwvj"]
 [ext_resource type="FontFile" uid="uid://box1b2tla1jkp" path="res://assets/fonts/MegamaxJonathanToo-YqOq2.ttf" id="2_hxu56"]
 [ext_resource type="Texture2D" uid="uid://xj55xkb3wtyt" path="res://assets/Splashv2.png" id="3_sepwh"]
 [ext_resource type="Texture2D" uid="uid://cd21m8rgkk0ca" path="res://assets/ThrownSlipper.png" id="4_slipper"]
@@ -39,15 +38,19 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_3er1b")
 
-[node name="SplashScreen" type="Sprite2D" parent="."]
-position = Vector2(577.5, 330)
-scale = Vector2(0.421875, 0.421875)
-texture = ExtResource("2_2fwvj")
-
-[node name="Splashv2" type="Sprite2D" parent="."]
-position = Vector2(588, 362)
-scale = Vector2(0.47432443, 0.47432455)
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -800.0
+offset_top = -444.0
+offset_right = 800.0
+offset_bottom = 444.0
+grow_horizontal = 2
+grow_vertical = 2
 texture = ExtResource("3_sepwh")
+stretch_mode = 4
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 custom_minimum_size = Vector2(400, 0)
@@ -116,3 +119,11 @@ mouse_filter = 2
 texture = ExtResource("4_slipper")
 expand_mode = 1
 stretch_mode = 5
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
