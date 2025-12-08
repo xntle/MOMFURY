@@ -122,7 +122,7 @@ _data = {
 [node name="CharacterBody2D2" type="CharacterBody2D"]
 scale = Vector2(2, 2)
 collision_layer = 2
-collision_mask = 4
+collision_mask = 36
 script = ExtResource("1_yqcot")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
