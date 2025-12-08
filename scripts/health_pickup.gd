@@ -7,6 +7,8 @@ var float_time: float = 0.0
 var float_amplitude: float = 5.0
 var float_speed: float = 2.0
 var position_initialized: bool = false
+var lifetime: float = 15.0
+var time_alive: float = 0.0
 
 
 func _ready():
@@ -23,6 +25,9 @@ func _process(delta):
 	float_time += delta * float_speed
 	var offset = sin(float_time) * float_amplitude
 	global_position = initial_position + Vector2(0, offset)
+	time_alive += delta
+	if time_alive >= lifetime:
+		queue_free()
 
 
 func _on_body_entered(body):
