@@ -3,7 +3,7 @@ extends CharacterBody2D
 @onready var player = get_node("/root/Game/Player")
 @onready var anim: AnimatedSprite2D = null  # we'll assign in _ready
 
-@export var max_health: float = 200.0
+@export var max_health: float = 2000.0
 var health: float = max_health
 
 

@@ -10,7 +10,7 @@ extends WeaponBase
 
 func _ready():
 	weapon_type = "Slipper"
-	damage = 20.0
+	damage = 40.0
 	cooldown = 0.3
 
 func _process(delta):

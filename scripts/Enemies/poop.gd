@@ -7,16 +7,16 @@ var normal_speed := 80.0
 var stop_distance := 200.0  # Stay further back to shoot
 var shoot_range := 250.0     # Max shooting distance
 
-@export var health := 25.0
+@export var health := 20.0
 @export var bullet_scene: PackedScene
 @export var health_pickup_scene: PackedScene
-@export var drop_chance: float = 0.5  # 50% chance
+@export var drop_chance: float = 0.3  # 30% chance
 @export var death_particles_scene: PackedScene
 @onready var agent: NavigationAgent2D = $NavigationAgent2D
 
 
 # Shooting
-var shoot_cooldown := 2.0
+var shoot_cooldown := 0.8
 var shoot_timer := 0.0
 var bullets_per_burst := 3
 var burst_delay := 0.15
