@@ -51,7 +51,10 @@ func _spawn_enemy() -> void:
 	var enemy = enemy_scene.instantiate()
 
 	# Add to scene
-	get_tree().current_scene.add_child(enemy)
+	print("THIS IS ENEMY LENGTH", %Enemies.get_child_count())
+	#if %Enemies.get_child_count() < 10:
+	%Enemies.add_child(enemy)
+	
 
 	# Random position around spawner
 	var random_angle = randf() * TAU

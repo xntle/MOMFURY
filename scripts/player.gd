@@ -12,6 +12,7 @@ enum Weapon { SLIPPER, RICE_MACHINE, BROOM }
 var current_weapon: Weapon = Weapon.SLIPPER
 
 var current_health: float = max_health
+var current_points: float = 0.0
 var direction: Vector2
 var is_rolling: bool = false
 var roll_timer: float = 0.0
@@ -29,10 +30,13 @@ var is_dead: bool = false    # <-- NEW (Manages the death state)
 
 
 signal health_changed(new_health:int)
+signal points_changed(new_points: int)
+signal round_changed(new_round: int)
 
 var last_move_dir: Vector2 = Vector2.DOWN  
 
 @onready var anim: AnimatedSprite2D = $animation
+var current_round: int = 1
 
 @onready var shoot_point: Marker2D = $ShootingPoint
 @onready var slip_weapon: Node2D = $slip
@@ -394,3 +398,14 @@ func _update_weapon_layering() -> void:
 
 	if broom_weapon != null:
 		broom_weapon.z_index = weapon_z
+		
+		
+func add_points(amount: int) -> void:
+	current_points += amount
+	emit_signal("points_changed", current_points)
+	
+
+func set_round(value: int) -> void:
+	print("NEW ROUND", value)
+	current_round = value
+	emit_signal("round_changed", current_round)

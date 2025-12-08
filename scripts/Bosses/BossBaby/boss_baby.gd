@@ -137,7 +137,7 @@
 extends CharacterBody2D
 
 @onready var player = get_node("/root/Game/Player")
-@onready var anim: AnimatedSprite2D = $animation
+@onready var anim: AnimatedSprite2D 
 
 @export var health: float = 150.0
 
@@ -171,14 +171,22 @@ var hit_timer := 0.0
 
 @export var radius := 200.0
 @export var count := 5
-@export var projectile_scene: PackedScene
+const projectile_scene := preload("res://scene/Bosses/BossBaby/CryAttack.tscn")
 @export var summon_scene: PackedScene
 
 
 func _ready() -> void:
 	randomize()
 	ability_timer = randf_range(1.0, 4.0)
-	anim.play("default_walk")  # always looping base anim
+	
+	anim = get_node_or_null("AnimatedSprite2D")
+	if anim == null:
+		anim = get_node_or_null("animation")
+
+	if anim != null:
+		anim.play("default_walk")  # always looping base anim
+	else:
+		push_warning("BossDaddy: no AnimatedSprite2D child named 'AnimatedSprite2D' or 'animation'.")
 
 
 func take_damage(amount: float) -> void:
@@ -263,7 +271,7 @@ func _physics_process(delta: float) -> void:
 		cooldown_timer -= delta
 
 		if cooldown_timer <= 0.0:
-			var random_ability := randi_range(1, 2)
+			var random_ability := randi_range(1, 1)
 			if random_ability == 1:
 				is_throwing = true
 				shoot_timer = shoot_duration

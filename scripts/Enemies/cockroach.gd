@@ -71,6 +71,8 @@ func take_damage(amount: float) -> void:
 		_drop_health()
 		_spawn_death_particles()
 		queue_free()
+		if is_instance_valid(player) and player.has_method("add_points"):
+			player.add_points(5)
 
 
 func _drop_health() -> void:

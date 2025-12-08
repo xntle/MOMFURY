@@ -21,15 +21,13 @@ var shoot_interval_timer = 0.0
 var beam: Node2D = null  
 var health := 2000.0
 
-@export var projectile_scene: PackedScene
+const projectile_scene := preload("res://scene/Bosses/BossTeen/ScreamAttack.tscn")
 @export var turn_speed: float = 6.0 # radians/sec (smaller = more lag)
 
 
 func _ready():
 	ability_timer = randf_range(1.0, 4.0) 
 	
-	 
-
 func _physics_process(delta):
 	var direction = global_position.direction_to(player.global_position)
 
