@@ -48,9 +48,6 @@ func _pick_boss_spawn_position() -> Vector2:
 
 
 func _start_next_round() -> void:
-	if is_destroyed:
-		return
-
 	round_number += 1
 	to_spawn_this_round = start_round_size + (round_number - 1) * round_growth
 	spawned_this_round = 0
@@ -61,7 +58,7 @@ func _start_next_round() -> void:
 	# Spawn a boss every 5 rounds
 	if round_number % 3 == 0 and not boss_scenes.is_empty():
 		var boss_scene := boss_scenes[randi() % boss_scenes.size()]
-		if boss_scene != null:
+		if %Bosses.get_child_count() == 0:
 			var boss := boss_scene.instantiate()
 			%Enemies.add_child(boss)
 			(boss as Node2D).global_position = _pick_boss_spawn_position()
@@ -113,15 +110,7 @@ func _arm_next_spawn() -> void:
 	_timer.start()
 
 func _on_timeout() -> void:
-	if is_destroyed:
-		return
-
 	if enemy_scenes.is_empty():
-		_arm_next_spawn()
-		return
-
-	# global cap (optional): total enemies under %Enemies
-	if max_alive > 0 and %Enemies.get_child_count() >= max_alive:
 		_arm_next_spawn()
 		return
 

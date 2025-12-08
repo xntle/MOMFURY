@@ -1,29 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://fxb838o4s043"]
+[gd_scene load_steps=2 format=3 uid="uid://fxb838o4s043"]
 
 [ext_resource type="Script" uid="uid://cfegw0ajs58hs" path="res://scripts/spawner.gd" id="1_l2bsp"]
-
-[sub_resource type="CanvasTexture" id="CanvasTexture_spawner"]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_spawner"]
-radius = 25.0
 
 [node name="Spawner" type="StaticBody2D"]
 collision_layer = 2
 collision_mask = 4
 script = ExtResource("1_l2bsp")
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-modulate = Color(0.8, 0.2, 0.2, 1)
-scale = Vector2(50, 50)
-texture = SubResource("CanvasTexture_spawner")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_spawner")
-
-[node name="Label" type="Label" parent="."]
-offset_left = -35.0
-offset_top = -45.0
-offset_right = 35.0
-offset_bottom = -25.0
-text = "SPAWNER"
-horizontal_alignment = 1

@@ -1,8 +1,45 @@
-[gd_scene load_steps=4 format=3 uid="uid://b75t07ym54440"]
+[gd_scene load_steps=7 format=3 uid="uid://b75t07ym54440"]
 
 [ext_resource type="Script" uid="uid://ci5rc6txagw2r" path="res://scripts/Weapons/ricemachine.gd" id="1_minlv"]
-[ext_resource type="Texture2D" uid="uid://cssom8ahnsa2s" path="res://assets/weapons/2.png" id="2_35fuf"]
+[ext_resource type="Texture2D" uid="uid://dx1vtyc5e0m6v" path="res://assets/weapons/Untitled_design__4_-removebg-preview.png" id="3_nuytp"]
 [ext_resource type="PackedScene" uid="uid://5oeaucq136j6" path="res://scene/Weapons/RiceBullet.tscn" id="5_rice"]
+
+[sub_resource type="Animation" id="Animation_x4qwe"]
+resource_name = "gun_animation"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("WeaponPivot/Gun/2:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.06666667, 0.2, 0.26666668),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 0]
+}
+
+[sub_resource type="Animation" id="Animation_nuytp"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("WeaponPivot/Gun/2:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_72si1"]
+_data = {
+&"RESET": SubResource("Animation_nuytp"),
+&"gun_animation": SubResource("Animation_x4qwe")
+}
 
 [node name="Ricechine" type="Node2D"]
 light_mask = 0
@@ -11,19 +48,26 @@ script = ExtResource("1_minlv")
 bullet_scene = ExtResource("5_rice")
 
 [node name="WeaponPivot" type="Marker2D" parent="."]
-position = Vector2(0, 1)
+position = Vector2(1, 1)
 rotation = -0.0010377732
 
 [node name="Gun" type="Sprite2D" parent="WeaponPivot"]
-position = Vector2(26, 4)
-scale = Vector2(0.7317023, 0.59420913)
+position = Vector2(27.995832, 4.0290556)
+scale = Vector2(0.863, 0.7)
 
 [node name="2" type="Sprite2D" parent="WeaponPivot/Gun"]
-position = Vector2(-5.466717, -6.693214)
-scale = Vector2(0.13953967, 0.13953969)
-texture = ExtResource("2_35fuf")
+position = Vector2(-30.122631, -5.752828)
+scale = Vector2(0.31623283, 0.31551287)
+texture = ExtResource("3_nuytp")
+hframes = 3
+vframes = 3
 
 [node name="ShootingPoint" type="Marker2D" parent="WeaponPivot/Gun"]
-position = Vector2(2.737587, -11.731461)
+position = Vector2(-26.639174, -14.319805)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_72si1")
+}
 
 [node name="ShootSound" type="AudioStreamPlayer2D" parent="."]

@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
 @onready var player = get_node("/root/Game/Player")
+@onready var anim: AnimatedSprite2D = $animation
 
 var normal_speed := 80.0
 var stop_distance := 200.0  # Stay further back to shoot
@@ -53,6 +54,9 @@ func _shoot_burst():
 			return
 
 		_shoot_bullet()
+	
+	if anim:
+		anim.play("default") 
 
 
 func _shoot_bullet():
