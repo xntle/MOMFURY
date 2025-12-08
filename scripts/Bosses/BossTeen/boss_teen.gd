@@ -61,12 +61,20 @@ func _physics_process(delta):
 		cooldown_timer -= delta
 		velocity = direction * normal_speed
 
+		# Update facing direction when not shooting
+		var sprite = get_node_or_null("animation")
+		if sprite != null:
+			if direction.x < 0:
+				sprite.flip_h = true  # Face left
+			elif direction.x > 0:
+				sprite.flip_h = false  # Face right
+
 		if cooldown_timer <= 0:
 			is_throwing = true
 			shoot_timer = shoot_duration
 			shoot_interval_timer = 0.0  # fire immediately when entering shooting mode
-			
-			
+
+
 	# move enemy
 	move_and_slide()
 	if push_timer > 0.0:
@@ -112,11 +120,13 @@ func take_damage(amount: float) -> void:
 	if health <= 0:
 		print("Boss Daddy defeated!")
 		_play_death_sound()
+		_trigger_death_screen_shake()
 		queue_free()
 		return
 
-	# Play hit sound
+	# Play hit sound and flash when hit
 	_play_hit_sound()
+	_flash_white()
 
 
 func _play_death_sound() -> void:
@@ -185,3 +195,32 @@ func _play_hit_sound() -> void:
 			if is_instance_valid(audio_player):
 				audio_player.queue_free()
 		)
+
+
+func _flash_white() -> void:
+	var sprite = get_node_or_null("animation")
+	if sprite == null:
+		return
+
+	# Flash white
+	sprite.modulate = Color(2.0, 2.0, 2.0, 1.0)
+
+	# Check if tree is valid
+	if get_tree() == null:
+		return
+
+	await get_tree().create_timer(0.1).timeout
+
+	# Return to normal color if still valid
+	if is_instance_valid(sprite):
+		sprite.modulate = Color(1.0, 1.0, 1.0, 1.0)
+
+
+func _trigger_death_screen_shake() -> void:
+	# Find the camera (attached to player)
+	if player == null:
+		return
+
+	var camera = player.get_node_or_null("Camera2D")
+	if camera != null and camera.has_method("shake"):
+		camera.shake(10.0, 0.4)

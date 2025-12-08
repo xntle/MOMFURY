@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://h4wwf7ms8id4"]
+[gd_scene load_steps=5 format=3 uid="uid://h4wwf7ms8id4"]
 
 [ext_resource type="Script" uid="uid://b7tqak68n8bx5" path="res://scripts/Bosses/BossDaddy/beer_bottle.gd" id="1_mo4lk"]
 [ext_resource type="Texture2D" uid="uid://bs8dajnyylskq" path="res://scene/Bosses/BossDaddy/1-removebg-preview.png" id="2_l6o7t"]
+[ext_resource type="PackedScene" uid="uid://dmyh4s2u8y2ds" path="res://scene/Bosses/BossDaddy/BeerPoison.tscn" id="3_poison"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_mo4lk"]
 
@@ -9,6 +10,7 @@
 collision_layer = 16
 collision_mask = 5
 script = ExtResource("1_mo4lk")
+poison_floor_scene = ExtResource("3_poison")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(-2.9999847, -2)

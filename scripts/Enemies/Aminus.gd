@@ -34,9 +34,18 @@ func _physics_process(delta: float) -> void:
 		shoot_timer -= delta
 
 	var distance_to_player := global_position.distance_to(player.global_position)
+	var direction := global_position.direction_to(player.global_position)
 
 	# Keep agent target updated (you can do this every frame, or on a Timer)
 	agent.target_position = player.global_position
+
+	# Update facing direction based on player position
+	var sprite = get_node_or_null("A")
+	if sprite != null:
+		if direction.x < 0:
+			sprite.flip_h = true  # Face left
+		elif direction.x > 0:
+			sprite.flip_h = false  # Face right
 
 	if distance_to_player > stop_distance:
 		# MOVE USING NAVIGATION PATH
