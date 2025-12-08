@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cr0xg0wf8rlax"
+path="res://.godot/imported/DSGNImpt_EXPLOSION-Mecha Piercing Punch_HY_PC.wav-d1136771890a24c2582de60d37a9a612.sample"
+
+[deps]
+
+source_file="res://assets/Sound/Damage/DSGNImpt_EXPLOSION-Mecha Piercing Punch_HY_PC.wav"
+dest_files=["res://.godot/imported/DSGNImpt_EXPLOSION-Mecha Piercing Punch_HY_PC.wav-d1136771890a24c2582de60d37a9a612.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2
