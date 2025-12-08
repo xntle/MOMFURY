@@ -1,15 +1,51 @@
-[gd_scene load_steps=7 format=3 uid="uid://dsm7571yb3duy"]
+[gd_scene load_steps=12 format=3 uid="uid://dsm7571yb3duy"]
 
 [ext_resource type="Script" uid="uid://4emgnu7jqpt8" path="res://scripts/Enemies/Aminus.gd" id="1_oi1qy"]
-[ext_resource type="Texture2D" uid="uid://ddac2xd0rjskg" path="res://characters/A.png" id="2_rb3vm"]
 [ext_resource type="PackedScene" uid="uid://cjoiyjqb37x1" path="res://scene/Enemies/AMinusBullet.tscn" id="3_aminus_bullet"]
-[ext_resource type="PackedScene" uid="uid://bedovmc10ufep" path="res://scene/HealthPickup.tscn" id="4_health"]
+[ext_resource type="PackedScene" path="res://scene/HealthPickup.tscn" id="4_health"]
+[ext_resource type="Texture2D" uid="uid://8avyyk1sk21p" path="res://characters/Untitled_design__5_-removebg-preview.png" id="4_r3alp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_48ekt"]
 size = Vector2(51, 63)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_oi1qy"]
 radius = 24.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4bw2y"]
+atlas = ExtResource("4_r3alp")
+region = Rect2(0, 100, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1wjpy"]
+atlas = ExtResource("4_r3alp")
+region = Rect2(100, 100, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jjh0p"]
+atlas = ExtResource("4_r3alp")
+region = Rect2(200, 100, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cc0x3"]
+atlas = ExtResource("4_r3alp")
+region = Rect2(300, 100, 100, 100)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tq2tq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4bw2y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1wjpy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jjh0p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cc0x3")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="A-" type="CharacterBody2D"]
 collision_layer = 2
@@ -24,12 +60,16 @@ scale = Vector2(0.5772617, 0.5772617)
 shape = SubResource("RectangleShape2D_48ekt")
 
 [node name="A" type="Sprite2D" parent="."]
-position = Vector2(1.7201738, -16.72668)
-scale = Vector2(0.2537961, 0.25379607)
-texture = ExtResource("2_rb3vm")
+visible = false
+position = Vector2(2, -17)
+scale = Vector2(0.3196963, 0.31969628)
+texture = ExtResource("4_r3alp")
+hframes = 4
+vframes = 4
+frame = 7
 
 [node name="PathfindingCollision" type="CollisionShape2D" parent="."]
-position = Vector2(2, 1)
+position = Vector2(2, -12)
 scale = Vector2(0.5772617, 0.5772617)
 shape = SubResource("CircleShape2D_oi1qy")
 
@@ -39,3 +79,10 @@ target_desired_distance = 3.0
 path_postprocessing = 1
 
 [node name="Timer" type="Timer" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(6, -12)
+scale = Vector2(0.38, 0.38)
+sprite_frames = SubResource("SpriteFrames_tq2tq")
+frame = 1
+frame_progress = 0.061688848

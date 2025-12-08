@@ -19,7 +19,6 @@ var round_number: int = 0
 var to_spawn_this_round: int = 0
 var spawned_this_round: int = 0
 var alive_from_this_spawner: int = 0
-var boss_spawned := false
 
 # Health system
 @export var max_health: float = 100.0
@@ -56,15 +55,16 @@ func _start_next_round() -> void:
 	if is_instance_valid(player) and player.has_method("set_round"):
 		player.set_round(round_number)
 
-	# Spawn a boss every 3 rounds
+	# Spawn a boss every 5 rounds
 	if round_number % 3 == 0 and not boss_scenes.is_empty():
 		var boss_scene := boss_scenes[randi() % boss_scenes.size()]
 		if %Bosses.get_child_count() == 0:
 			var boss := boss_scene.instantiate()
-			%Bosses.add_child(boss)
+			%Enemies.add_child(boss)
 			(boss as Node2D).global_position = _pick_boss_spawn_position()
 			boss.add_to_group("enemies")
 
+			alive_from_this_spawner += 1
 			boss.tree_exited.connect(_on_spawned_enemy_exited_tree)
 
 			print("BOSS ROUND! Round ", round_number)
@@ -74,7 +74,7 @@ func _start_next_round() -> void:
 
 func _maybe_finish_round() -> void:
 	# Called after spawns, and whenever an enemy dies
-	if  spawned_this_round >= to_spawn_this_round and %Enemies.get_child_count() == 0 and %Bosses.get_child_count() == 0:
+	if spawned_this_round >= to_spawn_this_round and alive_from_this_spawner <= 0 and not is_destroyed:
 		print("ROUND ", round, " cleared!")
 		_round_break_then_next()
 
@@ -89,32 +89,30 @@ func _round_break_then_next() -> void:
 
 
 func _arm_next_spawn() -> void:
+	if is_destroyed:
+		return
 
 	# if we already spawned everything for this round, just wait for kills
-	if spawned_this_round >= to_spawn_this_round and %Enemies.get_child_count() == 0 and %Bosses.get_child_count() == 0:
+	if spawned_this_round >= to_spawn_this_round:
 		_maybe_finish_round()
 		return
 
-	print("STARTING")
 	_timer.wait_time = randf_range(min_wait, max_wait)
 	_timer.start()
 
 func _on_timeout() -> void:
 	if enemy_scenes.is_empty():
 		_arm_next_spawn()
-		print('meow')
 		return
 
 	# round cap
 	if spawned_this_round >= to_spawn_this_round:
 		_arm_next_spawn()
-		print('quack')
 		return
 
 	var scene := enemy_scenes[randi() % enemy_scenes.size()]
 	if scene == null:
 		_arm_next_spawn()
-		print('arf')
 		return
 
 	var enemy := scene.instantiate()
@@ -127,7 +125,7 @@ func _on_timeout() -> void:
 
 	# When the enemy is freed (dies), decrement alive count
 	enemy.tree_exited.connect(_on_spawned_enemy_exited_tree)
-	print('fuck you')
+
 	_arm_next_spawn()
 
 func _on_spawned_enemy_exited_tree() -> void:
