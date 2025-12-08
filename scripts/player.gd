@@ -1,8 +1,8 @@
 extends CharacterBody2D
 class_name PlayerController
 
-@export var move_speed: float = 30.0
-@export var roll_speed: float = 300.0
+@export var move_speed: float = 50.0
+@export var roll_speed: float = 400.0
 @export var roll_time: float = 0.15
 @export var roll_cooldown: float = 0.4
 @export var max_health: float = 100.0
@@ -362,7 +362,27 @@ func take_damage(amount: int) -> void:
 		# Play the death animation once
 		if anim:
 			anim.play("die")
-		
+
+		# Play Duma death sound
+		var duma_sound = load("res://assets/Sound/Duma.mp3") as AudioStream
+		if duma_sound != null:
+			var audio_player = AudioStreamPlayer2D.new()
+			get_tree().current_scene.add_child(audio_player)
+			audio_player.stream = duma_sound
+			audio_player.global_position = global_position
+			audio_player.play()
+
+			# Wait for the sound to finish
+			await audio_player.finished
+
+			# Cleanup audio player
+			if is_instance_valid(audio_player):
+				audio_player.queue_free()
+
+		# Check if still valid (scene might have changed)
+		if not is_instance_valid(self):
+			return
+
 		var end_scene := load("res://scene/end_screen.tscn") as PackedScene
 		var end := end_scene.instantiate()
 		end.final_points = current_points
@@ -372,19 +392,11 @@ func take_damage(amount: int) -> void:
 		# remove the current game scene
 		get_tree().current_scene.queue_free()
 		get_tree().current_scene = end
+
 # Scene change occurs only after the 'die' animation finishes, followed by a delay.
 func _on_animation_finished(anim_name: StringName) -> void:
-	if is_dead and anim_name == "die":
-		var delay_time = 2.0
-		
-		# 1. Create a Timer (no need for await/async)
-		var timer = get_tree().create_timer(delay_time)
-		
-		# 2. Connect the timer's 'timeout' signal to an anonymous function
-		#    that executes the scene change.
-		timer.timeout.connect(func():
-			get_tree().change_scene_to_file("res://scene/main_menu.tscn")
-		)
+	# No longer needed - handled in take_damage with await
+	pass
 # Slow effect functions
 func apply_slow(multiplier: float) -> void:
 	is_slowed = true

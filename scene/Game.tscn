@@ -21,28 +21,40 @@
 [ext_resource type="PackedScene" uid="uid://cr5n8d10hvgdh" path="res://scene/Bosses/BossTeen/BossTeen.tscn" id="20_cg8ds"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4cigq"]
-bg_color = Color(0.07058824, 0.20784314, 0.14117648, 1)
+bg_color = Color(0, 0, 0, 0.3)
 border_width_left = 2
 border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
-border_color = Color(0, 0, 0, 1)
+border_color = Color(0, 0, 0, 0.5)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f6bub"]
-bg_color = Color(0, 0.36078432, 0.2901961, 1)
-border_width_left = 5
-border_width_top = 5
-border_width_right = 5
-border_width_bottom = 5
-border_color = Color(0, 0, 0, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r3aus"]
-bg_color = Color(0, 0.7019608, 0.57254905, 1)
+bg_color = Color(0, 0, 0, 0.5)
 border_width_left = 2
 border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
-border_color = Color(0, 0, 0, 1)
+border_color = Color(0, 0, 0, 0.7)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r3aus"]
+bg_color = Color(0, 0, 0, 0.4)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 0.6)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
 
 [node name="Game" type="Node2D"]
 script = ExtResource("2_game")

@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://ca1lqc5y68cee"
-path="res://.godot/imported/death_8_karen.wav-9032dcf750fc2233c8d68beda1201908.sample"
+path="res://.godot/imported/GameOver.wav-d9dcc2e57e765baa8675df20040cae5b.sample"
 
 [deps]
 
-source_file="res://assets/Sound/death_8_karen.wav"
-dest_files=["res://.godot/imported/death_8_karen.wav-9032dcf750fc2233c8d68beda1201908.sample"]
+source_file="res://assets/Sound/GameOver.wav"
+dest_files=["res://.godot/imported/GameOver.wav-d9dcc2e57e765baa8675df20040cae5b.sample"]
 
 [params]
 

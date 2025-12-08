@@ -2,15 +2,27 @@ extends Area2D
 
 @export var heal_amount: float = 20.0
 
+var initial_position: Vector2
+var float_time: float = 0.0
+var float_amplitude: float = 5.0
+var float_speed: float = 2.0
+var position_initialized: bool = false
+
 
 func _ready():
 	body_entered.connect(_on_body_entered)
 
-	# Add a small floating animation
-	var tween = create_tween()
-	tween.set_loops()
-	tween.tween_property(self, "position:y", position.y - 5, 0.8).set_trans(Tween.TRANS_SINE)
-	tween.tween_property(self, "position:y", position.y + 5, 0.8).set_trans(Tween.TRANS_SINE)
+
+func _process(delta):
+	# Store initial position on first frame (after enemy sets the position)
+	if not position_initialized:
+		initial_position = global_position
+		position_initialized = true
+
+	# Create smooth floating animation using sine wave
+	float_time += delta * float_speed
+	var offset = sin(float_time) * float_amplitude
+	global_position = initial_position + Vector2(0, offset)
 
 
 func _on_body_entered(body):

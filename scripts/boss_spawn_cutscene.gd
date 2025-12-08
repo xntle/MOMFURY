@@ -53,11 +53,18 @@ func _sequence_earthquake() -> void:
 				randf_range(-shake_intensity, shake_intensity),
 				randf_range(-shake_intensity, shake_intensity)
 			)
+
+			# Check if tree is valid
+			if get_tree() == null or not is_instance_valid(self):
+				return
+
 			await get_tree().create_timer(0.05).timeout
 			shake_timer += 0.05
 		camera.offset = Vector2.ZERO
 	else:
 		# No camera, just wait
+		if get_tree() == null or not is_instance_valid(self):
+			return
 		await get_tree().create_timer(earthquake_duration).timeout
 
 func _sequence_camera_pan() -> void:
@@ -141,6 +148,8 @@ func _sequence_show_text() -> void:
 	await tween.finished
 
 	# Hold
+	if get_tree() == null or not is_instance_valid(self):
+		return
 	await get_tree().create_timer(text_display_duration).timeout
 
 	# Fade out

@@ -4,7 +4,7 @@ extends CharacterBody2D
 
 var ability_timer := 0.0
 var throw_speed := 250.0
-var normal_speed := 25.0
+var normal_speed := 80.0
 var is_throwing := false
 var throw_duration := 0.2
 var throw_time_left := 0.0

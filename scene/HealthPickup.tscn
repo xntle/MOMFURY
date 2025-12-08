@@ -14,6 +14,7 @@ script = ExtResource("1_health")
 shape = SubResource("CircleShape2D_health")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
 modulate = Color(0.2, 1, 0.2, 1)
 scale = Vector2(16, 16)
 
@@ -28,5 +29,5 @@ vertical_alignment = 1
 
 [node name="St,small,507x507Pad,600x600,f8f8f8_u1" type="Sprite2D" parent="."]
 position = Vector2(-1, 0)
-scale = Vector2(0.019166667, 0.019166667)
+scale = Vector2(0.05, 0.05)
 texture = ExtResource("2_cqvjf")

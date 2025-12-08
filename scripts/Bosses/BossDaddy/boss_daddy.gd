@@ -6,7 +6,7 @@ extends CharacterBody2D
 @export var health: float = 200.0
 
 var throw_timer := 0.0
-var normal_speed := 25.0
+var normal_speed := 60.0
 
 var is_throwing := false
 var throw_duration := 0.5

@@ -87,7 +87,16 @@ func _round_break_then_next() -> void:
 	if _timer:
 		_timer.stop()
 
+	# Check if tree is valid before creating timer
+	if not is_instance_valid(self) or get_tree() == null:
+		return
+
 	await get_tree().create_timer(break_between_rounds).timeout
+
+	# Check again after await in case scene changed
+	if not is_instance_valid(self) or get_tree() == null:
+		return
+
 	_start_next_round()
 
 
@@ -172,7 +181,13 @@ func _flash_damage() -> void:
 	var sprite = get_node_or_null("Sprite2D")
 	if sprite != null:
 		sprite.modulate = Color(1.5, 0.5, 0.5)
+
+		# Check if tree is valid
+		if get_tree() == null:
+			return
+
 		await get_tree().create_timer(0.1).timeout
+
 		if sprite != null and not is_destroyed:
 			sprite.modulate = Color(1, 1, 1)
 
@@ -192,5 +207,7 @@ func _destroy() -> void:
 		tween.tween_property(sprite, "modulate:a", 0.0, 1.0)
 		tween.tween_callback(queue_free)
 	else:
-		await get_tree().create_timer(1.0).timeout
+		# Check if tree is valid
+		if get_tree() != null:
+			await get_tree().create_timer(1.0).timeout
 		queue_free()

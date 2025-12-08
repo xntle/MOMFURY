@@ -2,9 +2,9 @@ extends CharacterBody2D
 
 @onready var player = get_node("/root/Game/Player")
 
-var normal_speed := 40.0
-var stop_distance := 120.0  # Stay further back to shoot
-var shoot_range := 150.0     # Max shooting distance
+var normal_speed := 80.0
+var stop_distance := 200.0  # Stay further back to shoot
+var shoot_range := 250.0     # Max shooting distance
 
 @export var health := 25.0
 @export var bullet_scene: PackedScene
@@ -42,7 +42,16 @@ func _physics_process(delta):
 
 func _shoot_burst():
 	for i in bullets_per_burst:
+		# Check if tree is valid
+		if get_tree() == null or not is_instance_valid(self):
+			return
+
 		await get_tree().create_timer(i * burst_delay).timeout
+
+		# Check again after await
+		if not is_instance_valid(self):
+			return
+
 		_shoot_bullet()
 
 
@@ -72,12 +81,14 @@ func take_damage(amount: float) -> void:
 		print("Poop defeated!")
 		_drop_health()
 		_spawn_death_particles()
+		_trigger_death_screen_shake()
 		queue_free()
 		if is_instance_valid(player) and player.has_method("add_points"):
 			player.add_points(10)
 	else:
-		# Play hit sound only if still alive
+		# Play hit sound and flash when hit
 		_play_hit_sound()
+		_flash_white()
 
 
 func _drop_health() -> void:
@@ -171,3 +182,32 @@ func _play_hit_sound() -> void:
 			if is_instance_valid(audio_player):
 				audio_player.queue_free()
 		)
+
+
+func _flash_white() -> void:
+	var sprite = get_node_or_null("PixelArtCartoonPoopCharacterPng")
+	if sprite == null:
+		return
+
+	# Flash white
+	sprite.modulate = Color(2.0, 2.0, 2.0, 1.0)
+
+	# Check if tree is valid
+	if get_tree() == null:
+		return
+
+	await get_tree().create_timer(0.1).timeout
+
+	# Return to normal color if still valid
+	if is_instance_valid(sprite):
+		sprite.modulate = Color(1.0, 1.0, 1.0, 1.0)
+
+
+func _trigger_death_screen_shake() -> void:
+	# Find the camera (attached to player)
+	if player == null:
+		return
+
+	var camera = player.get_node_or_null("Camera2D")
+	if camera != null and camera.has_method("shake"):
+		camera.shake(8.0, 0.3)

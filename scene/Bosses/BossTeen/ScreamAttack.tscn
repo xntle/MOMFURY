@@ -65,7 +65,6 @@ shape = SubResource("SegmentShape2D_3f86c")
 [node name="animation" type="AnimatedSprite2D" parent="."]
 position = Vector2(213, 7.04158)
 sprite_frames = SubResource("SpriteFrames_g1cy5")
-frame_progress = 0.963646
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]
