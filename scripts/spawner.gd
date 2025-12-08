@@ -49,9 +49,6 @@ func _pick_boss_spawn_position() -> Vector2:
 
 
 func _start_next_round() -> void:
-	if is_destroyed:
-		return
-
 	round_number += 1
 	to_spawn_this_round = start_round_size + (round_number - 1) * round_growth
 	spawned_this_round = 0
@@ -62,7 +59,7 @@ func _start_next_round() -> void:
 	# Spawn a boss every 3 rounds
 	if round_number % 3 == 0 and not boss_scenes.is_empty():
 		var boss_scene := boss_scenes[randi() % boss_scenes.size()]
-		if boss_scene != null and %Bosses.get_child_count() == 0:
+		if %Bosses.get_child_count() == 0:
 			var boss := boss_scene.instantiate()
 			%Bosses.add_child(boss)
 			(boss as Node2D).global_position = _pick_boss_spawn_position()
@@ -103,16 +100,9 @@ func _arm_next_spawn() -> void:
 	_timer.start()
 
 func _on_timeout() -> void:
-
 	if enemy_scenes.is_empty():
 		_arm_next_spawn()
 		print('meow')
-		return
-
-	# global cap (optional): total enemies under %Enemies
-	if max_alive > 0 and %Enemies.get_child_count() >= max_alive:
-		_arm_next_spawn()
-		print('woof')
 		return
 
 	# round cap
@@ -155,43 +145,3 @@ func _pick_spawn_position() -> Vector2:
 		return global_position + Vector2.RIGHT.rotated(randf() * TAU) * randf_range(0.0, spawn_radius)
 
 	return global_position
-
-# ---------------- HEALTH / DESTROY ----------------
-
-func take_damage(amount: float) -> void:
-	if is_destroyed:
-		return
-
-	current_health -= amount
-	print("Spawner took ", amount, " damage. Health: ", current_health, "/", max_health)
-	_flash_damage()
-
-	if current_health <= 0:
-		_destroy()
-
-func _flash_damage() -> void:
-	var sprite = get_node_or_null("Sprite2D")
-	if sprite != null:
-		sprite.modulate = Color(1.5, 0.5, 0.5)
-		await get_tree().create_timer(0.1).timeout
-		if sprite != null and not is_destroyed:
-			sprite.modulate = Color(1, 1, 1)
-
-func _destroy() -> void:
-	is_destroyed = true
-	print("Spawner destroyed!")
-
-	if _timer != null:
-		_timer.stop()
-
-	collision_layer = 0
-	collision_mask = 0
-
-	var sprite = get_node_or_null("Sprite2D")
-	if sprite != null:
-		var tween = create_tween()
-		tween.tween_property(sprite, "modulate:a", 0.0, 1.0)
-		tween.tween_callback(queue_free)
-	else:
-		await get_tree().create_timer(1.0).timeout
-		queue_free()
