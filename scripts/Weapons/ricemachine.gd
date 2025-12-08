@@ -3,6 +3,7 @@ extends WeaponBase
 @export var bullet_scene: PackedScene
 @onready var weapon_pivot: Marker2D = $WeaponPivot
 @onready var shooting_point: Marker2D = $WeaponPivot/Gun/ShootingPoint
+@onready var player = get_tree().current_scene.get_node("Player")
 
 func _ready():
 	weapon_type = "Rice Machine"
@@ -44,4 +45,4 @@ func _shoot_bullet() -> void:
 
 	# Direction based on weapon rotation
 	var mouse_pos = get_global_mouse_position()
-	bullet.direction = (mouse_pos - bullet.global_position).normalized()
+	bullet.direction = (mouse_pos - player.global_position).normalized()
