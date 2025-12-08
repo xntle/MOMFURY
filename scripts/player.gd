@@ -43,16 +43,59 @@ var current_round: int = 1
 @onready var rice_weapon: Node2D = $Ricechine
 @onready var broom_weapon: Node2D = $Broom
 @onready var movement_trail: CPUParticles2D = $MovementTrail
+@onready var damage_audio: AudioStreamPlayer2D = $DamageAudio
 
 # Slow effect tracking
 var is_slowed: bool = false
 var slow_multiplier: float = 1.0
 
+# Damage sound system
+var damage_sounds: Array[AudioStream] = []
+var last_damage_sound_time: float = 0.0
+var damage_sound_cooldown: float = 1.0
+
+# Movement sound system
+var walk_sounds: Array[AudioStream] = []
+var walk_sound_timer: float = 0.0
+var walk_sound_interval: float = 0.35
+var dodgeroll_sound: AudioStream
+var weapon_switch_sound: AudioStream
+
 func _ready():
+	# Load damage sounds
+	_load_damage_sounds()
+
+	# Load movement sounds
+	_load_movement_sounds()
+
+	reset_run_state()
 	if anim:
 		anim.play("idle_down")
 	_update_weapon_visibility()
 	anim.animation_finished.connect(_on_animation_finished)
+
+func _load_damage_sounds() -> void:
+	# Load all 10 damage sounds
+	for i in range(1, 11):
+		var sound_path = "res://assets/sound/Damage/damage_%d_karen.wav" % i
+		var sound = load(sound_path) as AudioStream
+		if sound:
+			damage_sounds.append(sound)
+
+
+func _load_movement_sounds() -> void:
+	# Load walk sounds
+	for i in range(1, 4):
+		var sound_path = "res://assets/sound/Movement/Walk/16_human_walk_stone_%d.wav" % i
+		var sound = load(sound_path) as AudioStream
+		if sound:
+			walk_sounds.append(sound)
+
+	# Load dodge roll sound
+	dodgeroll_sound = load("res://assets/sound/Movement/Dodgeroll.wav") as AudioStream
+
+	# Load weapon switch sound
+	weapon_switch_sound = load("res://assets/sound/Movement/WeaponSwitch.wav") as AudioStream
 
 
 func _physics_process(delta):
@@ -146,6 +189,10 @@ func _physics_process(delta):
 		roll_timer = roll_time
 		roll_dir = roll_input_dir.normalized()
 		collision_layer = 8
+
+		# Play dodge roll sound
+		_play_dodgeroll_sound()
+
 		if anim:
 			anim.play("roll")
 		return
@@ -155,6 +202,13 @@ func _physics_process(delta):
 
 	if not is_stunned:
 		move_and_slide()
+
+	# Play walking sounds
+	if direction != Vector2.ZERO and not is_rolling and not is_stunned:
+		walk_sound_timer -= delta
+		if walk_sound_timer <= 0.0:
+			_play_walk_sound()
+			walk_sound_timer = walk_sound_interval
 
 	# Update movement trail
 	if movement_trail != null:
@@ -281,9 +335,12 @@ func _on_body_entered(body) -> void:
 # Damage function (Initiates the death sequence)
 func take_damage(amount: int) -> void:
 	if is_dead: return # Prevent damage if already dead
-	
+
 	current_health -= amount
 	emit_signal("health_changed", current_health)
+
+	# Play random damage sound with cooldown
+	_play_damage_sound()
 
 	is_hit = true
 	hit_timer = hit_duration
@@ -306,6 +363,15 @@ func take_damage(amount: int) -> void:
 		if anim:
 			anim.play("die")
 		
+		var end_scene := load("res://scene/end_screen.tscn") as PackedScene
+		var end := end_scene.instantiate()
+		end.final_points = current_points
+		end.final_round = current_round
+		get_tree().root.add_child(end)
+
+		# remove the current game scene
+		get_tree().current_scene.queue_free()
+		get_tree().current_scene = end
 # Scene change occurs only after the 'die' animation finishes, followed by a delay.
 func _on_animation_finished(anim_name: StringName) -> void:
 	if is_dead and anim_name == "die":
@@ -327,6 +393,19 @@ func apply_slow(multiplier: float) -> void:
 func remove_slow() -> void:
 	is_slowed = false
 	slow_multiplier = 1.0
+
+func _play_damage_sound() -> void:
+	# Check cooldown
+	var current_time = Time.get_ticks_msec() / 1000.0
+	if current_time - last_damage_sound_time < damage_sound_cooldown:
+		return
+
+	# Play random damage sound
+	if damage_sounds.size() > 0 and damage_audio:
+		var random_sound = damage_sounds[randi() % damage_sounds.size()]
+		damage_audio.stream = random_sound
+		damage_audio.play()
+		last_damage_sound_time = current_time
 	
 func apply_stun(duration) -> void:
 	stun_timer = duration
@@ -365,6 +444,9 @@ func _switch_weapon() -> void:
 		Weapon.BROOM:
 			current_weapon = Weapon.SLIPPER
 			print("Switched to Slipper")
+
+	# Play weapon switch sound
+	_play_weapon_switch_sound()
 
 	_update_weapon_visibility()
 
@@ -406,6 +488,133 @@ func add_points(amount: int) -> void:
 	
 
 func set_round(value: int) -> void:
-	print("NEW ROUND", value)
 	current_round = value
 	emit_signal("round_changed", current_round)
+
+func reset_run_state() -> void:
+	# Core run stats
+	current_health = max_health
+	current_points = 0
+	current_round = 1
+
+	# Movement/action state
+	direction = Vector2.ZERO
+	velocity = Vector2.ZERO
+	last_move_dir = Vector2.DOWN
+
+	is_dead = false
+	is_hit = false
+	hit_timer = 0.0
+
+	is_rolling = false
+	roll_timer = 0.0
+	cooldown_timer = 0.0
+	roll_dir = Vector2.ZERO
+
+	is_stunned = false
+	stun_timer = 0.0
+	intangibility_timer = 0.0
+	collision_layer = 1
+
+	# Slow
+	is_slowed = false
+	slow_multiplier = 1.0
+
+	# Weapon
+	current_weapon = Weapon.SLIPPER
+	_update_weapon_visibility()
+	_update_weapon_layering()
+
+	# FX / Anim
+	if movement_trail:
+		movement_trail.emitting = false
+	if anim:
+		anim.play("idle_down")
+
+	# Push UI updates immediately
+	emit_signal("health_changed", int(current_health))
+	emit_signal("points_changed", int(current_points))
+	emit_signal("round_changed", int(current_round))
+
+
+func _play_walk_sound() -> void:
+	if walk_sounds.size() == 0:
+		return
+
+	var random_sound = walk_sounds[randi() % walk_sounds.size()]
+	var audio_player = AudioStreamPlayer2D.new()
+	get_tree().current_scene.add_child(audio_player)
+	audio_player.stream = random_sound
+	audio_player.global_position = global_position
+	audio_player.volume_db = -8.0  # Quieter for walking
+
+	# Ensure sound doesn't loop
+	if random_sound is AudioStreamWAV:
+		random_sound.loop_mode = AudioStreamWAV.LOOP_DISABLED
+
+	audio_player.play()
+
+	# Auto-cleanup
+	get_tree().create_timer(1.0).timeout.connect(func():
+		if is_instance_valid(audio_player):
+			audio_player.queue_free()
+	)
+
+	audio_player.finished.connect(func():
+		if is_instance_valid(audio_player):
+			audio_player.queue_free()
+	)
+
+
+func _play_dodgeroll_sound() -> void:
+	if dodgeroll_sound == null:
+		return
+
+	var audio_player = AudioStreamPlayer2D.new()
+	get_tree().current_scene.add_child(audio_player)
+	audio_player.stream = dodgeroll_sound
+	audio_player.global_position = global_position
+
+	# Ensure sound doesn't loop
+	if dodgeroll_sound is AudioStreamWAV:
+		dodgeroll_sound.loop_mode = AudioStreamWAV.LOOP_DISABLED
+
+	audio_player.play()
+
+	# Auto-cleanup
+	get_tree().create_timer(2.0).timeout.connect(func():
+		if is_instance_valid(audio_player):
+			audio_player.queue_free()
+	)
+
+	audio_player.finished.connect(func():
+		if is_instance_valid(audio_player):
+			audio_player.queue_free()
+	)
+
+
+func _play_weapon_switch_sound() -> void:
+	if weapon_switch_sound == null:
+		return
+
+	var audio_player = AudioStreamPlayer2D.new()
+	get_tree().current_scene.add_child(audio_player)
+	audio_player.stream = weapon_switch_sound
+	audio_player.global_position = global_position
+
+	# Ensure sound doesn't loop
+	if weapon_switch_sound is AudioStreamWAV:
+		weapon_switch_sound.loop_mode = AudioStreamWAV.LOOP_DISABLED
+
+	audio_player.play()
+
+	# Auto-cleanup
+	get_tree().create_timer(2.0).timeout.connect(func():
+		if is_instance_valid(audio_player):
+			audio_player.queue_free()
+	)
+
+	audio_player.finished.connect(func():
+		if is_instance_valid(audio_player):
+			audio_player.queue_free()
+	)

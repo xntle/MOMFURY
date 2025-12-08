@@ -24,6 +24,10 @@ window/size/viewport_height=1080
 
 project/assembly_name="momfury"
 
+[editor]
+
+version_control/autoload_on_startup=true
+
 [input]
 
 move_up={
