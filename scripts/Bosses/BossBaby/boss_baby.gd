@@ -139,8 +139,8 @@ extends CharacterBody2D
 @onready var player = get_node("/root/Game/Player")
 @onready var anim: AnimatedSprite2D 
 
-@export var max_health: float = 150.0
-@export var health: float = 150.0
+@export var max_health: float = 2000.0
+var health: float = max_health
 
 var ability_timer := 0.0
 var throw_speed := 250.0

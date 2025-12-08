@@ -15,7 +15,7 @@ var broom_sound: AudioStream
 
 func _ready():
 	weapon_type = "Broom"
-	damage = 25.0
+	damage = 80.0
 	cooldown = 0.5
 
 	# Load broom swing sound

@@ -4,9 +4,9 @@ extends CharacterBody2D
 
 @export var health: float = 10.0
 @export var speed: float = 100.0
-@export var damage: float = 10.0
+@export var damage: float = 25.0
 @export var health_pickup_scene: PackedScene
-@export var drop_chance: float = 0.5  # 50% chance
+@export var drop_chance: float = 0.2  # 20% chance
 @export var death_particles_scene: PackedScene
 @onready var agent: NavigationAgent2D = $NavigationAgent2D
 
