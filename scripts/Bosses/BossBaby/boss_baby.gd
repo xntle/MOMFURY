@@ -54,8 +54,9 @@ func _ready() -> void:
 		anim = get_node_or_null("animation")
 
 	# ---- NAV TUNING (adjust to boss size) ----
-	agent.target_desired_distance = 8.0
-	agent.radius = 16.0
+	if agent != null:
+		agent.target_desired_distance = 8.0
+		agent.radius = 16.0
 	# -----------------------------------------
 
 	if anim != null:
@@ -93,11 +94,11 @@ func take_damage(amount: float) -> void:
 
 func _get_nav_direction() -> Vector2:
 	# Update target
-	if is_instance_valid(player):
+	if agent != null and is_instance_valid(player):
 		agent.target_position = player.global_position
 
 	# If we have a path, follow it
-	if not agent.is_navigation_finished():
+	if agent != null and not agent.is_navigation_finished():
 		var next_pos := agent.get_next_path_position()
 		var v := next_pos - global_position
 		if v.length() > 0.001:
@@ -168,7 +169,7 @@ func _physics_process(delta: float) -> void:
 		cooldown_timer -= delta
 
 		if cooldown_timer <= 0.0:
-			var random_ability := randi_range(1, 1) # (your code always chooses 1)
+			var random_ability := randi_range(1, 2) # (your code always chooses 1)
 			if random_ability == 1:
 				is_throwing = true
 				shoot_timer = shoot_duration
@@ -324,3 +325,13 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 		player.apply_stun(0.2)
 		player.apply_intangibility(0.4)
 		push_timer = 0.2
+
+
+func _spawn_hit_effect() -> void:
+	var hit_effect_path = "res://scene/Effects/HitImpact.tscn"
+	var hit_scene = load(hit_effect_path) as PackedScene
+
+	if hit_scene != null:
+		var hit_effect = hit_scene.instantiate()
+		get_tree().current_scene.add_child(hit_effect)
+		hit_effect.global_position = global_position

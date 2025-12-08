@@ -71,8 +71,9 @@ func _on_body_entered(body):
 		# Spawn hit effect
 		if hit_effect_scene != null:
 			var hit_effect = hit_effect_scene.instantiate()
-			get_tree().current_scene.add_child(hit_effect)
+			# Set position BEFORE adding to tree (so particles emit at correct position)
 			hit_effect.global_position = global_position
+			get_tree().current_scene.add_child(hit_effect)
 
 	# Destroy bullet on impact
 	queue_free()

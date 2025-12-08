@@ -40,7 +40,7 @@ func _physics_process(delta: float) -> void:
 	agent.target_position = player.global_position
 
 	# Update facing direction based on player position
-	var sprite = get_node_or_null("A")
+	var sprite = anim
 	if sprite != null:
 		if direction.x < 0:
 			sprite.flip_h = true  # Face left
@@ -133,10 +133,10 @@ func _play_death_sound() -> void:
 	var death_sounds = [
 		"res://assets/sound/Death/DSGNImpt_EXPLOSION-Mecha Piercing Punch_HY_PC-001.wav",
 		"res://assets/sound/Death/DSGNImpt_EXPLOSION-Mecha Piercing Punch_HY_PC-002.wav",
+		"res://assets/sound/Death/DSGNImpt_EXPLOSION-Mecha Piercing Punch_HY_PC-003.wav",
 		"res://assets/sound/Death/DSGNImpt_EXPLOSION-Mecha Piercing Punch_HY_PC-004.wav",
 		"res://assets/sound/Death/DSGNImpt_EXPLOSION-Mecha Piercing Punch_HY_PC-005.wav",
-		"res://assets/sound/Death/DSGNImpt_EXPLOSION-Mecha Piercing Punch_HY_PC-006.wav",
-		"res://assets/sound/Death/DSGNImpt_EXPLOSION-Mecha Piercing Punch_HY_PC-007.wav"
+		"res://assets/sound/Death/DSGNImpt_EXPLOSION-Mecha Piercing Punch_HY_PC-006.wav"
 	]
 
 	# Pick random sound and play it
@@ -197,7 +197,7 @@ func _play_hit_sound() -> void:
 
 
 func _flash_white() -> void:
-	var sprite = get_node_or_null("A")
+	var sprite = anim
 	if sprite == null:
 		return
 
@@ -223,3 +223,13 @@ func _trigger_death_screen_shake() -> void:
 	var camera = player.get_node_or_null("Camera2D")
 	if camera != null and camera.has_method("shake"):
 		camera.shake(8.0, 0.3)
+
+
+func _spawn_hit_effect() -> void:
+	var hit_effect_path = "res://scene/Effects/HitImpact.tscn"
+	var hit_scene = load(hit_effect_path) as PackedScene
+
+	if hit_scene != null:
+		var hit_effect = hit_scene.instantiate()
+		get_tree().current_scene.add_child(hit_effect)
+		hit_effect.global_position = global_position

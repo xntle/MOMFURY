@@ -89,10 +89,10 @@ func _on_hitbox_body_entered(body):
 		# Spawn hit effect at hitbox center
 		if hit_effect_scene != null:
 			var hit_effect = hit_effect_scene.instantiate()
-			get_tree().current_scene.add_child(hit_effect)
-			# Spawn at hitbox position (where the broom actually hit)
+			# Set position BEFORE adding to tree (so particles emit at correct position)
 			var hitbox_global_pos = hitbox.global_position
 			hit_effect.global_position = hitbox_global_pos
+			get_tree().current_scene.add_child(hit_effect)
 			print("Spawned hit effect at: ", hitbox_global_pos)
 
 

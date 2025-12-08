@@ -219,6 +219,16 @@ func _trigger_death_screen_shake() -> void:
 		camera.shake(8.0, 0.3)
 
 
+func _spawn_hit_effect() -> void:
+	var hit_effect_path = "res://scene/Effects/HitImpact.tscn"
+	var hit_scene = load(hit_effect_path) as PackedScene
+
+	if hit_scene != null:
+		var hit_effect = hit_scene.instantiate()
+		get_tree().current_scene.add_child(hit_effect)
+		hit_effect.global_position = global_position
+
+
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body == player:
 		player.take_damage(damage)
