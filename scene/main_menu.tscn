@@ -51,7 +51,6 @@ grow_vertical = 2
 script = ExtResource("1_3er1b")
 
 [node name="TextureRect" type="TextureRect" parent="."]
-z_index = 1
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -67,7 +66,6 @@ texture = ExtResource("3_sepwh")
 stretch_mode = 4
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
-z_index = 1
 custom_minimum_size = Vector2(400, 0)
 layout_mode = 1
 anchors_preset = 8

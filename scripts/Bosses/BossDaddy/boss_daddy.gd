@@ -103,8 +103,16 @@ func _physics_process(delta: float) -> void:
 	if anim == null:
 		return
 
-	# (optional) let attack override hit so it doesn't spam-hit animation mid-attack
-	if is_throwing:
+	# Update facing direction based on player position
+	if direction.x < 0:
+		anim.flip_h = true  # Face left
+	elif direction.x > 0:
+		anim.flip_h = false  # Face right
+
+	if is_hit:
+		if anim.animation != "daddy_hit":
+			anim.play("daddy_hit")
+	elif is_throwing:
 		if anim.animation != "daddy_attack":
 			anim.play("daddy_attack")
 	elif is_hit:
@@ -141,14 +149,19 @@ func take_damage(amount: float) -> void:
 	if health <= 0.0:
 		print("Boss Daddy defeated!")
 		_play_death_sound()
+		_trigger_death_screen_shake()
 		queue_free()
 		return
 
-	# Play hit sound
+	# Play hit sound and flash when hit
 	_play_hit_sound()
+	_flash_white()
 
 	is_hit = true
 	hit_time_left = hit_duration
+
+	# Interrupt throwing when hit
+	is_throwing = false
 
 	if anim != null:
 		anim.play("daddy_hit")
@@ -220,3 +233,31 @@ func _play_hit_sound() -> void:
 			if is_instance_valid(audio_player):
 				audio_player.queue_free()
 		)
+
+
+func _flash_white() -> void:
+	if anim == null:
+		return
+
+	# Flash white
+	anim.modulate = Color(2.0, 2.0, 2.0, 1.0)
+
+	# Check if tree is valid
+	if get_tree() == null:
+		return
+
+	await get_tree().create_timer(0.1).timeout
+
+	# Return to normal color if still valid
+	if is_instance_valid(anim):
+		anim.modulate = Color(1.0, 1.0, 1.0, 1.0)
+
+
+func _trigger_death_screen_shake() -> void:
+	# Find the camera (attached to player)
+	if player == null:
+		return
+
+	var camera = player.get_node_or_null("Camera2D")
+	if camera != null and camera.has_method("shake"):
+		camera.shake(10.0, 0.4)

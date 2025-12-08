@@ -70,10 +70,13 @@ func take_damage(amount: float) -> void:
 
 	if health <= 0.0:
 		_play_death_sound()
+		_trigger_death_screen_shake()
 		queue_free()
 		return
 
+	# Play hit sound and flash when hit
 	_play_hit_sound()
+	_flash_white()
 
 	if is_hit:
 		return
@@ -186,6 +189,15 @@ func _physics_process(delta: float) -> void:
 		player.move_and_collide(8 * player.move_speed * move_dir * delta)
 
 	# -------------------------
+	# FACING DIRECTION
+	# -------------------------
+	if anim != null:
+		if direction.x < 0:
+			anim.flip_h = true  # Face left
+		elif direction.x > 0:
+			anim.flip_h = false  # Face right
+
+	# -------------------------
 	# ANIMATION
 	# -------------------------
 	if not anim:
@@ -276,6 +288,35 @@ func _play_hit_sound() -> void:
 			if is_instance_valid(audio_player):
 				audio_player.queue_free()
 		)
+
+
+func _flash_white() -> void:
+	if anim == null:
+		return
+
+	# Flash white
+	anim.modulate = Color(2.0, 2.0, 2.0, 1.0)
+
+	# Check if tree is valid
+	if get_tree() == null:
+		return
+
+	await get_tree().create_timer(0.1).timeout
+
+	# Return to normal color if still valid
+	if is_instance_valid(anim):
+		anim.modulate = Color(1.0, 1.0, 1.0, 1.0)
+
+
+func _trigger_death_screen_shake() -> void:
+	# Find the camera (attached to player)
+	if player == null:
+		return
+
+	var camera = player.get_node_or_null("Camera2D")
+	if camera != null and camera.has_method("shake"):
+		camera.shake(10.0, 0.4)
+
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body == player:
