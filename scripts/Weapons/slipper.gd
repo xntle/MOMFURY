@@ -6,6 +6,7 @@ extends WeaponBase
 @onready var weapon_pivot: Marker2D = $WeaponPivot
 @onready var shooting_point: Marker2D = $WeaponPivot/Slipper/ShootingPoint
 @onready var slipper_sprite: Node2D = $WeaponPivot/Slipper
+@onready var player = get_tree().current_scene.get_node("Player")
 
 func _ready():
 	weapon_type = "Slipper"
@@ -44,9 +45,9 @@ func _shoot_bullet() -> void:
 	else:
 		bullet.global_position = global_position
 
-	# Direction is based on the weapon pivot rotation
+	# Direction is based vector between player and mouse
 	var mouse_pos = get_global_mouse_position()
-	bullet.direction = (mouse_pos - bullet.global_position).normalized()
+	bullet.direction = (mouse_pos - player.global_position).normalized()
 
 	# Hide slipper sprite when thrown
 	if slipper_sprite != null:

@@ -3,13 +3,13 @@ extends Area2D
 @export var speed: float = 200.0
 @export var max_distance: float = 400.0
 @export var damage: float = 8.0
+@export var lifetime: float = 3.0
 
 var direction: Vector2 = Vector2.ZERO
-var _start_position: Vector2
+var travel_time: float = 0.0
 
 
 func _ready():
-	_start_position = global_position
 	body_entered.connect(_on_body_entered)
 
 
@@ -17,7 +17,8 @@ func _physics_process(delta):
 	global_position += direction * speed * delta
 	rotation += 5.0 * delta
 
-	if _start_position.distance_to(global_position) >= max_distance:
+	travel_time += delta
+	if travel_time >= lifetime:
 		queue_free()
 
 
