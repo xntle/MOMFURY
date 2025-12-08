@@ -58,6 +58,7 @@ func _ready():
 	# Load damage sounds
 	_load_damage_sounds()
 
+	reset_run_state()
 	if anim:
 		anim.play("idle_down")
 	_update_weapon_visibility()
@@ -326,6 +327,15 @@ func take_damage(amount: int) -> void:
 		if anim:
 			anim.play("die")
 		
+		var end_scene := load("res://scene/end_screen.tscn") as PackedScene
+		var end := end_scene.instantiate()
+		end.final_points = current_points
+		end.final_round = current_round
+		get_tree().root.add_child(end)
+
+		# remove the current game scene
+		get_tree().current_scene.queue_free()
+		get_tree().current_scene = end
 # Scene change occurs only after the 'die' animation finishes, followed by a delay.
 func _on_animation_finished(anim_name: StringName) -> void:
 	if is_dead and anim_name == "die":
@@ -439,6 +449,50 @@ func add_points(amount: int) -> void:
 	
 
 func set_round(value: int) -> void:
-	print("NEW ROUND", value)
 	current_round = value
 	emit_signal("round_changed", current_round)
+
+func reset_run_state() -> void:
+	# Core run stats
+	current_health = max_health
+	current_points = 0
+	current_round = 1
+
+	# Movement/action state
+	direction = Vector2.ZERO
+	velocity = Vector2.ZERO
+	last_move_dir = Vector2.DOWN
+
+	is_dead = false
+	is_hit = false
+	hit_timer = 0.0
+
+	is_rolling = false
+	roll_timer = 0.0
+	cooldown_timer = 0.0
+	roll_dir = Vector2.ZERO
+
+	is_stunned = false
+	stun_timer = 0.0
+	intangibility_timer = 0.0
+	collision_layer = 1
+
+	# Slow
+	is_slowed = false
+	slow_multiplier = 1.0
+
+	# Weapon
+	current_weapon = Weapon.SLIPPER
+	_update_weapon_visibility()
+	_update_weapon_layering()
+
+	# FX / Anim
+	if movement_trail:
+		movement_trail.emitting = false
+	if anim:
+		anim.play("idle_down")
+
+	# Push UI updates immediately
+	emit_signal("health_changed", int(current_health))
+	emit_signal("points_changed", int(current_points))
+	emit_signal("round_changed", int(current_round))

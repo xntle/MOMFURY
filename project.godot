@@ -15,9 +15,18 @@ run/main_scene="uid://bve1pou0gt1v4"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 
+[display]
+
+window/size/viewport_width=1920
+window/size/viewport_height=1080
+
 [dotnet]
 
 project/assembly_name="momfury"
+
+[editor]
+
+version_control/autoload_on_startup=true
 
 [input]
 
