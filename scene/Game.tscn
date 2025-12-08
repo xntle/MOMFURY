@@ -1,18 +1,18 @@
 [gd_scene load_steps=25 format=3 uid="uid://bve1pou0gt1v4"]
 
 [ext_resource type="PackedScene" uid="uid://kk3crf462xob" path="res://scene/House.tscn" id="1_e7hha"]
-[ext_resource type="Script" uid="uid://bg4wxh4k8pviy" path="res://scripts/game_manager.gd" id="2_game"]
+[ext_resource type="Script" path="res://scripts/game_manager.gd" id="2_game"]
 [ext_resource type="PackedScene" uid="uid://ctnihbseogqdf" path="res://scene/Player.tscn" id="4_0qanc"]
 [ext_resource type="PackedScene" uid="uid://v1xuhkejwyw7" path="res://scene/main_menu.tscn" id="4_1qeit"]
-[ext_resource type="Script" uid="uid://lyimuq4183ha" path="res://scripts/pause_menu.gd" id="5_0qanc"]
+[ext_resource type="Script" path="res://scripts/pause_menu.gd" id="5_0qanc"]
 [ext_resource type="FontFile" uid="uid://box1b2tla1jkp" path="res://assets/fonts/MegamaxJonathanToo-YqOq2.ttf" id="6_qto5f"]
-[ext_resource type="Script" uid="uid://dloc7t0utspjp" path="res://scripts/health_label.gd" id="7_0qanc"]
-[ext_resource type="Script" path="res://scene/points_label.gd" id="10_6okl4"]
-[ext_resource type="Script" path="res://scene/round_label.gd" id="10_7sjor"]
+[ext_resource type="Script" path="res://scripts/health_label.gd" id="7_0qanc"]
+[ext_resource type="Script" uid="uid://bcsxuymmhfxat" path="res://scene/points_label.gd" id="10_6okl4"]
+[ext_resource type="Script" uid="uid://x7pmqjcraxnb" path="res://scene/round_label.gd" id="10_7sjor"]
 [ext_resource type="PackedScene" uid="uid://fxb838o4s043" path="res://scene/Enemies/Spawner.tscn" id="10_f6bub"]
 [ext_resource type="PackedScene" uid="uid://dsm7571yb3duy" path="res://scene/Enemies/A-.tscn" id="10_r3aus"]
-[ext_resource type="Script" path="res://scene/enemies.gd" id="10_w73ac"]
-[ext_resource type="Script" path="res://scene/new_round_label.gd" id="12_7sjor"]
+[ext_resource type="Script" uid="uid://cx7sc8flosdyn" path="res://scene/enemies.gd" id="10_w73ac"]
+[ext_resource type="Script" uid="uid://dvsj8h3wm3su0" path="res://scene/new_round_label.gd" id="12_7sjor"]
 [ext_resource type="PackedScene" uid="uid://5wrlhjc0vedk" path="res://scene/Enemies/Cockroach.tscn" id="12_64o46"]
 [ext_resource type="Script" uid="uid://1qi0tmmw7efp" path="res://scripts/boss_health_bar.gd" id="12_cg8ds"]
 [ext_resource type="PackedScene" uid="uid://ixi501xwduk4" path="res://scene/Enemies/Poop.tscn" id="13_msms8"]
@@ -76,6 +76,7 @@ collision_mask = 4
 
 [node name="Pause Menu" parent="UI" instance=ExtResource("4_1qeit")]
 process_mode = 3
+visible = false
 offset_left = 1.0
 offset_right = 1.0
 script = ExtResource("5_0qanc")
