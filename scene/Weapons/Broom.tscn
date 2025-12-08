@@ -158,8 +158,8 @@ hframes = 3
 
 [node name="Hitbox" type="Area2D" parent="."]
 scale = Vector2(3.7199974, 3.7199974)
-collision_layer = 4
-collision_mask = 3
+collision_layer = 8
+collision_mask = 2
 monitoring = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
