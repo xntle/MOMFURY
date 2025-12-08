@@ -1,6 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://uk4xbii7jvhv"]
+[gd_scene load_steps=8 format=3 uid="uid://cjdmj8wnomepi"]
 
-[ext_resource type="Script" uid="uid://cafbj6q8lhmym" path="res://scene/end_screen.gd" id="1_w5cn3"]
+[ext_resource type="Script" path="res://scene/end_screen.gd" id="1_w5cn3"]
 [ext_resource type="Texture2D" uid="uid://xj55xkb3wtyt" path="res://assets/Splashv2.png" id="3_j5iq8"]
 [ext_resource type="FontFile" uid="uid://box1b2tla1jkp" path="res://assets/fonts/MegamaxJonathanToo-YqOq2.ttf" id="4_pmcpw"]
 [ext_resource type="Texture2D" uid="uid://cd21m8rgkk0ca" path="res://assets/ThrownSlipper.png" id="5_2nv7r"]
@@ -45,9 +45,9 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -416.0
-offset_top = -228.0
+offset_top = -226.0
 offset_right = 416.0
-offset_bottom = 228.0
+offset_bottom = 230.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("3_j5iq8")
