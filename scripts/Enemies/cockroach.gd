@@ -57,7 +57,7 @@ func _physics_process(delta):
 
 	if (not (dash_timer>0 and dash_timer<=0.5)):
 		move_and_slide()
-	rotation = direction.angle() +90
+	rotation = direction.angle() + 90
 	
 func _on_timer_timeout():
 	if $NavigationAgent2D.target_position != player.global_position:
@@ -83,7 +83,7 @@ func _drop_health() -> void:
 	if randf() < drop_chance and health_pickup_scene != null:
 		var health_drop = health_pickup_scene.instantiate()
 		get_tree().current_scene.add_child(health_drop)
-		health_drop.global_position = global_position
+		health_drop.global_position = player.global_position
 
 
 func _spawn_death_particles() -> void:

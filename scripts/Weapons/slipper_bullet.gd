@@ -17,7 +17,19 @@ func _ready():
 
 
 func _play_throw_sound() -> void:
-	var throw_sound = load("res://assets/sound/Mom/SlipperThrow.wav") as AudioStream
+	# Array of throw sound paths
+	var throw_sounds = [
+		"res://assets/sound/Throw/SWSH_MOVEMENT-Bamboo Whip_HY_PC-001.wav",
+		"res://assets/sound/Throw/SWSH_MOVEMENT-Bamboo Whip_HY_PC-002.wav",
+		"res://assets/sound/Throw/SWSH_MOVEMENT-Bamboo Whip_HY_PC-003.wav",
+		"res://assets/sound/Throw/SWSH_MOVEMENT-Bamboo Whip_HY_PC-004.wav",
+		"res://assets/sound/Throw/SWSH_MOVEMENT-Bamboo Whip_HY_PC-005.wav",
+		"res://assets/sound/Throw/SWSH_MOVEMENT-Bamboo Whip_HY_PC-006.wav"
+	]
+
+	# Pick random throw sound
+	var random_sound_path = throw_sounds[randi() % throw_sounds.size()]
+	var throw_sound = load(random_sound_path) as AudioStream
 
 	if throw_sound != null:
 		var audio_player = AudioStreamPlayer2D.new()

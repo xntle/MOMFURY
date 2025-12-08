@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://b5ct4arbu74wr"
+path="res://.godot/imported/SWSH_MOVEMENT-Bamboo Whip_HY_PC-001.wav-db93f182700e70a7e2c942b42d80e5f2.sample"
+
+[deps]
+
+source_file="res://assets/Sound/Throw/SWSH_MOVEMENT-Bamboo Whip_HY_PC-001.wav"
+dest_files=["res://.godot/imported/SWSH_MOVEMENT-Bamboo Whip_HY_PC-001.wav-db93f182700e70a7e2c942b42d80e5f2.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

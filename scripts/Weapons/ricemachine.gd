@@ -98,6 +98,8 @@ func _shoot_bullet() -> void:
 	# Use shooting point if available
 	if shooting_point != null:
 		bullet.global_position = shooting_point.global_position
+		# Create muzzle flash at shooting point
+		_create_muzzle_flash()
 	else:
 		print("ERROR: no shooting point")
 
@@ -108,3 +110,45 @@ func _shoot_bullet() -> void:
 	# 🔥 Play firing animation
 	if gun_anim_player:
 		gun_anim_player.play("gun_animation")
+
+func _create_muzzle_flash() -> void:
+	# Create particle effect for muzzle flash
+	var particles = CPUParticles2D.new()
+	get_tree().current_scene.add_child(particles)
+	particles.global_position = shooting_point.global_position
+
+	# Fire-like appearance
+	particles.emitting = true
+	particles.one_shot = true
+	particles.explosiveness = 1.0
+	particles.amount = 8
+	particles.lifetime = 0.15
+	particles.speed_scale = 2.0
+
+	# Direction and spread
+	particles.direction = Vector2(cos(weapon_pivot.rotation), sin(weapon_pivot.rotation))
+	particles.spread = 25.0
+	particles.initial_velocity_min = 80.0
+	particles.initial_velocity_max = 120.0
+
+	# Particle shape and size
+	particles.scale_amount_min = 3.0
+	particles.scale_amount_max = 6.0
+
+	# Colors - orange/yellow fire gradient
+	var gradient = Gradient.new()
+	gradient.add_point(0.0, Color(1.0, 0.8, 0.2, 1.0))  # Bright yellow
+	gradient.add_point(0.5, Color(1.0, 0.4, 0.1, 0.8))  # Orange
+	gradient.add_point(1.0, Color(0.3, 0.1, 0.0, 0.0))  # Dark red, transparent
+	particles.color_ramp = gradient
+
+	# Gravity and damping for realistic effect
+	particles.gravity = Vector2(0, -50)
+	particles.damping_min = 50.0
+	particles.damping_max = 100.0
+
+	# Auto-cleanup after particles finish
+	get_tree().create_timer(0.3).timeout.connect(func():
+		if is_instance_valid(particles):
+			particles.queue_free()
+	)

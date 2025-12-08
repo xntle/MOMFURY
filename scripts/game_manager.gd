@@ -32,7 +32,8 @@ func _check_spawners() -> void:
 
 	# If all spawners are destroyed, spawn the boss
 	if spawners.is_empty():
-		_spawn_boss()
+		#_spawn_boss()
+		pass
 
 func _spawn_boss() -> void:
 	if boss_spawned:

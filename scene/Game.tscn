@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://bve1pou0gt1v4"]
+[gd_scene load_steps=25 format=3 uid="uid://bve1pou0gt1v4"]
 
 [ext_resource type="PackedScene" uid="uid://kk3crf462xob" path="res://scene/House.tscn" id="1_e7hha"]
 [ext_resource type="Script" path="res://scripts/game_manager.gd" id="2_game"]
@@ -14,8 +14,11 @@
 [ext_resource type="Script" uid="uid://cx7sc8flosdyn" path="res://scene/enemies.gd" id="10_w73ac"]
 [ext_resource type="Script" uid="uid://dvsj8h3wm3su0" path="res://scene/new_round_label.gd" id="12_7sjor"]
 [ext_resource type="PackedScene" uid="uid://5wrlhjc0vedk" path="res://scene/Enemies/Cockroach.tscn" id="12_64o46"]
+[ext_resource type="Script" uid="uid://1qi0tmmw7efp" path="res://scripts/boss_health_bar.gd" id="12_cg8ds"]
 [ext_resource type="PackedScene" uid="uid://ixi501xwduk4" path="res://scene/Enemies/Poop.tscn" id="13_msms8"]
 [ext_resource type="PackedScene" uid="uid://bog8uq3cg74nk" path="res://scene/Bosses/BossDaddy/BossDaddy.tscn" id="14_7ftmx"]
+[ext_resource type="PackedScene" uid="uid://drw5trv1gsjtw" path="res://scene/Bosses/BossBaby/BossBaby.tscn" id="19_ls1fb"]
+[ext_resource type="AudioStream" uid="uid://dpo2yv5rj8hu2" path="res://assets/Sound/BG.mp3" id="19_cg8ds"]
 [ext_resource type="PackedScene" uid="uid://de8c3he3rib60" path="res://scene/BossBaby.tscn" id="19_ls1fb"]
 [ext_resource type="PackedScene" uid="uid://cr5n8d10hvgdh" path="res://scene/Bosses/BossTeen/BossTeen.tscn" id="20_cg8ds"]
 
@@ -42,6 +45,21 @@ border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
 border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cg8ds"]
+bg_color = Color(0.1882353, 0, 0, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.37791878, 0.3779189, 0.37791863, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hr58s"]
+bg_color = Color(0.8820814, 0, 0.11043473, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_bottom = 4
+border_color = Color(0.3764706, 0.3764706, 0.3764706, 1)
 
 [node name="Game" type="Node2D"]
 script = ExtResource("2_game")
@@ -165,6 +183,22 @@ vertical_alignment = 1
 script = ExtResource("12_7sjor")
 player = NodePath("../../Player")
 
+[node name="BossHealthBar" type="ProgressBar" parent="UI"]
+custom_minimum_size = Vector2(1000, 50)
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -500.0
+offset_top = 25.0
+offset_right = 500.0
+offset_bottom = 75.0
+grow_horizontal = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_cg8ds")
+theme_override_styles/fill = SubResource("StyleBoxFlat_hr58s")
+value = 50.0
+show_percentage = false
+script = ExtResource("12_cg8ds")
+
 [node name="Enemies" type="Node2D" parent="."]
 unique_name_in_owner = true
 script = ExtResource("10_w73ac")
@@ -186,3 +220,10 @@ position = Vector2(-177, -36)
 
 [node name="SpawnPoint3" type="Marker2D" parent="Spawner"]
 position = Vector2(-52, -820)
+
+[node name="Bosses" type="Node2D" parent="."]
+unique_name_in_owner = true
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("19_cg8ds")
+pitch_scale = 0.46
+autoplay = true
