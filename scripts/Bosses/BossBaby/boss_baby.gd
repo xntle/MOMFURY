@@ -139,6 +139,7 @@ extends CharacterBody2D
 @onready var player = get_node("/root/Game/Player")
 @onready var anim: AnimatedSprite2D 
 
+@export var max_health: float = 150.0
 @export var health: float = 150.0
 
 var ability_timer := 0.0
@@ -169,16 +170,18 @@ var is_hit := false
 var hit_duration := 0.4
 var hit_timer := 0.0
 
+signal health_changed(new_health:int)
+
 @export var radius := 200.0
 @export var count := 5
 const projectile_scene := preload("res://scene/Bosses/BossBaby/CryAttack.tscn")
 @export var summon_scene: PackedScene
 
-
 func _ready() -> void:
 	randomize()
 	ability_timer = randf_range(1.0, 4.0)
-	
+	var health_bar = get_tree().current_scene.get_node("UI/BossHealthBar")
+	health_bar.connect_boss(self)
 	anim = get_node_or_null("AnimatedSprite2D")
 	if anim == null:
 		anim = get_node_or_null("animation")
@@ -187,12 +190,14 @@ func _ready() -> void:
 		anim.play("default_walk")  # always looping base anim
 	else:
 		push_warning("BossDaddy: no AnimatedSprite2D child named 'AnimatedSprite2D' or 'animation'.")
+	
+	
 
 
 func take_damage(amount: float) -> void:
 	health -= amount
 	print("BossBaby took ", amount, " damage. HP: ", health)
-
+	emit_signal("health_changed", health)
 	if health <= 0.0:
 		_play_death_sound()
 		queue_free()
