@@ -3,7 +3,7 @@ extends CharacterBody2D
 @onready var player: CharacterBody2D = get_node("/root/Game/Player")
 
 @export var health: float = 10.0
-@export var speed: float = 50.0
+@export var speed: float = 100.0
 @export var damage: float = 10.0
 @export var health_pickup_scene: PackedScene
 @export var drop_chance: float = 0.5  # 50% chance
@@ -45,13 +45,14 @@ func _physics_process(delta):
 
 	elif bounce_timer >= 0.1:
 		velocity = -4 * direction * speed
-	elif bounce_timer == 0:
+	elif bounce_timer <= 0:
 		if !$NavigationAgent2D.is_target_reached():
 			var nav_point = to_local($NavigationAgent2D.get_next_path_position()).normalized()
-			velocity = nav_point * speed * delta
-			move_and_slide()
+			velocity = nav_point * speed
+		else:
+			velocity = direction * speed
 	else:
-		velocity = Vector2(0,0)
+		velocity = direction * speed
 
 #For 0.5 seconds before the dash, the cockroach stands still as a warning.
 
@@ -70,12 +71,14 @@ func take_damage(amount: float) -> void:
 	if health <= 0:
 		_drop_health()
 		_spawn_death_particles()
+		_trigger_death_screen_shake()
 		queue_free()
 		if is_instance_valid(player) and player.has_method("add_points"):
 			player.add_points(5)
 	else:
-		# Play hit sound only if still alive
+		# Play hit sound and flash when hit
 		_play_hit_sound()
+		_flash_white()
 
 
 func _drop_health() -> void:
@@ -83,7 +86,7 @@ func _drop_health() -> void:
 	if randf() < drop_chance and health_pickup_scene != null:
 		var health_drop = health_pickup_scene.instantiate()
 		get_tree().current_scene.add_child(health_drop)
-		health_drop.global_position = player.global_position
+		health_drop.global_position = global_position
 
 
 func _spawn_death_particles() -> void:
@@ -169,6 +172,35 @@ func _play_hit_sound() -> void:
 			if is_instance_valid(audio_player):
 				audio_player.queue_free()
 		)
+
+
+func _flash_white() -> void:
+	var sprite = get_node_or_null("AnimatedSprite2D")
+	if sprite == null:
+		return
+
+	# Flash white
+	sprite.modulate = Color(2.0, 2.0, 2.0, 1.0)
+
+	# Check if tree is valid
+	if get_tree() == null:
+		return
+
+	await get_tree().create_timer(0.1).timeout
+
+	# Return to normal color if still valid
+	if is_instance_valid(sprite):
+		sprite.modulate = Color(1.0, 1.0, 1.0, 1.0)
+
+
+func _trigger_death_screen_shake() -> void:
+	# Find the camera (attached to player)
+	if player == null:
+		return
+
+	var camera = player.get_node_or_null("Camera2D")
+	if camera != null and camera.has_method("shake"):
+		camera.shake(8.0, 0.3)
 
 
 func _on_area_2d_body_entered(body: Node2D) -> void:

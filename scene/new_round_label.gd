@@ -18,6 +18,10 @@ func _on_round_changed(new_round: int) -> void:
 	_hide_token += 1
 	var token := _hide_token
 
+	# Check if tree is valid
+	if get_tree() == null or not is_instance_valid(self):
+		return
+
 	await get_tree().create_timer(show_seconds).timeout
 	if token == _hide_token:
 		hide()
