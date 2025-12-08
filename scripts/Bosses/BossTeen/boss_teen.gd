@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
-@onready var player = get_node("/root/Game/Player")
+@onready var player: Node2D = get_node("/root/Game/Player")
+@onready var agent: NavigationAgent2D = $NavigationAgent2D
 
 var ability_timer := 0.0
 var throw_speed := 250.0
@@ -9,33 +10,57 @@ var is_throwing := false
 var throw_duration := 0.2
 var throw_time_left := 0.0
 
-var shoot_timer = 0.0
-var cooldown_timer = 0.0
-var shoot_duration = 3.0       # shoot for 5 seconds
-var cooldown_duration = 5.0    # wait 5 seconds before shooting again
-var push_timer = 0.0
+var shoot_timer := 0.0
+var cooldown_timer := 0.0
+var shoot_duration := 3.0
+var cooldown_duration := 5.0
+var push_timer := 0.0
 
-var shoot_interval = 1.0   
-var shoot_interval_timer = 0.0
+var shoot_interval := 1.0
+var shoot_interval_timer := 0.0
 
-var beam: Node2D = null  
+var beam: Node2D = null
 @export var max_health: float = 2000.0
-var health:float = max_health
+var health: float = max_health
 
 const projectile_scene := preload("res://scene/Bosses/BossTeen/ScreamAttack.tscn")
 @export var turn_speed: float = 6.0 # radians/sec (smaller = more lag)
-signal health_changed(new_health:int)
 
-func _ready():
-	ability_timer = randf_range(1.0, 4.0) 
+signal health_changed(new_health: int)
+
+func _ready() -> void:
+	randomize()
+	ability_timer = randf_range(1.0, 4.0)
+
 	var health_bar = get_tree().current_scene.get_node("UI/BossHealthBar")
 	health_bar.connect_boss(self)
 
-func _physics_process(delta):
-	var direction = global_position.direction_to(player.global_position)
+	# Nav tuning (adjust to size)
+	agent.path_desired_distance = 12.0
+	agent.target_desired_distance = 8.0
+	agent.radius = 16.0
+
+func _physics_process(delta: float) -> void:
+	if not is_instance_valid(player):
+		return
+
+	# Update target for pathfinding
+	agent.target_position = player.global_position
+
+	# Direct direction (useful for push + rotation)
+	var direct_dir := (player.global_position - global_position).normalized()
+
+	# Path direction (for movement)
+	var move_dir := direct_dir
+	if not agent.is_navigation_finished():
+		var next_pos := agent.get_next_path_position()
+		var v := next_pos - global_position
+		if v.length() > 0.001:
+			move_dir = v.normalized()
 
 	$animation.play("default")
-	# SHOOTING MODE
+
+	# -------- BEAM / ATTACK MODE --------
 	if is_throwing:
 		velocity = Vector2.ZERO
 		shoot_timer -= delta
@@ -44,22 +69,20 @@ func _physics_process(delta):
 		if beam == null or not is_instance_valid(beam):
 			beam = spawn_beam()
 
-		# keep beam attached to boss (optional but usually desired)
+		# keep beam attached to boss
 		if is_instance_valid(beam):
 			beam.global_position = global_position
 
-		if is_instance_valid(player):
-			var target_angle = (player.global_position - global_position).angle()
-			rotation = lerp_angle(rotation, target_angle, turn_speed * delta)
-			
-		# end attack after 4 seconds
+
+
+		# end attack
 		if shoot_timer <= 0.0:
 			end_beam_attack()
-	# MOVEMENT MODE
+
+	# -------- MOVEMENT MODE (PATHFINDING) --------
 	else:
 		rotation = 0.0
 		cooldown_timer -= delta
-		velocity = direction * normal_speed
 
 		# Update facing direction when not shooting
 		var sprite = get_node_or_null("animation")
@@ -75,16 +98,24 @@ func _physics_process(delta):
 			shoot_interval_timer = 0.0  # fire immediately when entering shooting mode
 
 
+		# move using navigation
+		velocity = move_dir * normal_speed
+
+		if cooldown_timer <= 0.0:
+			start_beam_attack()
+
 	# move enemy
 	move_and_slide()
+
+	# push player back if in contact timer
 	if push_timer > 0.0:
-		push_timer = max(0,push_timer-delta)
-		player.move_and_collide(8 * player.move_speed * direction * delta)
+		push_timer = max(0.0, push_timer - delta)
+		player.move_and_collide(8 * player.move_speed * direct_dir * delta)
 
 func start_beam_attack() -> void:
 	is_throwing = true
 	shoot_timer = shoot_duration
-	# beam will spawn on next _physics_process frame (or you can spawn here)
+	shoot_interval_timer = 0.0
 
 func end_beam_attack() -> void:
 	is_throwing = false
@@ -103,21 +134,19 @@ func spawn_beam() -> Node2D:
 	b.global_position = global_position
 	return b
 
-
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body == player:
 		player.take_damage(15)
 		player.apply_stun(0.2)
 		player.apply_intangibility(0.4)
-		push_timer = 0.2 # Replace with function body.
+		push_timer = 0.2
 
-# Damage function
 func take_damage(amount: float) -> void:
 	health -= amount
 	print("Boss Daddy took ", amount, " damage. Health: ", health)
 	emit_signal("health_changed", health)
 
-	if health <= 0:
+	if health <= 0.0:
 		print("Boss Daddy defeated!")
 		_play_death_sound()
 		_trigger_death_screen_shake()
@@ -128,9 +157,7 @@ func take_damage(amount: float) -> void:
 	_play_hit_sound()
 	_flash_white()
 
-
 func _play_death_sound() -> void:
-	# Array of death sound paths
 	var death_sounds = [
 		"res://assets/sound/Death/DSGNImpt_EXPLOSION-Mecha Piercing Punch_HY_PC-001.wav",
 		"res://assets/sound/Death/DSGNImpt_EXPLOSION-Mecha Piercing Punch_HY_PC-002.wav",
@@ -140,7 +167,6 @@ func _play_death_sound() -> void:
 		"res://assets/sound/Death/DSGNImpt_EXPLOSION-Mecha Piercing Punch_HY_PC-006.wav"
 	]
 
-	# Pick random sound and play it
 	var random_sound_path = death_sounds[randi() % death_sounds.size()]
 	var sound = load(random_sound_path) as AudioStream
 
@@ -150,24 +176,20 @@ func _play_death_sound() -> void:
 		audio_player.stream = sound
 		audio_player.global_position = global_position
 
-		# Ensure sound doesn't loop
 		if sound is AudioStreamWAV:
 			sound.loop_mode = AudioStreamWAV.LOOP_DISABLED
 
 		audio_player.play()
 
-		# Auto-cleanup after 3 seconds max (in case finished signal doesn't fire)
 		get_tree().create_timer(3.0).timeout.connect(func():
 			if is_instance_valid(audio_player):
 				audio_player.queue_free()
 		)
 
-		# Also cleanup when finished normally
 		audio_player.finished.connect(func():
 			if is_instance_valid(audio_player):
 				audio_player.queue_free()
 		)
-
 
 func _play_hit_sound() -> void:
 	var hit_sound = load("res://assets/sound/Hit/Hit.wav") as AudioStream
@@ -178,19 +200,16 @@ func _play_hit_sound() -> void:
 		audio_player.stream = hit_sound
 		audio_player.global_position = global_position
 
-		# Ensure sound doesn't loop
 		if hit_sound is AudioStreamWAV:
 			hit_sound.loop_mode = AudioStreamWAV.LOOP_DISABLED
 
 		audio_player.play()
 
-		# Auto-cleanup after 2 seconds max
 		get_tree().create_timer(2.0).timeout.connect(func():
 			if is_instance_valid(audio_player):
 				audio_player.queue_free()
 		)
 
-		# Also cleanup when finished normally
 		audio_player.finished.connect(func():
 			if is_instance_valid(audio_player):
 				audio_player.queue_free()

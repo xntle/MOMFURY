@@ -130,4 +130,12 @@ scale = Vector2(1, 1.8400004)
 position = Vector2(1, 15.760866)
 shape = SubResource("RectangleShape2D_f2df1")
 
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+path_desired_distance = 3.0
+target_desired_distance = 3.0
+path_postprocessing = 1
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
+
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
