@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 @onready var player = get_node("/root/Game/Player")
 @onready var anim: AnimatedSprite2D = null  # we'll assign in _ready
+@onready var agent: NavigationAgent2D = $NavigationAgent2D
 
 @export var max_health: float = 2000.0
 var health: float = max_health
@@ -24,27 +25,40 @@ const projectile_scene := preload("res://scene/Bosses/BossDaddy/BeerBottle.tscn"
 
 signal health_changed(new_health:int)
 
+
 func _ready() -> void:
 	randomize()
 	throw_timer = randf_range(1.0, 4.0)
-	
-	#Connecting the boss health logic
+
+	# boss health UI hookup
 	var health_bar = get_tree().current_scene.get_node("UI/BossHealthBar")
 	health_bar.connect_boss(self)
-	# Try common node names: "AnimatedSprite2D" OR "animation"
+
 	anim = get_node_or_null("AnimatedSprite2D")
 	if anim == null:
 		anim = get_node_or_null("animation")
+
+	# nav tuning (adjust to your boss size)
+	agent.path_desired_distance = 12.0
+	agent.target_desired_distance = 8.0
+	agent.radius = 16.0
 
 	if anim != null:
 		anim.play("daddy_walk_right")
 	else:
 		push_warning("BossDaddy: no AnimatedSprite2D child named 'AnimatedSprite2D' or 'animation'.")
 
-
 func _physics_process(delta: float) -> void:
 	throw_timer -= delta
-	var direction := global_position.direction_to(player.global_position)
+
+	if not is_instance_valid(player):
+		return
+
+	# keep target updated
+	agent.target_position = player.global_position
+
+	var to_player = player.global_position - global_position
+	var direction_to_player = to_player.normalized()
 
 	# --- update hit timer ---
 	if is_hit:
@@ -58,42 +72,47 @@ func _physics_process(delta: float) -> void:
 		if throw_time_left <= 0.0:
 			is_throwing = false
 
-	# --- start a new throw if ready (only if not hit or already throwing) ---
-	if not is_hit and not is_throwing and throw_timer <= 0.0:
+	# --- start a new throw if ready ---
+	var dist_to_player := global_position.distance_to(player.global_position)
+
+	if not is_throwing and throw_timer <= 0.0 and dist_to_player < 200.0:
 		is_throwing = true
 		throw_time_left = throw_duration
 		throw_timer = randf_range(1.0, 4.0)
-
-		# shoot once at the start
 		shoot()
 
-	# --- movement ---
-	if is_hit or is_throwing:
+	# --- movement using pathfinding ---
+	if is_throwing:
 		velocity = Vector2.ZERO
 	else:
-		velocity = direction * normal_speed
+		if not agent.is_navigation_finished():
+			var next_pos := agent.get_next_path_position()
+			var nav_dir := (next_pos - global_position).normalized()
+			velocity = nav_dir * normal_speed
+		else:
+			velocity = direction_to_player * normal_speed
 
 	move_and_slide()
 
 	# push player back if in contact timer
 	if push_timer > 0.0:
 		push_timer = max(0.0, push_timer - delta)
-		player.move_and_collide(8 * player.move_speed * direction * delta)
+		player.move_and_collide(8 * player.move_speed * direction_to_player * delta)
 
 	# --- animation state machine ---
 	if anim == null:
-		return  # no sprite node, skip animation
+		return
 
-	if is_hit:
-		if anim.animation != "daddy_hit":
-			anim.play("daddy_hit")
-	elif is_throwing:
+	# (optional) let attack override hit so it doesn't spam-hit animation mid-attack
+	if is_throwing:
 		if anim.animation != "daddy_attack":
 			anim.play("daddy_attack")
+	elif is_hit:
+		if anim.animation != "daddy_hit":
+			anim.play("daddy_hit")
 	else:
 		if anim.animation != "daddy_walk_right":
 			anim.play("daddy_walk_right")
-
 
 func shoot() -> void:
 	if projectile_scene == null:
