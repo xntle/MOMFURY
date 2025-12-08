@@ -192,9 +192,9 @@ func _physics_process(delta: float) -> void:
 	# FACING DIRECTION
 	# -------------------------
 	if anim != null:
-		if direction.x < 0:
+		if move_dir.x < 0:
 			anim.flip_h = true  # Face left
-		elif direction.x > 0:
+		elif move_dir.x > 0:
 			anim.flip_h = false  # Face right
 
 	# -------------------------

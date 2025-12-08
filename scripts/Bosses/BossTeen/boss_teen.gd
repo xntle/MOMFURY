@@ -87,9 +87,9 @@ func _physics_process(delta: float) -> void:
 		# Update facing direction when not shooting
 		var sprite = get_node_or_null("animation")
 		if sprite != null:
-			if direction.x < 0:
+			if direct_dir.x < 0:
 				sprite.flip_h = true  # Face left
-			elif direction.x > 0:
+			elif direct_dir.x > 0:
 				sprite.flip_h = false  # Face right
 
 		if cooldown_timer <= 0:

@@ -104,9 +104,9 @@ func _physics_process(delta: float) -> void:
 		return
 
 	# Update facing direction based on player position
-	if direction.x < 0:
+	if direction_to_player.x < 0:
 		anim.flip_h = true  # Face left
-	elif direction.x > 0:
+	elif direction_to_player.x > 0:
 		anim.flip_h = false  # Face right
 
 	if is_hit:

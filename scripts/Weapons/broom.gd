@@ -86,11 +86,14 @@ func _on_hitbox_body_entered(body):
 		# Apply knockback
 		_apply_knockback(body)
 
-		# Spawn hit effect
+		# Spawn hit effect at hitbox center
 		if hit_effect_scene != null:
 			var hit_effect = hit_effect_scene.instantiate()
 			get_tree().current_scene.add_child(hit_effect)
-			hit_effect.global_position = body.global_position
+			# Spawn at hitbox position (where the broom actually hit)
+			var hitbox_global_pos = hitbox.global_position
+			hit_effect.global_position = hitbox_global_pos
+			print("Spawned hit effect at: ", hitbox_global_pos)
 
 
 func _apply_knockback(body: Node2D) -> void:

@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://b2a6nsjhobmuv"
-path="res://.godot/imported/Gemini_Generated_Image_nx24xjnx24xjnx24-removebg-preview.png-9f75b1a19f5ff411a5219a1109ca471b.ctex"
+path="res://.godot/imported/daddy.png-1e67b9a472a7c7e0802f366042d91e0d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scene/Bosses/BossDaddy/Gemini_Generated_Image_nx24xjnx24xjnx24-removebg-preview.png"
-dest_files=["res://.godot/imported/Gemini_Generated_Image_nx24xjnx24xjnx24-removebg-preview.png-9f75b1a19f5ff411a5219a1109ca471b.ctex"]
+source_file="res://scene/Bosses/BossDaddy/daddy.png"
+dest_files=["res://.godot/imported/daddy.png-1e67b9a472a7c7e0802f366042d91e0d.ctex"]
 
 [params]
 

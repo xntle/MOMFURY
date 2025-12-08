@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bfafqyko2kyk6" path="res://scripts/Bosses/BossDaddy/boss_daddy.gd" id="1_u22dk"]
 [ext_resource type="Texture2D" uid="uid://dscd4y8ji3g6u" path="res://characters/pixel-art-cartoon-poop-character-png.png" id="2_3xl6v"]
-[ext_resource type="Texture2D" uid="uid://b2a6nsjhobmuv" path="res://scene/Bosses/BossDaddy/Gemini_Generated_Image_nx24xjnx24xjnx24-removebg-preview.png" id="4_hbsvs"]
+[ext_resource type="Texture2D" uid="uid://b2a6nsjhobmuv" path="res://scene/Bosses/BossDaddy/daddy.png" id="4_hbsvs"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3xl6v"]
 size = Vector2(10.032896, 13.157897)

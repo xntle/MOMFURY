@@ -1,25 +1,26 @@
-[gd_scene load_steps=2 format=3 uid="uid://cqh7hit_impact"]
+[gd_scene load_steps=2 format=3 uid="uid://btigt38al88om"]
 
-[ext_resource type="Script" path="res://scripts/Effects/hit_effect.gd" id="1_hit"]
+[ext_resource type="Script" uid="uid://c7vih55itibbw" path="res://scripts/Effects/hit_effect.gd" id="1_hit"]
 
 [node name="HitImpact" type="CPUParticles2D"]
-emitting = true
-amount = 12
-lifetime = 0.4
+z_index = 2
+emitting = false
+amount = 30
+lifetime = 0.5
 one_shot = true
 explosiveness = 1.0
 randomness = 0.5
-local_coords = false
-emission_shape = 1
-emission_sphere_radius = 8.0
+draw_order = 1
+emission_shape = 2
+emission_sphere_radius = 1.0
 direction = Vector2(0, -1)
 spread = 180.0
-gravity = Vector2(0, 200)
-initial_velocity_min = 80.0
-initial_velocity_max = 150.0
-angular_velocity_min = -200.0
-angular_velocity_max = 200.0
-scale_amount_min = 2.0
-scale_amount_max = 5.0
-color = Color(1, 0.8, 0.3, 1)
+gravity = Vector2(0, 300)
+initial_velocity_min = 100.0
+initial_velocity_max = 200.0
+angular_velocity_min = -300.0
+angular_velocity_max = 300.0
+scale_amount_min = 4.0
+scale_amount_max = 8.0
+hue_variation_max = 0.2
 script = ExtResource("1_hit")

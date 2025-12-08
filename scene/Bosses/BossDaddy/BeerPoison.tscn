@@ -5,6 +5,7 @@
 [sub_resource type="CanvasTexture" id="CanvasTexture_g70a0"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_g70a0"]
+radius = 16.94047
 
 [node name="BeerPoison" type="Area2D"]
 scale = Vector2(1, 0.9940951)
@@ -17,11 +18,24 @@ scale = Vector2(49.77173, 44.141666)
 texture = SubResource("CanvasTexture_g70a0")
 
 [node name="PoisonArea" type="CollisionShape2D" parent="."]
+modulate = Color(1, 1, 0, 1)
+self_modulate = Color(1, 1, 0.54901963, 1)
 visibility_layer = 2
 scale = Vector2(2.7744212, 2.7744212)
 shape = SubResource("CircleShape2D_g70a0")
 
 [node name="DamageTimer" type="Timer" parent="."]
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+orbit_velocity_min = -267.15
+orbit_velocity_max = -30.04
+linear_accel_min = -0.3
+radial_accel_min = -100.0
+radial_accel_max = 44.26
+tangential_accel_min = -9.61
+tangential_accel_max = 100.0
+scale_amount_max = 83.47
+color = Color(1, 1, 0.4627451, 1)
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]
