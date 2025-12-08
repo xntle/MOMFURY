@@ -191,8 +191,6 @@ func _ready() -> void:
 	else:
 		push_warning("BossDaddy: no AnimatedSprite2D child named 'AnimatedSprite2D' or 'animation'.")
 	
-	
-
 
 func take_damage(amount: float) -> void:
 	health -= amount

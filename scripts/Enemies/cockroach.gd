@@ -8,6 +8,8 @@ extends CharacterBody2D
 @export var health_pickup_scene: PackedScene
 @export var drop_chance: float = 0.5  # 50% chance
 @export var death_particles_scene: PackedScene
+@onready var agent: NavigationAgent2D = $NavigationAgent2D
+
 
 var dash_timer: float = 0.0
 var dash_speed: float = 250.0
@@ -19,46 +21,60 @@ var default_bounce_timer: float = 0.25
 
 
 func _ready():
-	# First random cooldown 1 to 3 seconds
-	dash_timer = randf_range(1.0, 3.0)  
-	$NavigationAgent2D.target_position = player.global_position
+	dash_timer = randf_range(1.0, 3.0)
+	agent.target_position = player.global_position
 
 func _physics_process(delta):
-	
-	bounce_timer = max(0.0,bounce_timer-delta)
-	dash_timer = max(0.0,dash_timer-delta)
+	bounce_timer = max(0.0, bounce_timer - delta)
+	dash_timer = max(0.0, dash_timer - delta)
 
-	var direction = global_position.direction_to(player.global_position)
-	
+	if not is_instance_valid(player):
+		return
+
+	# update nav target (or keep your Timer method instead)
+	agent.target_position = player.global_position
+
+	var to_player := player.global_position - global_position
+	var direct_dir := to_player.normalized()
+
 	# Start a dash when timer hits zero
 	if dash_timer <= 0.0:
 		is_dashing = true
 		dash_time_left = dash_duration
 		dash_timer = randf_range(1.0, 3.0)
-		
+
 	# Dash or normal move or bounce
 	if is_dashing:
-		velocity = direction * dash_speed
+		var dash_dir: Vector2
+
+		if not agent.is_navigation_finished():
+			var next_pos := agent.get_next_path_position()
+			dash_dir = (next_pos - global_position).normalized()
+		else:
+			dash_dir = direct_dir  # fallback if no path
+
+		velocity = dash_dir * dash_speed
 		dash_time_left -= delta
-		if dash_time_left <= 0:
+		if dash_time_left <= 0.0:
 			is_dashing = false
 
 	elif bounce_timer >= 0.1:
-		velocity = -4 * direction * speed
-	elif bounce_timer <= 0:
-		if !$NavigationAgent2D.is_target_reached():
-			var nav_point = to_local($NavigationAgent2D.get_next_path_position()).normalized()
-			velocity = nav_point * speed
-		else:
-			velocity = direction * speed
+		velocity = -4.0 * direct_dir * speed
+
 	else:
-		velocity = direction * speed
+		# NORMAL MOVE USING NAVIGATION PATH
+		if not agent.is_navigation_finished():
+			var next_pos := agent.get_next_path_position()
+			var nav_dir := (next_pos - global_position).normalized()
+			velocity = nav_dir * speed
+		else:
+			velocity = direct_dir * speed
 
-#For 0.5 seconds before the dash, the cockroach stands still as a warning.
-
-	if (not (dash_timer>0 and dash_timer<=0.5)):
+	# stands still for warning window before dash
+	if not (dash_timer > 0.0 and dash_timer <= 0.5):
 		move_and_slide()
-	rotation = direction.angle() + 90
+
+	rotation = direct_dir.angle() + deg_to_rad(90)
 	
 func _on_timer_timeout():
 	if $NavigationAgent2D.target_position != player.global_position:

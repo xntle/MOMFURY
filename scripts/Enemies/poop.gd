@@ -12,6 +12,8 @@ var shoot_range := 250.0     # Max shooting distance
 @export var health_pickup_scene: PackedScene
 @export var drop_chance: float = 0.5  # 50% chance
 @export var death_particles_scene: PackedScene
+@onready var agent: NavigationAgent2D = $NavigationAgent2D
+
 
 # Shooting
 var shoot_cooldown := 2.0
@@ -19,22 +21,32 @@ var shoot_timer := 0.0
 var bullets_per_burst := 3
 var burst_delay := 0.15
 
-func _physics_process(delta):
-	var direction = global_position.direction_to(player.global_position)
-	var distance_to_player = global_position.distance_to(player.global_position)
+func _ready() -> void:
+	agent.path_desired_distance = 8.0
+	agent.target_desired_distance = stop_distance
+
+func _physics_process(delta: float) -> void:
+	if not is_instance_valid(player):
+		return
+
+	var distance_to_player := global_position.distance_to(player.global_position)
 
 	# Update shoot timer
-	if shoot_timer > 0:
+	if shoot_timer > 0.0:
 		shoot_timer -= delta
 
-	# Move toward player ONLY if farther than stop distance
+	# Update path target (you can do this every frame, or via your Timer)
+	agent.target_position = player.global_position
+
+	# Move using navigation path
 	if distance_to_player > stop_distance:
-		velocity = direction * normal_speed
+		var next_pos := agent.get_next_path_position()
+		var dir := (next_pos - global_position).normalized()
+		velocity = dir * normal_speed
 	else:
 		velocity = Vector2.ZERO
 
-		# Shoot at player when in range
-		if distance_to_player <= shoot_range and shoot_timer <= 0 and bullet_scene != null:
+		if distance_to_player <= shoot_range and shoot_timer <= 0.0 and bullet_scene != null:
 			_shoot_burst()
 			shoot_timer = shoot_cooldown
 
