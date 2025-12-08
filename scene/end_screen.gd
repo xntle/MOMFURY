@@ -85,9 +85,13 @@ func _play_ui_sound(sound_path: String) -> void:
 		)
 
 func _on_start_pressed():
+	# Wait for click sound to play before changing scene
+	await get_tree().create_timer(0.2).timeout
 	get_tree().change_scene_to_file("res://scene/Game.tscn")
 
 func _on_quit_pressed():
+	# Wait for click sound to play before quitting
+	await get_tree().create_timer(0.2).timeout
 	get_tree().quit()
 
 func _load_high_scores() -> void:

@@ -36,11 +36,15 @@ func _play_ui_sound(sound_path: String) -> void:
 
 func _on_resume_pressed():
 	if get_tree().paused == true:
+		# Wait for click sound to play
+		await get_tree().create_timer(0.2).timeout
 		get_tree().paused = false
 		visible = false
 
 func _on_quit_pressed():
 	if get_tree().paused == true:
+		# Wait for click sound to play before quitting
+		await get_tree().create_timer(0.2).timeout
 		get_tree().quit()
 
 func _input(event):

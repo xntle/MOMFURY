@@ -1,12 +1,10 @@
 extends Control
 
 func _ready():
-	$VBoxContainer/StartButton.pressed.connect(_on_start_pressed)
-	$VBoxContainer/QuitButton.pressed.connect(_on_quit_pressed)
+	$StartButton.pressed.connect(_on_start_pressed)
 
-	# Add hover and click sounds to buttons
-	_setup_button_sounds($VBoxContainer/StartButton)
-	_setup_button_sounds($VBoxContainer/QuitButton)
+	# Add hover and click sounds
+	_setup_button_sounds($StartButton)
 
 func _setup_button_sounds(button: Button) -> void:
 	# Hover sound
@@ -36,9 +34,4 @@ func _play_ui_sound(sound_path: String) -> void:
 func _on_start_pressed():
 	# Wait for click sound to play before changing scene
 	await get_tree().create_timer(0.2).timeout
-	get_tree().change_scene_to_file("res://scene/tutorial.tscn")
-
-func _on_quit_pressed():
-	# Wait for click sound to play before quitting
-	await get_tree().create_timer(0.2).timeout
-	get_tree().quit()
+	get_tree().change_scene_to_file("res://scene/Game.tscn")

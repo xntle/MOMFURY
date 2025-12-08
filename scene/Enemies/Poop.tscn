@@ -1,9 +1,8 @@
-[gd_scene load_steps=13 format=3 uid="uid://ixi501xwduk4"]
+[gd_scene load_steps=12 format=3 uid="uid://ixi501xwduk4"]
 
 [ext_resource type="Script" uid="uid://d1urbn8e0rtq7" path="res://scripts/Enemies/poop.gd" id="1_yhf4p"]
-[ext_resource type="Texture2D" uid="uid://dscd4y8ji3g6u" path="res://characters/pixel-art-cartoon-poop-character-png.png" id="2_goo80"]
 [ext_resource type="PackedScene" uid="uid://c6vj8mhrybcuv" path="res://scene/Enemies/PoopBullet.tscn" id="3_poop_bullet"]
-[ext_resource type="PackedScene" path="res://scene/HealthPickup.tscn" id="4_health"]
+[ext_resource type="PackedScene" uid="uid://bedovmc10ufep" path="res://scene/HealthPickup.tscn" id="4_health"]
 [ext_resource type="Texture2D" uid="uid://8avyyk1sk21p" path="res://characters/Untitled_design__5_-removebg-preview.png" id="5_jilgu"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_m4ljs"]
@@ -58,11 +57,6 @@ health_pickup_scene = ExtResource("4_health")
 position = Vector2(-0.5, -12.5)
 scale = Vector2(0.23, 0.23)
 shape = SubResource("CircleShape2D_m4ljs")
-
-[node name="PixelArtCartoonPoopCharacterPng" type="Sprite2D" parent="."]
-position = Vector2(-0.7499981, -20.749996)
-scale = Vector2(0.057857145, 0.057857145)
-texture = ExtResource("2_goo80")
 
 [node name="PathfindingCollision" type="CollisionShape2D" parent="."]
 position = Vector2(-1, 0)
