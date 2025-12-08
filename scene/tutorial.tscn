@@ -1,7 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://tutorial_scene_01"]
+[gd_scene load_steps=6 format=3 uid="uid://c4744etxcuy2s"]
 
-[ext_resource type="Script" path="res://scene/tutorial.gd" id="1_tutorial"]
-[ext_resource type="Texture2D" uid="uid://b58wvd4c1xc1a" path="res://assets/Tutorial.png" id="2_tutorial"]
+[ext_resource type="Script" uid="uid://c2pmf5w8hleox" path="res://scene/tutorial.gd" id="1_tutorial"]
+[ext_resource type="Texture2D" uid="uid://qtxc5rkkwgt1" path="res://assets/tutor.png" id="2_nvmt1"]
 [ext_resource type="FontFile" uid="uid://box1b2tla1jkp" path="res://assets/fonts/MegamaxJonathanToo-YqOq2.ttf" id="3_font"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_normal"]
@@ -44,7 +44,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_tutorial")
+texture = ExtResource("2_nvmt1")
 expand_mode = 1
 stretch_mode = 5
 
