@@ -59,7 +59,7 @@ func _start_next_round() -> void:
 		player.set_round(round_number)
 
 	# Spawn a boss every 5 rounds
-	if round_number % 1 == 0 and not boss_scenes.is_empty():
+	if round_number % 3 == 0 and not boss_scenes.is_empty():
 		var boss_scene := boss_scenes[randi() % boss_scenes.size()]
 		if boss_scene != null:
 			var boss := boss_scene.instantiate()
