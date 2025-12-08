@@ -453,7 +453,7 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_onrkg"]
-radius = 8.12884
+radius = 6.3295126
 
 [sub_resource type="Animation" id="Animation_y30ri"]
 length = 0.4
@@ -650,7 +650,7 @@ animation = &"die"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 top_level = true
-position = Vector2(11, 0)
+position = Vector2(11, 4)
 scale = Vector2(1.1090735, -2.1000402)
 shape = SubResource("CircleShape2D_onrkg")
 
@@ -679,16 +679,15 @@ scale_amount_max = 4.0
 color = Color(1, 1, 1, 0.5)
 
 [node name="slip" parent="." instance=ExtResource("3_y30ri")]
-visible = false
-position = Vector2(10, 6)
+position = Vector2(12, 5)
 rotation = 1.415462
 
 [node name="Ricechine" parent="." instance=ExtResource("6_ricechine")]
 visible = false
-position = Vector2(12, 4)
-bullet_scene = null
+position = Vector2(10, 4)
 
 [node name="Broom" parent="." instance=ExtResource("7_broom")]
+visible = false
 position = Vector2(17, 8)
 rotation = -0.6961279
 hit_effect_scene = null

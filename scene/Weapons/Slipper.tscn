@@ -9,7 +9,7 @@ radius = 2.8239067
 
 [node name="SlipperBullet" type="Area2D"]
 collision_layer = 4
-collision_mask = 3
+collision_mask = 2
 script = ExtResource("1_141rr")
 hit_effect_scene = ExtResource("3_hit")
 

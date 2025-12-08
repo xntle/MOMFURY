@@ -19,9 +19,9 @@ position = Vector2(26, 4)
 scale = Vector2(0.7317023, 0.59420913)
 
 [node name="2" type="Sprite2D" parent="WeaponPivot/Gun"]
-position = Vector2(-10.932005, -8.383108)
+position = Vector2(-5.466717, -6.693214)
 scale = Vector2(0.13953967, 0.13953969)
 texture = ExtResource("2_35fuf")
 
 [node name="ShootingPoint" type="Marker2D" parent="WeaponPivot/Gun"]
-position = Vector2(95.66867, -8.246872)
+position = Vector2(2.737587, -11.731461)
