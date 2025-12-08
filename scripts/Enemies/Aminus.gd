@@ -45,7 +45,7 @@ func _shoot_bullet():
 		return
 	
 	if anim:
-		anim.play("default")  # your only animation
+		anim.play("default") 
 
 
 	var bullet = bullet_scene.instantiate()
