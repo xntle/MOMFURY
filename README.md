@@ -3,11 +3,7 @@
 
 ## Summary ##
 
-** Inspired by the legendary slipper throwing prowess of Asian tiger moms. You play as a determined mom fighting to restore order as your home falls into chaos.  **
-
-** Armed with her trusty arsenal of household weapons: the Slipper, Rice Machine Gun, and Broom. Mom must face off against waves of household disasters: cockroaches, mysterious poop, and even dreaded A-minus grades! **
-
-** Family members are the real op, they turn into epic boss battles. Can you survive confrontations with Daddy, the rebellious Teen, and even Baby? **
+Inspired by the legendary slipper throwing prowess of Asian tiger moms. You play as a determined mom fighting to restore order as your home falls into chaos. Armed with her trusty arsenal of household weapons: the Slipper, Rice Machine Gun, and Broom. Mom must face off against waves of household disasters: cockroaches, mysterious poop, and even dreaded A-minus grades! Family members are the real op, they turn into epic boss battles. Can you survive confrontations with Daddy, the rebellious Teen, and even Baby?
 
 ## Project Resources
 
