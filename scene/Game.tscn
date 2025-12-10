@@ -265,6 +265,12 @@ position = Vector2(1573, 212)
 [node name="Bosses" type="Node2D" parent="."]
 unique_name_in_owner = true
 
+[node name="CharacterBody2D" parent="." instance=ExtResource("14_7ftmx")]
+
+[node name="BossBaby" parent="." instance=ExtResource("19_ls1fb")]
+
+[node name="CharacterBody2D2" parent="." instance=ExtResource("20_cg8ds")]
+
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("19_cg8ds")
 pitch_scale = 0.46

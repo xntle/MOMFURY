@@ -95,22 +95,48 @@ func _on_quit_pressed():
 	get_tree().quit()
 
 func _load_high_scores() -> void:
-	var file = FileAccess.open(SAVE_FILE, FileAccess.READ)
-	if file:
-		high_score = file.get_32()
-		high_round = file.get_32()
-		file.close()
+	# Try web localStorage first (for HTML5 builds)
+	if OS.has_feature("web"):
+		high_score = _get_web_storage("mom_fury_high_score", 0)
+		high_round = _get_web_storage("mom_fury_high_round", 0)
 	else:
-		# No save file yet, default to 0
-		high_score = 0
-		high_round = 0
+		# Use FileAccess for desktop builds
+		var file = FileAccess.open(SAVE_FILE, FileAccess.READ)
+		if file:
+			high_score = file.get_32()
+			high_round = file.get_32()
+			file.close()
+		else:
+			high_score = 0
+			high_round = 0
 
 func _save_high_scores() -> void:
-	var file = FileAccess.open(SAVE_FILE, FileAccess.WRITE)
-	if file:
-		file.store_32(high_score)
-		file.store_32(high_round)
-		file.close()
+	# Try web localStorage first (for HTML5 builds)
+	if OS.has_feature("web"):
+		_set_web_storage("mom_fury_high_score", high_score)
+		_set_web_storage("mom_fury_high_round", high_round)
+	else:
+		# Use FileAccess for desktop builds
+		var file = FileAccess.open(SAVE_FILE, FileAccess.WRITE)
+		if file:
+			file.store_32(high_score)
+			file.store_32(high_round)
+			file.close()
+
+func _get_web_storage(key: String, default_value: int) -> int:
+	if OS.has_feature("web"):
+		var result = JavaScriptBridge.eval("""
+			(function() {
+				var value = localStorage.getItem('%s');
+				return value !== null ? parseInt(value) : %d;
+			})()
+		""" % [key, default_value])
+		return int(result) if result != null else default_value
+	return default_value
+
+func _set_web_storage(key: String, value: int) -> void:
+	if OS.has_feature("web"):
+		JavaScriptBridge.eval("localStorage.setItem('%s', '%d')" % [key, value])
 
 func _display_high_scores() -> void:
 	# Create a label for high scores if it doesn't exist
