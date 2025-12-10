@@ -1,4 +1,4 @@
-
+[ProjectDocumentTemplate.md](https://github.com/user-attachments/files/24088318/ProjectDocumentTemplate.md)
 # MOMFURY #
 
 ## Summary ##
@@ -7,9 +7,9 @@ Inspired by the legendary slipper throwing prowess of Asian tiger moms. You play
 
 ## Project Resources
 
-[Web-playable version of your game.]([https://itch.io/](https://xntle.itch.io/momfury))  
-[Trailor]([https://youtube.com](https://youtu.be/JRxhv8Fadck))  
-[Press Kit](https://dopresskit.com/) - check repo
+[Web-playable version of your game.](https://xntle.itch.io/momfury)  
+[Trailor]([https://youtube.com](https://youtu.be/D2lgWJRIE20))  
+[Press Kit](https://dopresskit.com/)  
 [Proposal: make your own copy of the linked doc.](https://docs.google.com/document/d/1qwWCpMwKJGOLQ-rRJt8G8zisCa2XHFhv6zSWars0eWM/edit?usp=sharing)  
 
 ## Gameplay Explanation ##
@@ -21,9 +21,24 @@ Inspired by the legendary slipper throwing prowess of Asian tiger moms. You play
 
 # External Code, Ideas, and Structure #
 
-If your project contains code that: 1) your team did not write, and 2) does not fit cleanly into a role, please document it in this section. Please include the author of the code, where to find the code, and note which scripts, folders, or other files that comprise the external contribution. Additionally, include the license for the external code that permits you to use it. You do not need to include the license for code provided by the instruction team.
+External Code
 
-If you used tutorials or other intellectual guidance to create aspects of your project, include reference to that information as well.
+1. Use of AI
+- We all used AI to debug our written code.
+
+- 
+If your project contains code that: 1) your team did not write, and 2) does not fit cleanly into a role, please document it in this section. 
+
+
+Please include the author of the code, where to find the code, and note which scripts, folders, or other files that comprise the external contribution. Additionally, include the license for the external code that permits you to use it. You do not need to include the license for code provided by the instruction team.
+
+Tutorials:
+- Spinning gun and shooting mechanism: https://www.youtube.com/watch?v=GwCiGixlqiU
+- Tilemap/Tileset: https://www.youtube.com/watch?v=ZutpG0_CYrQ
+- ...
+
+
+
 
 # Team Member Contributions
 
