@@ -1,4 +1,4 @@
-[ProjectDocumentTemplate.md](https://github.com/user-attachments/files/24088318/ProjectDocumentTemplate.md)
+
 # MOMFURY #
 
 ## Summary ##
@@ -7,9 +7,9 @@ Inspired by the legendary slipper throwing prowess of Asian tiger moms. You play
 
 ## Project Resources
 
-[Web-playable version of your game.](https://itch.io/)  
-[Trailor](https://youtube.com)  
-[Press Kit](https://dopresskit.com/)  
+[Web-playable version of your game.]([https://itch.io/](https://xntle.itch.io/momfury))  
+[Trailor]([https://youtube.com](https://youtu.be/JRxhv8Fadck))  
+[Press Kit](https://dopresskit.com/) - check repo
 [Proposal: make your own copy of the linked doc.](https://docs.google.com/document/d/1qwWCpMwKJGOLQ-rRJt8G8zisCa2XHFhv6zSWars0eWM/edit?usp=sharing)  
 
 ## Gameplay Explanation ##
