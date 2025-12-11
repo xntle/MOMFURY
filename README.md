@@ -270,11 +270,39 @@ You should replay any **bold text** with your relevant information. Liberally us
 
 Add addition contributions int he Other Contributions section.
 
-## Main Roles
+## An Le (xntle)
 
-## Sub-Roles
+### Main Role: Game Logic
 
-## Other Contributions
+**Player Movement System** - Implemented 8-directional movement with WASD/Arrow key support, including normalized diagonal speed to prevent faster diagonal movement. This demonstrates understanding of vector mathematics and game feel principles from the course's player controller lectures. [Player script](https://github.com/xntle/MOMFURY/blob/main/scripts/player.gd)
+
+**Dodge Roll Mechanics** - Created invincibility frame system with collision mask switching (normal_mask vs roll_mask) during dodge roll, cooldown management, and directional rolling based on input or last facing direction. The system uses Godot's physics layers for temporary invulnerability, applying concepts from the game mechanics and physics sections of the course. [Player dodge roll implementation](https://github.com/xntle/MOMFURY/blob/main/scripts/player.gd)
+
+**Weapon Switching System** - Designed and implemented Q key weapon cycling (Slipper → Rice Gun → Broom) with state management and attack damage functionality. Each weapon has unique stats (damage, fire rate, range) creating distinct gameplay strategies, demonstrating game balance principles. [Player weapon system](https://github.com/xntle/MOMFURY/blob/main/scripts/player.gd)
+
+**Enemy AI Behaviors** - Developed multiple enemy types with distinct AI patterns: cockroaches with dash attacks and warning delays, spawners with health systems, and integration of boss behaviors. Implemented collision logic for enemy-player interactions and damage systems. Applied state machine concepts and AI behavior patterns from course material. [Cockroach AI](https://github.com/xntle/MOMFURY/blob/main/scripts/cockroach.gd) | [Enemy spawners](https://github.com/xntle/MOMFURY/tree/main/scripts/Enemies)
+
+**Health Drop System** - Created procedural health pickup spawning with percentage-based drop rates from defeated enemies (cockroaches 20%, poop 30%, A-minus 50%), adding risk-reward gameplay elements and resource management. [Enemy health drops](https://github.com/xntle/MOMFURY/blob/main/scripts/Enemies/Aminus.gd)
+
+### Sub-Role: Visual Cohesion
+
+**Hit Effect System** - Implemented visual feedback for all combat interactions including hit particles, white flash on damage, and impact effects. Created consistent visual language across all enemy types and weapons to communicate game state to players. This applies juice and game feel principles from the course. [Hit effects](https://github.com/xntle/MOMFURY/tree/main/scene/Effects) | [Flash implementation](https://github.com/xntle/MOMFURY/blob/main/scripts/Enemies/Aminus.gd)
+
+**Boss Visual Effects** - Added directional facing for all bosses to track player position, ensuring visual consistency and telegraphing attack directions. Integrated explosion and death particles for boss defeats. [Boss direction system](https://github.com/xntle/MOMFURY/blob/main/scripts/Bosses/BossDaddy/boss_daddy.gd)
+
+**Player Direction System** - Redesigned player to face mouse cursor instead of movement direction, creating intuitive aiming for the twin-stick shooter controls and maintaining visual clarity during combat. [Player facing logic](https://github.com/xntle/MOMFURY/blob/main/scripts/player.gd)
+
+**Screen Shake & Camera Effects** - Integrated camera shake on significant events (enemy deaths, boss attacks) to enhance impact feel and player feedback, applying principles of game juice and procedural animation. [Camera shake calls](https://github.com/xntle/MOMFURY/blob/main/scripts/Enemies/Aminus.gd)
+
+### Other Contributions
+
+**Sound Design & Integration** - Implemented comprehensive audio system including hit sounds, attack sounds for each weapon (slipper throw, rice gun, broom swing), UI interaction sounds (hover, click), and enemy death sound variations with randomization. Created AudioStreamPlayer management with proper cleanup to prevent memory leaks. [Rice bullet sound](https://github.com/xntle/MOMFURY/blob/main/scripts/Weapons/rice_bullet.gd) | [UI sounds](https://github.com/xntle/MOMFURY/blob/main/scene/end_screen.gd) | [Enemy death sounds](https://github.com/xntle/MOMFURY/blob/main/scripts/Enemies/Aminus.gd)
+
+**Producer Role** - Organized project structure and folder hierarchy for the team. Managed HTML5 web deployment to itch.io including export configuration and browser compatibility. Created and maintained comprehensive README documentation with gameplay explanations, controls, and project resources. Coordinated team workflows and git branch management. [Project structure](https://github.com/xntle/MOMFURY/tree/main/scripts) | [README documentation](https://github.com/xntle/MOMFURY/blob/main/README.md)
+
+**Visual Assets** - Designed and created the game map through multiple iterations using Godot's tilemap system, creating the house environment layout with proper collision. Created splash screen using AI tool (nano banana) with references to in-game characters (Mom, Daddy, Teen, Baby) to establish visual identity and theming for the game. [Map implementation](https://github.com/xntle/MOMFURY/blob/main/scene/Game.tscn)
+
+**UI/UX Systems** - Built pause menu with ESC key toggle and process mode management for pause-immune UI. Implemented high score saving system with FileAccess and browser localStorage support for web builds. Created tutorial system and story scene for narrative introduction. [Pause menu](https://github.com/xntle/MOMFURY/blob/main/scripts/pause_menu.gd) | [High score system](https://github.com/xntle/MOMFURY/blob/main/scene/end_screen.gd)
 
 # Team Member Contributions - Kyle
 
