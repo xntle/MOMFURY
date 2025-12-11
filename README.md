@@ -9,7 +9,7 @@ Inspired by the legendary slipper throwing prowess of Asian tiger moms. You play
 
 - [Web-playable version of your game.](https://xntle.itch.io/momfury)  
 - [Trailer](https://www.youtube.com/watch?v=tMS8DrScSLs)
-- Assets: refer tot he asset folder  
+- Assets: refer to the asset folder  
 - [Proposal: make your own copy of the linked doc.]([https://docs.google.com/document/d/1qwWCpMwKJGOLQ-rRJt8G8zisCa2XHFhv6zSWars0eWM/edit?usp=sharing](https://docs.google.com/document/d/1ipeN3TBZHgDxpwUtU1WC2WKfwLL1Ti3kdM2tzpY00W8/edit?tab=t.0))
 
 ## Gameplay Explanation
