@@ -232,7 +232,7 @@ Tutorials:
 - Tilemap/Tileset: https://www.youtube.com/watch?v=ZutpG0_CYrQ
 - ...
 
-# Team Member Contributions
+# Team Member Contributions - Ben
 
 This section be repeated once for each team member. Each team member should provide their name and GitHub user information.
 
@@ -275,6 +275,68 @@ Add addition contributions int he Other Contributions section.
 ## Sub-Roles
 
 ## Other Contributions
+
+# Team Member Contributions - Ben
+
+This section be repeated once for each team member. Each team member should provide their name and GitHub user information.
+
+The general structures is
+
+```
+Team Member 1
+  Main Role
+    Documentation for main role.
+  Sub-Role
+    Documentation for Sub-Role
+  Other contribtions
+    Documentation for contributions to the project outside of the main and sub roles.
+
+Team Member 2
+  Main Role
+    Documentation for main role.
+  Sub-Role
+    Documentation for Sub-Role
+  Other contribtions
+    Documentation for contributions to the project outside of the main and sub roles.
+...
+```
+
+For each team member, you shoudl work of your role and sub-role in terms of the content of the course. Please look at the role sections below for specific instructions for each role.
+
+Below is a template for you to highlight items of your work. These provide the evidence needed for your work to be evaluated. Try to have at least four such descriptions. They will be assessed on the quality of the underlying system and how they are linked to course content.
+
+_Short Description_ - Long description of your work item that includes how it is relevant to topics discussed in class. [link to evidence in your repository](https://github.com/dr-jam/ECS189L/edit/project-description/ProjectDocumentTemplate.md)
+
+Here is an example:  
+_Procedural Terrain_ - The game's background consists of procedurally generated terrain produced with Perlin noise. The game can modify this terrain at run-time via a call to its script methods. The intent is to allow the player to modify the terrain. This system is based on the component design pattern and the procedural content generation portions of the course. [The PCG terrain generation script](https://github.com/dr-jam/CameraControlExercise/blob/513b927e87fc686fe627bf7d4ff6ff841cf34e9f/Obscura/Assets/Scripts/TerrainGenerator.cs#L6).
+
+You should replay any **bold text** with your relevant information. Liberally use the template when necessary and appropriate.
+
+Add addition contributions int he Other Contributions section.
+
+## Main Roles - UI
+
+Main Menu - I was responsible for creating the Main Menu. To this end, I created a separate scene with a control root node. This node contains a TextureRect for the splash, as well as VboxContainer containing the buttons to start and quit the game. These buttons all have custom hover and click effects, accomplished by creating different StyleBoxes for the normal, hover and click state. The start button changes the current scene to the game scene. The logic is all contained in [main menu.gd](https://github.com/xntle/MOMFURY/blob/main/scripts/main_menu.gd).
+
+<img width="965" height="540" alt="Screenshot 2025-12-10 at 5 46 26 PM" src="https://github.com/user-attachments/assets/0dc46f38-f244-4a1f-ac97-674c2a629af4" />
+
+Pause Menu - I also created the pause menu, which is mostly derived from the main menu node. To access it, the game checks for a pause input(the Esc button) and toggles the get_tree().paused state. From there, the player can resume by either pressing the input again or clicking on the resume button. This logic is again contained in [pause_menu.gd](https://github.com/xntle/MOMFURY/blob/main/scripts/pause_menu.gd). This pause menu, along with all other gameplay related UI assets, are contained as control nodes within a CanvasLayer subnode of the Game node that is labeled UI. 
+
+Health indicators - I was responsible for creating the underlying logic behind player and enemy health, as well as respective UI indicators for them. Player and enemy health both used an exported float variable for their maximum health as well as a float variable for their current health. The entities are equipped with a take_damage() function([example for the player](https://github.com/xntle/MOMFURY/blob/main/scripts/player.gd#L336)) that both adjusts its health, checks for and runs any death logic, and emits a health_changed signal. This health changed signal(for the player) is then used for the [health label logic](https://github.com/xntle/MOMFURY/blob/main/scripts/health_label.gd) to update the indicated health on the UI accordingly. For bosses, this health_changed signal is used to update their [boss HP bar](https://github.com/xntle/MOMFURY/blob/main/scripts/boss_health_bar.gd). For this health bar's overall function, it is equipped with a connect_boss function that both assigns the associated boss, as well as adjusting its current and maximum health values to match the boss. This connect_boss function is ran in the ready() logic of each boss entity. Accordingly, the boss HP bar shows itself whenever it is assigned to a boss, and also every time its assigned boss takes damage as a guardrail. It automatically hides upon runtime if there is no boss assigned, and also whenever its associated boss dies. Both the player health indicator and boss HP bar use signals to determine when to update its values to save on computing, as opposed to continuously checking these values in a process() or physics_process() function which would be very inefficient. 
+
+## Sub-Roles - Gameplay Testing
+
+As the gameplay tester, I was responsible for adjusting player and enemy balancing to ensure a fun and enjoyable experience. My aim with this role was to create a game that was difficult but felt rewarding to master. From the weapons perspective, my design goal was to ensure that all 3 of the available weapons had a valid use case despite the relative simplicity of our game. I accomplished this by ensuring that the ease of use of each gun was inversely correlated with the raw damage that it offered. Starting with the ricechine gun, it has a base dps of 100(10 damage, 10 shots per second) which was the lowest of the 3 weapons. To compensate it is not only the easiest and least punishing to play, but also the most efficient at dealing with large groups of enemies. With a base damage of 10, it reaches a key threshold of oneshotting cockroaches(the lowest hp enemy in our game), as well as taking poops out in 2 shots. For the slipper, as a slow moving, slow firing projectile it offers a higher dps than the ricechine gun(40 damage with a 0.3s cd resulting in 133.3 dps). This makes it the best choice at dealing with the higher health A minus enemies, whose 80 health threshold allows it to be taken out with 2 slippers. However, the slow movement makes it difficult to use in large areas, requiring precise aim and potential shot leading. Finally, as the broom has the crippling limitation of being a melee weapon, it has the highest dps by far of 160(80 per swing, 2 swings per second). This allows it to oneshot every non-boss enemy in the game, as well as being that weapon that takes out bosses the fastest. However, this is balanced out by the inherent risk of the weapon being melee, which can be extremely dangerous against enemies such as the baby. My design goal with the broom was to create a satisfying, high skill weapon that provides a high risk, high reward option for experienced players. 
+
+I also balanced most of the enemies and bosses in the game, finding a middle ground between challenging and frustrating, while ensuring there was meaningful differentiation between the various enemies. A notable challenge I found was differentiating the A minus enemy and the poop, as their behaviours are extremely similar. I accomplished this by giving them significant stat profile differences. The poop is a lighter, squishier enemy that fires fast, low damage shots and is easily taken out with 2 shots of the ricechine gun or 1 shot of any other weapon. On the other hand, the A minus is significantly tankier, requiring 2 slippers or 8 rice shots, as well as doing heavy damage with their slow projectiles. Ideally, I would give these enemies(alongside the rest of them) different weighting in the spawning algorithm, which is a change I would have liked to implement had we more time to work on the game. I also worked with Kyle on designing some of the boss attacks and ensuring that each of the 3 bosses felt different enough to avoid a stale experience resulting from playing through the endless rounds of the game. To that end, I wrote most of the logic behind the Daddy's beer attack, alongside Kyle, and finetuned its range, speed and damage to make the boss feel engaging and interesting to fight. 
+
+## Other Contributions
+
+I also helped with improving and implementing numerous other systems in the game. 
+
+Collision - Notably, I added the collision layers on the map of the game, as well as most of the collision logic the game runs on. The collision logic is implemented by having separate layers for the player(1), enemies(2), walls(3), player projectiles(4), enemy projectiles(5), transparent walls(used for furniture, 6) and intangible objects(notably the player while rolling, 8). These entities all have masks for walls, as well as any other objects they should detect. In earlier iterations of the game, we ran into many issues where the enemies would push around the player heavily, making movement almost impossible, as both enemies and players used move_and_slide() to move around to ensure consistent behavior with walls. I solved this issue by making the player and enemies not detect each other naturally with their masks, which allows players to pass through enemies without being blocked. To avoid this behavior from happening with bosses(which we deemed unintuitive), I also added [custom logic to bosses](https://github.com/xntle/MOMFURY/blob/main/scripts/Bosses/BossBaby/boss_baby.gd#L322) wherein they would damage players and knock them away if they were touched. I accomplished this by adding an Area2d with mask 1 onto each boss alongside an on_body_entered signal, upon which this logic would run. I also added functions to apply a stun and apply intangibility to the player to be used in this logic. As the collisionobject of the boss does not have mask 1, this also prevented the disruptive pushing behavior from occurring. I also used extremely similar logic for the cockroach enemy, which attempts to directly collide with the player to do damage. Unlike a boss, it doesn't knock the player away, but rather knocks itself back upon collision. 
+
+Rolling - I also added most of the [roll logic](https://github.com/xntle/MOMFURY/blob/main/scripts/player.gd#L125) for the game. Faithful to other top-down shooters, the roll in the game gives temporary intangibility, allowing you to roll straight through enemies and projectiles. This is accomplished by temporarily changing the players collision layer to 8, which isn't detected by anything in the game except walls. To avoid this logic from interfering with other sources of intangibility(such as the logic ran at the end of a roll ending intangibility from other sources early), there are guardrails in the logic used for other [intangibility sources](https://github.com/xntle/MOMFURY/blob/main/scripts/player.gd#L227) that specifically check if the player is rolling. The logic that turns off intangibility if there is no current intangibility effect, and if the player is not rolling, is also ran continuously to prevent the player from being stuck in layer 8(which would be significantly gamebreaking).
 
 # Team Member Contributions - Kyle
 
