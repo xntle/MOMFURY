@@ -232,45 +232,7 @@ Tutorials:
 - Tilemap/Tileset: https://www.youtube.com/watch?v=ZutpG0_CYrQ
 - ...
 
-# Team Member Contributions - Ben
-
-This section be repeated once for each team member. Each team member should provide their name and GitHub user information.
-
-The general structures is
-
-```
-Team Member 1
-  Main Role
-    Documentation for main role.
-  Sub-Role
-    Documentation for Sub-Role
-  Other contribtions
-    Documentation for contributions to the project outside of the main and sub roles.
-
-Team Member 2
-  Main Role
-    Documentation for main role.
-  Sub-Role
-    Documentation for Sub-Role
-  Other contribtions
-    Documentation for contributions to the project outside of the main and sub roles.
-...
-```
-
-For each team member, you shoudl work of your role and sub-role in terms of the content of the course. Please look at the role sections below for specific instructions for each role.
-
-Below is a template for you to highlight items of your work. These provide the evidence needed for your work to be evaluated. Try to have at least four such descriptions. They will be assessed on the quality of the underlying system and how they are linked to course content.
-
-_Short Description_ - Long description of your work item that includes how it is relevant to topics discussed in class. [link to evidence in your repository](https://github.com/dr-jam/ECS189L/edit/project-description/ProjectDocumentTemplate.md)
-
-Here is an example:  
-_Procedural Terrain_ - The game's background consists of procedurally generated terrain produced with Perlin noise. The game can modify this terrain at run-time via a call to its script methods. The intent is to allow the player to modify the terrain. This system is based on the component design pattern and the procedural content generation portions of the course. [The PCG terrain generation script](https://github.com/dr-jam/CameraControlExercise/blob/513b927e87fc686fe627bf7d4ff6ff841cf34e9f/Obscura/Assets/Scripts/TerrainGenerator.cs#L6).
-
-You should replay any **bold text** with your relevant information. Liberally use the template when necessary and appropriate.
-
-Add addition contributions int he Other Contributions section.
-
-## An Le (xntle)
+# Team Member Contributions - An
 
 ### Main Role: Game Logic
 
@@ -455,22 +417,20 @@ eg. player moving backwards but still faces the shoot direction
 
 **UI/UX Systems** - Menu and progression systems:
 
-- **Pause menu**: ESC key toggle with `process_mode = 3` for pause-immune UI - prevents menu from freezing during pause
 - **High score persistence**: Dual-system approach - FileAccess for desktop, browser localStorage for HTML5 web builds
 - **Tutorial system**: Created tutorial scene for teaching controls and mechanics to new players
 - **Story scene**: Narrative introduction scene that sets up game premise before gameplay starts
 - **End screen**: Game over screen displaying final points, round survived, and high scores with "NEW HIGH SCORE" announcement
 
+<img width="948" height="531" alt="Screenshot 2025-12-10 at 9 40 19 PM" src="https://github.com/user-attachments/assets/01a02cd8-1f21-4811-bda1-0a37f9da05e8" />
+
+
 [Pause menu](https://github.com/xntle/MOMFURY/blob/main/scripts/pause_menu.gd) | [High score system](https://github.com/xntle/MOMFURY/blob/main/scene/end_screen.gd)
 
 **Sprite Art Assets** - Created pixel art sprites for enemy characters:
 
-- **A-minus enemy sprite**: Designed the A-minus grade character sprite with animations for idle, movement, and attack states
-- **Cockroach enemy sprite**: Drew cockroach sprite with rotational design to support dynamic facing based on player position
-- **Art style consistency**: Ensured sprites matched game's pixel art aesthetic and color palette for visual cohesion
-- **Animation-ready design**: Created sprites with consideration for animation frame requirements and hitbox clarity
-
-[A-minus sprite](https://github.com/xntle/MOMFURY/blob/main/characters/A.png) | [Cockroach sprite](https://github.com/xntle/MOMFURY/blob/main/characters/cockroach.png)
+- **Cockroach enemy sprite**: Drew cockroach sprite with rotational design to support dynamic facing based on player position.
+- :-) proud of this cockroach
 
 <img width="456" height="441" alt="Screenshot 2025-12-10 at 8 42 15 PM" src="https://github.com/user-attachments/assets/4779ea9d-a4eb-4059-b2af-9a6f33ade2f4" />
 ![cockroach](https://github.com/user-attachments/assets/4ab2bca9-66fb-4409-ab7f-50c14c046179)
@@ -485,6 +445,8 @@ eg. player moving backwards but still faces the shoot direction
 - **Integration**: All particles use auto-cleanup via `queue_free()` after emission completes to prevent memory leaks
 - **Performance**: CPUParticles2D chosen over GPUParticles2D for better compatibility with HTML5 web builds
 - **Course concepts**: Demonstrates game juice, procedural animation, particle systems for enhanced game feel
+<img width="98" height="120" alt="Screenshot 2025-12-10 at 9 03 00 PM" src="https://github.com/user-attachments/assets/1bea1ae3-3f89-4e25-80d9-cd22451e6be7" />
+<img width="234" height="146" alt="Screenshot 2025-12-10 at 8 55 04 PM" src="https://github.com/user-attachments/assets/e6b4d824-6829-402a-a6f4-a7cbe8056388" />
 
 [Hit effect script](https://github.com/xntle/MOMFURY/blob/main/scripts/Effects/hit_effect.gd) | [Death particles](https://github.com/xntle/MOMFURY/blob/main/scripts/Effects/death_particles.gd) | [Soul escape](https://github.com/xntle/MOMFURY/blob/main/scripts/soul_escape.gd) | [Movement trail integration](https://github.com/xntle/MOMFURY/blob/main/scripts/player.gd#L45)
 
