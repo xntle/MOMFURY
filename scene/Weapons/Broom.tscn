@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://bdexbpdn3b2op" path="res://scripts/Weapons/broom.gd" id="1_broom"]
 [ext_resource type="Texture2D" uid="uid://cdp607p1ck0c1" path="res://assets/weapons/broomsprite.png" id="3_25nkj"]
 [ext_resource type="Texture2D" uid="uid://bfr0n4tj4nnmm" path="res://assets/weapons/6.png" id="3_k58ik"]
-[ext_resource type="PackedScene" uid="uid://btigt38al88om" path="res://scene/Effects/HitImpact.tscn" id="4_hit"]
+[ext_resource type="PackedScene" uid="uid://btigt38al88om" path="res://scenes/Effects/HitImpact.tscn" id="4_hit"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hitbox"]
 size = Vector2(23.887117, 6.462365)

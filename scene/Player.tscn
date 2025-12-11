@@ -3,9 +3,9 @@
 [ext_resource type="Script" uid="uid://cbrwihmwrf8c6" path="res://scripts/player.gd" id="1_hjaqi"]
 [ext_resource type="Texture2D" uid="uid://cob6ob6cowun4" path="res://characters/spritesheet-removebg-preview.png" id="2_82gks"]
 [ext_resource type="Texture2D" uid="uid://cskhw164o4tni" path="res://characters/spritesheet (4).png" id="3_dc1pm"]
-[ext_resource type="PackedScene" uid="uid://cfwuhb3k8ao3" path="res://scene/Weapons/Slip.tscn" id="3_y30ri"]
-[ext_resource type="PackedScene" uid="uid://b75t07ym54440" path="res://scene/Weapons/Ricechine.tscn" id="6_ricechine"]
-[ext_resource type="PackedScene" uid="uid://ljl3f4jpnmhv" path="res://scene/Weapons/Broom.tscn" id="7_broom"]
+[ext_resource type="PackedScene" uid="uid://cfwuhb3k8ao3" path="res://scenes/Weapons/Slip.tscn" id="3_y30ri"]
+[ext_resource type="PackedScene" uid="uid://b75t07ym54440" path="res://scenes/Weapons/Ricechine.tscn" id="6_ricechine"]
+[ext_resource type="PackedScene" uid="uid://ljl3f4jpnmhv" path="res://scenes/Weapons/Broom.tscn" id="7_broom"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ea7gk"]
 atlas = ExtResource("3_dc1pm")

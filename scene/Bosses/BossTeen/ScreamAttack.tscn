@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://bbhu5dry8x0xc"]
 
 [ext_resource type="Script" uid="uid://b4n15i8unfjm3" path="res://scripts/Bosses/BossDaddy/beer_poison.gd" id="1_fpuwr"]
-[ext_resource type="Texture2D" uid="uid://cvvfg5s2ufu3m" path="res://scene/Bosses/BossTeen/!#()%)!)$&@)$@!)(#)#$.png" id="2_w051k"]
+[ext_resource type="Texture2D" uid="uid://cvvfg5s2ufu3m" path="res://scenes/Bosses/BossTeen/!#()%)!)$&@)$@!)(#)#$.png" id="2_w051k"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_3f86c"]
 b = Vector2(54.06533, 0)

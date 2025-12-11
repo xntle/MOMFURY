@@ -38,7 +38,7 @@ func _on_body_entered(body):
 			body.emit_signal("health_changed", body.current_health)
 			print("Player healed! Health: ", body.current_health, "/", body.max_health)
 
-			# Play pickup effect (optional sound/particle here)
+			# Play pickup effect
 			queue_free()
 		else:
 			# Already at max health

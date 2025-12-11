@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://brerv7448rocb"]
 
 [ext_resource type="Script" uid="uid://dwi0an6mcso8r" path="res://scripts/Weapons/rice_bullet.gd" id="1_ikkhi"]
-[ext_resource type="Texture2D" uid="uid://dgn1lwaurj4ig" path="res://scene/Weapons/st,small,507x507-pad,600x600,f8f8f8.u1.jpg" id="2_86l85"]
+[ext_resource type="Texture2D" uid="uid://dgn1lwaurj4ig" path="res://scenes/Weapons/st,small,507x507-pad,600x600,f8f8f8.u1.jpg" id="2_86l85"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v4rvk"]
 size = Vector2(3.8170967, 3.8624382)

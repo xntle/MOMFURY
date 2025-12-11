@@ -1,8 +1,8 @@
 [gd_scene load_steps=12 format=3 uid="uid://ixi501xwduk4"]
 
 [ext_resource type="Script" uid="uid://d1urbn8e0rtq7" path="res://scripts/Enemies/poop.gd" id="1_yhf4p"]
-[ext_resource type="PackedScene" uid="uid://c6vj8mhrybcuv" path="res://scene/Enemies/PoopBullet.tscn" id="3_poop_bullet"]
-[ext_resource type="PackedScene" uid="uid://bedovmc10ufep" path="res://scene/HealthPickup.tscn" id="4_health"]
+[ext_resource type="PackedScene" uid="uid://c6vj8mhrybcuv" path="res://scenes/Enemies/PoopBullet.tscn" id="3_poop_bullet"]
+[ext_resource type="PackedScene" uid="uid://bedovmc10ufep" path="res://scenes/HealthPickup.tscn" id="4_health"]
 [ext_resource type="Texture2D" uid="uid://8avyyk1sk21p" path="res://characters/Untitled_design__5_-removebg-preview.png" id="5_jilgu"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_m4ljs"]
