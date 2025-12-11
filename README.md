@@ -448,6 +448,9 @@ eg. player moving backwards but still faces the shoot direction
 
 [Hit effect script](https://github.com/xntle/MOMFURY/blob/main/scripts/Effects/hit_effect.gd) | [Death particles](https://github.com/xntle/MOMFURY/blob/main/scripts/Effects/death_particles.gd) | [Soul escape](https://github.com/xntle/MOMFURY/blob/main/scripts/soul_escape.gd) | [Movement trail integration](https://github.com/xntle/MOMFURY/blob/main/scripts/player.gd#L45)
 
+**The original spawner system** - When Spawners were enemies:
+- At first, you need to destroy spawners in order to get to the boss fight. We changed to round base, therefore this is deprecated. Check the deprecated folder where Polymorphism was applied to these spawners.
+  
 # Team Member Contributions - Ben
 
 This section be repeated once for each team member. Each team member should provide their name and GitHub user information.
