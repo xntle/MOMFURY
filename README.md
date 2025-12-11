@@ -603,6 +603,8 @@ _Points System_ - To make the game have some sort of goal, I worked on obtaining
 <img width="244" height="328" alt="spritesheet (4)" src="https://github.com/user-attachments/assets/a1835e2f-6476-4e44-ab8c-1bccff9a8c4e" />
 
 - My primary technical responsibility was architecting and implementing the complete 8-Directional Animation System for the player character, the "Mom." This involved producing a full suite of sprites—including movement, idle, hit-reaction, and special-state frames—for all eight movement directions. A significant design choice was to use the mouse position to determine the player's facing direction in the [\_update_animation loop](https://github.com/xntle/MOMFURY/blob/9de11fa44a8213e075b997d1c3231155001684da/scripts/player.gd#L299). This approach, while technically challenging, enhanced game feel by ensuring that attacking and aiming felt immediately responsive, aligning with core principles of clarity and responsiveness.
+<img width="1440" height="900" alt="Screenshot 2025-12-10 at 22 25 57" src="https://github.com/user-attachments/assets/02be9f69-14e6-4b56-b3ac-db05a6ee1d20" />
+
 
 - To manage this complex visual system, I built a state machine structure using a Priority Hierarchy of conditional logic. This system ensures that `is_dead` is checked first, followed by `is_hit`, and then `is_rolling`. A crucial challenge was designing the logic within the [\_get_anim_name](https://github.com/xntle/MOMFURY/blob/9de11fa44a8213e075b997d1c3231155001684da/scripts/player.gd#L236) helper function to reliably translate the continuous mouse vector into the correct discrete 8-directional animation name using directional vector thresholds. I overcame the initial instability of this approach by refining the thresholds to be more tolerant, ensuring that when the character is actively moving (`direction != Vector2.ZERO`), a corresponding movement animation is always selected, rather than defaulting to `idle_down`. I learned the necessity of creating resilient vector comparison logic when matching continuous input (mouse aim) to discrete visual outputs (8-directional sprites).
 
@@ -613,7 +615,7 @@ _Points System_ - To make the game have some sort of goal, I worked on obtaining
 - The system uses the animation call inside the final animation block (e.g., `anim.play("baby_throw_diaper`) in BossBaby or `anim.play("daddy_attack"`) in BossDaddy) to signal the attack. Furthermore, I implemented the horizontal flipping logic (e.g., `anim.flip_h = true`) based on the boss's movement or facing direction (move_dir or direction_to_player) to ensure the boss always faces the correct direction during attacks and movement, thus improving visual clarity and player readability.
 
 ### Hit-Reaction System + Death Animation
-
+<img width="1440" height="900" alt="Screenshot 2025-12-10 at 22 20 55" src="https://github.com/user-attachments/assets/8c26397a-86fa-4382-855d-0105deeebb0d" />
 - A critical component of this state hierarchy was the Hit-Reaction System, designed for immediate, unambiguous feedback when the player takes damage. I implemented a dedicated "hit" animation state for each movement direction. When the player receives damage, the script sets the `is_hit` flag, overriding all other states and locking the character into the corresponding hit animation for a fixed `hit_duration`. The red color was chosen specifically because red universally signifies damage, danger, or urgency in game design, instantly communicating the state change to the player. This system is an example of Modular Design, abstracting the hit logic away from enemy and weapon scripts.
 <img width="72" height="24" alt="spritesheet 7" src="https://github.com/user-attachments/assets/ab81b176-d473-4ab2-9e96-33aba028b82b" />
 <img width="1440" height="900" alt="Screenshot 2025-12-10 at 20 37 03" src="https://github.com/user-attachments/assets/cb944822-624a-4d67-8259-b46cefcec106" />
@@ -636,7 +638,6 @@ _Points System_ - To make the game have some sort of goal, I worked on obtaining
 
 ### House Map Layout Plan 
 <img width="400" height="400" alt="house map layout" src="https://github.com/user-attachments/assets/5888e78d-b15b-418a-90fc-03386006042f" />
-
 - My initial contribution involved planning and designing the primary game environment which is the house map. This process included sketching the layout of interconnected rooms, designating clear pathways, and integrating the chosen tile-map assets. A key challenge was a design conflict: making the map big enough to support the  enemy count and provide dynamic combat space, while simultaneously keeping it "cozy" to maintain the necessary home-like feeling central to the game's theme.
 
 ### Extra Spawn Animation
