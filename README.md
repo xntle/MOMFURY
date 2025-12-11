@@ -383,7 +383,13 @@ enemy explodes into white particles when killed:
 - **Visual clarity**: Maintains clear communication of player intent during combat
 - **Improves strafing**: Essential for dodge-and-shoot gameplay patterns
 
+![Uploading Screenshot 2025-12-10 at 9.02.37 PM.png…]()
+
 [Player facing logic](https://github.com/xntle/MOMFURY/blob/main/scripts/player.gd)
+
+eg. player moving backwards but still faces the shoot direction
+<img width="227" height="162" alt="Screenshot 2025-12-10 at 9 03 27 PM" src="https://github.com/user-attachments/assets/2801edbb-73fe-4144-a688-0641d00c379d" />
+<img width="281" height="173" alt="Screenshot 2025-12-10 at 8 46 08 PM" src="https://github.com/user-attachments/assets/433ebcf5-1473-423a-b497-bafb96afa04f" />
 
 **Screen Shake & Camera Effects** - Impact enhancement:
 - **Shake on events**: Camera shake triggered on enemy deaths and boss attacks
