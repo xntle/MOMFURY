@@ -362,3 +362,9 @@ Add addition contributions int he Other Contributions section.
 ](https://www.youtube.com/watch?v=d8a5xaxSWks)
 
 
+## Main Roles - Animations & Visuals (Quynh Tran)
+
+*Player Animation / State Control)* - My primary technical responsibility was architecting and implementing the complete 8-Directional Animation System for the player character, the "Mom." This involved producing a full suite of sprites—including movement, idle, hit-reaction, and special-state frames—for all eight movement directions. A significant design choice was to use the mouse position to determine the player's facing direction in the [_update_animation loop](https://github.com/xntle/MOMFURY/blob/9de11fa44a8213e075b997d1c3231155001684da/scripts/player.gd#L299). This approach, while technically challenging, enhanced game feel by ensuring that attacking and aiming felt immediately responsive, aligning with core principles of clarity and responsiveness.
+
+- To manage this complex visual system, I built a state machine structure using a Priority Hierarchy of conditional logic. This system ensures that `is_dead` is checked first, followed by `is_hit`, and then `is_rolling`. A crucial challenge was designing the logic within the [_get_anim_name](https://github.com/xntle/MOMFURY/blob/9de11fa44a8213e075b997d1c3231155001684da/scripts/player.gd#L236) helper function to reliably translate the continuous mouse vector into the correct discrete 8-directional animation name using directional vector thresholds. I overcame the initial instability of this approach by refining the thresholds to be more tolerant, ensuring that when the character is actively moving (`direction != Vector2.ZERO`), a corresponding movement animation is always selected, rather than defaulting to `idle_down`. I learned the necessity of creating resilient vector comparison logic when matching continuous input (mouse aim) to discrete visual outputs (8-directional sprites).
+
