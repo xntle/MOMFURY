@@ -408,4 +408,18 @@ Add addition contributions int he Other Contributions section.
 - The player experience was polished through the implementation of the Death Animation and Post-Death Flow. When the player's health reaches zero, the `take_damage(amount: int`) function sets the `is_dead` flag to true, locks player movement (`velocity = Vector2.ZERO`), and plays the -shot die animation (`anim.play("die")`). Crucially, this function no longer contains the unstable await keyword for audio or the immediate scene change logic. Instead, the transition is managed by the [_on_animation_finished(anim_name: StringName)](https://github.com/xntle/MOMFURY/blob/9de11fa44a8213e075b997d1c3231155001684da/scripts/player.gd#L397) function, which is connected to the animation signal. Upon detecting that the "die" animation has finished, this function initiates a signal-driven asynchronous delay. It does this by creating a persistent `SceneTreeTimer` and connecting its timeout signal to the scene change logic. This reliable use of the timer enforces a crucial two-second pause. Only after this stable delay does the closure execute, loading the End Screen scene (`end_screen.tscn`), passing necessary data (current_points, current_round), and removing the current game scene (`get_tree().current_scene.queue_free()`). This demonstrates effective concepts in Animation-driven game state transitions and Scene management and asynchronous delays, ensuring a smooth, reliable conclusion to the player's run.
 
 ### Weapons
-- 
+- I designed and implemented the visual system for the player's three unique weapons (Slipper, Rice Machine Gun, Broom), focusing on modularity and dynamic rendering. Each weapon is implemented as an individual Godot scene attached to the player hierarchy via dedicated `Node2D` or `Marker2D` nodes (e.g., `$slip`, `$Ricechine`, `$Broom`). This approach follows the Component-Based Architecture principle, ensuring the weapon's visual resources are decoupled from the player's core logic. Weapon selection is managed by dynamically adjusting the visible property of these components to ensure only the `current_weapon` is displayed.
+
+
+## Sub-Roles - Narrative Design
+
+### Environmental Storytelling
+
+### Visual Choices
+
+## Other Contribution
+
+## Resources Used
+- [Making a Player Character with Animations, Movement, and Collisions ~ Godot 4 Tutorial](https://www.youtube.com/watch?v=aJyRIpgh2hI)
+- [How to animate Sprite Sheets in Godot using AnimationPlayer (beginner tutorial)](https://www.youtube.com/watch?v=FEwE6myyz_I)
+
