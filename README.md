@@ -338,27 +338,82 @@ Add addition contributions int he Other Contributions section.
 
 ### Sub-Role: Visual Cohesion
 
-**Hit Effect System** - Implemented visual feedback for all combat interactions including hit particles, white flash on damage, and impact effects. Created consistent visual language across all enemy types and weapons to communicate game state to players. This applies juice and game feel principles from the course. [Hit effects](https://github.com/xntle/MOMFURY/tree/main/scene/Effects) | [Flash implementation](https://github.com/xntle/MOMFURY/blob/main/scripts/Enemies/Aminus.gd)
+**Hit Effect System** - Visual feedback for combat interactions:
+- **Hit particles**: Impact particles spawn on projectile collision for instant feedback
+- **White flash**: Enemies flash white when taking damage using `sprite.modulate = Color(2.0, 2.0, 2.0, 1.0)`
+- **Impact effects**: `HitImpact.tscn` spawns at collision point for weapons
+- **Consistent visual language**: Same effect system across all enemy types and weapons
+- **Course concepts**: Game juice and game feel principles
 
-**Boss Visual Effects** - Added directional facing for all bosses to track player position, ensuring visual consistency and telegraphing attack directions. Integrated explosion and death particles for boss defeats. [Boss direction system](https://github.com/xntle/MOMFURY/blob/main/scripts/Bosses/BossDaddy/boss_daddy.gd)
+[Hit effects](https://github.com/xntle/MOMFURY/tree/main/scene/Effects) | [Flash implementation](https://github.com/xntle/MOMFURY/blob/main/scripts/Enemies/Aminus.gd)
 
-**Player Direction System** - Redesigned player to face mouse cursor instead of movement direction, creating intuitive aiming for the twin-stick shooter controls and maintaining visual clarity during combat. [Player facing logic](https://github.com/xntle/MOMFURY/blob/main/scripts/player.gd)
+**Boss Visual Effects** - Enhanced boss presentation:
+- **Directional facing**: All bosses track and face player position using `direction_to_player`
+- **Visual consistency**: Ensures attacks are properly telegraphed through facing direction
+- **Death effects**: Explosion and death particles integrated for boss defeats
+- **Polish**: Creates more dynamic and responsive boss encounters
 
-**Screen Shake & Camera Effects** - Integrated camera shake on significant events (enemy deaths, boss attacks) to enhance impact feel and player feedback, applying principles of game juice and procedural animation. [Camera shake calls](https://github.com/xntle/MOMFURY/blob/main/scripts/Enemies/Aminus.gd)
+[Boss direction system](https://github.com/xntle/MOMFURY/blob/main/scripts/Bosses/BossDaddy/boss_daddy.gd)
+
+**Player Direction System** - Mouse-based facing for intuitive controls:
+- **Decoupled facing**: Player character faces mouse cursor instead of movement direction
+- **Twin-stick feel**: Creates intuitive aiming - face where you shoot, not where you walk
+- **Visual clarity**: Maintains clear communication of player intent during combat
+- **Improves strafing**: Essential for dodge-and-shoot gameplay patterns
+
+[Player facing logic](https://github.com/xntle/MOMFURY/blob/main/scripts/player.gd)
+
+**Screen Shake & Camera Effects** - Impact enhancement:
+- **Shake on events**: Camera shake triggered on enemy deaths and boss attacks
+- **Intensity variation**: Shake strength varies by event significance (8.0 intensity, 0.3 duration for enemy deaths)
+- **Game juice**: Enhances impact feel and player feedback
+- **Procedural animation**: Dynamic camera movement without pre-authored animations
+
+[Camera shake calls](https://github.com/xntle/MOMFURY/blob/main/scripts/Enemies/Aminus.gd)
 
 ### Other Contributions
 
 
-**Sound Design & Integration** - Implemented comprehensive audio system with randomization techniques to prevent audio fatigue and create dynamic, engaging soundscapes. Each enemy type (cockroach, poop, A-minus) uses an array-based randomization system with 6 death sound variations selected via `randi() % death_sounds.size()`, ensuring each kill feels unique rather than repetitive. Applied the same technique to weapon sounds - the slipper weapon randomly selects from 6 throw sound variations on each shot, adding organic variation to combat. This randomization approach is critical for endless survival games where players hear the same actions hundreds of times - without variation, repetitive audio becomes tiresome and reduces player engagement. Implemented dynamic AudioStreamPlayer2D instantiation with dual cleanup systems (finished signal + timer fallback) to prevent memory leaks during intense combat with many simultaneous sounds. Added UI interaction sounds (hover, click) with similar AudioStreamPlayer management for menu feedback. Ensured all sounds use `loop_mode = AudioStreamWAV.LOOP_DISABLED` to prevent infinite loops and integrated spatial audio positioning for weapon and enemy sounds to enhance directional awareness. This applies audio design principles from the course covering game feel, juice, and procedural variation. [Slipper randomization](https://github.com/xntle/MOMFURY/blob/main/scripts/Weapons/slipper_bullet.gd#L19-L31) | [Enemy death randomization](https://github.com/xntle/MOMFURY/blob/main/scripts/Enemies/Aminus.gd#L131-L143) | [UI sounds](https://github.com/xntle/MOMFURY/blob/main/scene/end_screen.gd#L62-L85)
+**Sound Design & Integration** - Implemented audio system with randomization to prevent audio fatigue:
+- **Enemy death sound randomization**: Each enemy type uses array-based system with 6 death sound variations via `randi() % death_sounds.size()` - ensures each kill feels unique
+- **Weapon sound randomization**: Slipper weapon randomly selects from 6 throw sound variations on each shot - adds organic variation to combat
+- **Why randomization matters**: Critical for endless survival games where players hear same actions hundreds of times - prevents repetitive audio fatigue and maintains engagement
+- **Dynamic AudioStreamPlayer2D instantiation**: Creates audio players at runtime with dual cleanup (finished signal + timer fallback) - prevents memory leaks during intense combat
+- **UI interaction sounds**: Hover and click sounds for menus with same AudioStreamPlayer management
+- **Loop prevention**: All sounds use `loop_mode = AudioStreamWAV.LOOP_DISABLED` to prevent infinite loops
+- **Spatial audio**: AudioStreamPlayer2D with `global_position` for weapon/enemy sounds - enhances directional awareness
+- **Course concepts**: Game feel, juice, procedural variation
 
-**Producer Role** - Organized project structure and folder hierarchy for the team. Managed HTML5 web deployment to itch.io including export configuration and browser compatibility. Created and maintained comprehensive README documentation with gameplay explanations, controls, and project resources. Coordinated team workflows and git branch management. [Project structure](https://github.com/xntle/MOMFURY/tree/main/scripts) | [README documentation](https://github.com/xntle/MOMFURY/blob/main/README.md)
+[Slipper randomization](https://github.com/xntle/MOMFURY/blob/main/scripts/Weapons/slipper_bullet.gd#L19-L31) | [Enemy death randomization](https://github.com/xntle/MOMFURY/blob/main/scripts/Enemies/Aminus.gd#L131-L143) | [UI sounds](https://github.com/xntle/MOMFURY/blob/main/scene/end_screen.gd#L62-L85)
+
+**Producer Role** - Project management and deployment:
+- **Project organization**: Organized folder structure and hierarchy for team collaboration
+- **HTML5 web deployment**: Managed itch.io deployment with export configuration and browser compatibility testing
+- **Documentation**: Created and maintained comprehensive README with gameplay explanations, controls, enemy stats, and project resources
+- **Team coordination**: Managed git workflows, branch management, and pull request reviews
+- **Build management**: Handled export presets and build processes for web distribution
+
+[Project structure](https://github.com/xntle/MOMFURY/tree/main/scripts) | [README documentation](https://github.com/xntle/MOMFURY/blob/main/README.md)
 
 <img width="660" height="508" alt="Screenshot 2025-12-10 at 7 48 57 PM" src="https://github.com/user-attachments/assets/95401919-f5be-4673-ae81-f0fdd818a55c" />
 
 
-**Visual Assets** - Designed and created the game map through multiple iterations using Godot's tilemap system, creating the house environment layout with proper collision. Created splash screen using AI tool (nano banana) with references to in-game characters (Mom, Daddy, Teen, Baby) to establish visual identity and theming for the game. [Map implementation](https://github.com/xntle/MOMFURY/blob/main/scene/Game.tscn)
+**Visual Assets** - Game environment and branding design:
+- **Game map design**: Created house environment layout through multiple iterations using Godot's tilemap system
+- **Collision integration**: Added proper collision layers to tilemap for wall and furniture interactions
+- **Splash screen**: Created using AI tool (nano banana) featuring in-game characters (Mom, Daddy, Teen, Baby)
+- **Visual identity**: Established game's branding and theming through splash screen design
 
-**UI/UX Systems** - Built pause menu with ESC key toggle and process mode management for pause-immune UI. Implemented high score saving system with FileAccess and browser localStorage support for web builds. Created tutorial system and story scene for narrative introduction. [Pause menu](https://github.com/xntle/MOMFURY/blob/main/scripts/pause_menu.gd) | [High score system](https://github.com/xntle/MOMFURY/blob/main/scene/end_screen.gd)
+[Map implementation](https://github.com/xntle/MOMFURY/blob/main/scene/Game.tscn)
+
+**UI/UX Systems** - Menu and progression systems:
+- **Pause menu**: ESC key toggle with `process_mode = 3` for pause-immune UI - prevents menu from freezing during pause
+- **High score persistence**: Dual-system approach - FileAccess for desktop, browser localStorage for HTML5 web builds
+- **Tutorial system**: Created tutorial scene for teaching controls and mechanics to new players
+- **Story scene**: Narrative introduction scene that sets up game premise before gameplay starts
+- **End screen**: Game over screen displaying final points, round survived, and high scores with "NEW HIGH SCORE" announcement
+
+[Pause menu](https://github.com/xntle/MOMFURY/blob/main/scripts/pause_menu.gd) | [High score system](https://github.com/xntle/MOMFURY/blob/main/scene/end_screen.gd)
 
 **Sprite Art Assets** - Created pixel art sprites for enemy characters:
 - **A-minus enemy sprite**: Designed the A-minus grade character sprite with animations for idle, movement, and attack states
