@@ -321,10 +321,15 @@ Add addition contributions int he Other Contributions section.
 - **Collision layers**: Enemies use layer 2, mask walls/transparent walls for environment navigation
 - **Signal-based communication**: Enemies call `player.take_damage()` on collision, receive `take_damage()` from projectiles - decoupled architecture
 - **Course concepts**: AI state machines, pathfinding, signal-based design patterns
+<img width="259" height="154" alt="Screenshot 2025-12-10 at 8 46 24 PM" src="https://github.com/user-attachments/assets/b29114e7-3ee0-4cde-9458-5fca36456dae" />
+<img width="101" height="80" alt="Screenshot 2025-12-10 at 8 45 17 PM" src="https://github.com/user-attachments/assets/f02fbed2-8790-4ec4-815e-3fd450a4f31f" />
+<img width="218" height="100" alt="Screenshot 2025-12-10 at 8 46 01 PM" src="https://github.com/user-attachments/assets/44cff5db-fb4d-479b-9ea5-0e11d0149f31" />
 
 [Cockroach dash AI](https://github.com/xntle/MOMFURY/blob/main/scripts/Enemies/cockroach.gd#L40-L75) | [Navigation pathfinding](https://github.com/xntle/MOMFURY/blob/main/scripts/Enemies/cockroach.gd#L50-L71) | [Warning telegraph](https://github.com/xntle/MOMFURY/blob/main/scripts/Enemies/cockroach.gd#L73-L75)
 
 **Health Drop System** - Created procedural health pickup spawning with probabilistic RNG:
+<img width="665" height="365" alt="Screenshot 2025-12-10 at 8 43 43 PM" src="https://github.com/user-attachments/assets/d42952be-e15e-4262-9cc3-414bcd419d55" />
+
 - **Probabilistic system**: `_drop_health()` (lines 106-111) uses `randf() < drop_chance` comparison
 - **Tiered drop rates**: Cockroach 0.2 (20%), Poop 0.3 (30%), A-minus 0.5 (50%) - exported float variables per enemy
 - **Risk-reward design**: Higher-threat enemies have higher drop rates - incentivizes prioritizing dangerous targets
@@ -422,6 +427,9 @@ Add addition contributions int he Other Contributions section.
 - **Animation-ready design**: Created sprites with consideration for animation frame requirements and hitbox clarity
 
 [A-minus sprite](https://github.com/xntle/MOMFURY/blob/main/characters/A.png) | [Cockroach sprite](https://github.com/xntle/MOMFURY/blob/main/characters/cockroach.png)
+
+<img width="456" height="441" alt="Screenshot 2025-12-10 at 8 42 15 PM" src="https://github.com/user-attachments/assets/4779ea9d-a4eb-4059-b2af-9a6f33ade2f4" />
+![cockroach](https://github.com/user-attachments/assets/4ab2bca9-66fb-4409-ab7f-50c14c046179)
 
 **Particle Effects System** - Implemented CPUParticles2D-based visual effects for game juice:
 - **Movement trail**: Dynamic particle trail on player movement, intensity scales with speed - 8 particles normal movement, 15 particles during dodge roll with increased scale
