@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://b70gjql05pb8w" path="res://scripts/Weapons/slipper.gd" id="1_37psg"]
 [ext_resource type="Texture2D" uid="uid://6xhl3fuu1e6v" path="res://assets/weapons/1.png" id="2_37psg"]
 [ext_resource type="Texture2D" uid="uid://s1hx2hdp8w7d" path="res://assets/weapons/HandSlipper.png" id="4_1urmk"]
-[ext_resource type="PackedScene" uid="uid://b3h1b4y6h3e85" path="res://scene/Weapons/Slipper.tscn" id="4_slipper"]
+[ext_resource type="PackedScene" uid="uid://b3h1b4y6h3e85" path="res://scenes/Weapons/Slipper.tscn" id="4_slipper"]
 
 [node name="slip" type="Node2D"]
 light_mask = 0

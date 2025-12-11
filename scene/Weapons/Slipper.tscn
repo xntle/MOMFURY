@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://c2k3pg7xnkl76" path="res://scripts/Weapons/slipper_bullet.gd" id="1_141rr"]
 [ext_resource type="Texture2D" uid="uid://cd21m8rgkk0ca" path="res://assets/ThrownSlipper.png" id="2_141rr"]
-[ext_resource type="PackedScene" path="res://scene/Effects/HitImpact.tscn" id="3_hit"]
+[ext_resource type="PackedScene" uid="uid://btigt38al88om" path="res://scenes/Effects/HitImpact.tscn" id="3_hit"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_c17ra"]
 radius = 2.8239067

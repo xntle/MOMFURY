@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://big42lkxshamh" path="res://scripts/Enemies/cockroach.gd" id="1_jbinx"]
 [ext_resource type="Texture2D" uid="uid://dscd4y8ji3g6u" path="res://characters/pixel-art-cartoon-poop-character-png.png" id="2_q61ie"]
 [ext_resource type="Texture2D" uid="uid://cvv328m4ol46m" path="res://characters/cockroach.png" id="3_cq2d2"]
-[ext_resource type="PackedScene" uid="uid://bedovmc10ufep" path="res://scene/HealthPickup.tscn" id="4_health"]
+[ext_resource type="PackedScene" uid="uid://bedovmc10ufep" path="res://scenes/HealthPickup.tscn" id="4_health"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_euy66"]
 radius = 6.0

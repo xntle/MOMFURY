@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://c4744etxcuy2s"]
 
-[ext_resource type="Script" uid="uid://c2pmf5w8hleox" path="res://scene/tutorial.gd" id="1_tutorial"]
+[ext_resource type="Script" uid="uid://c2pmf5w8hleox" path="res://scripts/tutorial.gd" id="1_tutorial"]
 [ext_resource type="Texture2D" uid="uid://qtxc5rkkwgt1" path="res://assets/tutor.png" id="2_nvmt1"]
 [ext_resource type="FontFile" uid="uid://box1b2tla1jkp" path="res://assets/fonts/MegamaxJonathanToo-YqOq2.ttf" id="3_font"]
 

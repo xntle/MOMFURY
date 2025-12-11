@@ -1,9 +1,7 @@
-
 [gd_scene load_steps=9 format=3 uid="uid://cjdmj8wnomepi"]
 
-[ext_resource type="Script" path="res://scene/end_screen.gd" id="1_w5cn3"]
+[ext_resource type="Script" uid="uid://cafbj6q8lhmym" path="res://scripts/end_screen.gd" id="1_w5cn3"]
 [ext_resource type="Texture2D" uid="uid://cqs8ployi3fmk" path="res://assets/GameOver.png" id="4_cgu5q"]
-
 [ext_resource type="FontFile" uid="uid://box1b2tla1jkp" path="res://assets/fonts/MegamaxJonathanToo-YqOq2.ttf" id="4_pmcpw"]
 [ext_resource type="Texture2D" uid="uid://bh6g15tk51gfp" path="res://assets/Screenshot 2025-12-07 at 11.47.38 PM.png" id="4_w5cn3"]
 [ext_resource type="Texture2D" uid="uid://cd21m8rgkk0ca" path="res://assets/ThrownSlipper.png" id="5_2nv7r"]

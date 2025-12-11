@@ -1,7 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://poop_spawner_v2"]
+[gd_scene load_steps=3 format=3]
 
-[ext_resource type="PackedScene" uid="uid://fxb838o4s043" path="res://scene/Enemies/Spawner.tscn" id="1_base"]
-[ext_resource type="PackedScene" uid="uid://cqnwo76q2wad8" path="res://scene/Enemies/Poop.tscn" id="2_poop"]
+[ext_resource type="PackedScene" uid="uid://fxb838o4s043" path="res://scenes/Enemies/Spawner.tscn" id="1_base"]
+[ext_resource type="PackedScene" uid="uid://ixi501xwduk4" path="res://scenes/Enemies/Poop.tscn" id="2_poop"]
 
 [node name="PoopSpawner" instance=ExtResource("1_base")]
 max_health = 60.0

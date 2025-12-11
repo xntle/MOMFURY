@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://ci5rc6txagw2r" path="res://scripts/Weapons/ricemachine.gd" id="1_minlv"]
 [ext_resource type="Texture2D" uid="uid://dx1vtyc5e0m6v" path="res://assets/weapons/Untitled_design__4_-removebg-preview.png" id="3_nuytp"]
-[ext_resource type="PackedScene" uid="uid://5oeaucq136j6" path="res://scene/Weapons/RiceBullet.tscn" id="5_rice"]
+[ext_resource type="PackedScene" uid="uid://5oeaucq136j6" path="res://scenes/Weapons/RiceBullet.tscn" id="5_rice"]
 
 [sub_resource type="Animation" id="Animation_x4qwe"]
 resource_name = "gun_animation"

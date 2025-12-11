@@ -1,6 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://death_particles_01"]
+[gd_scene load_steps=3 format=3]
 
-[ext_resource type="Script" path="res://scripts/death_particles.gd" id="1_death_particles"]
+[ext_resource type="Script" uid="uid://q4rocjmrklcn" path="res://scripts/Effects/death_particles.gd" id="1_death_particles"]
 
 [sub_resource type="Curve" id="Curve_alpha"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://5jhg5nepxmiu"]
 
-[ext_resource type="Script" uid="uid://cxdle84sffkks" path="res://scripts/spawner_base.gd" id="1_spawner"]
+[ext_resource type="Script" uid="uid://cxdle84sffkks" path="res://scripts/Deprecate/spawner_base.gd" id="1_spawner"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_spawner"]
 

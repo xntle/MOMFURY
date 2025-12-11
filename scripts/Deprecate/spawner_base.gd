@@ -4,7 +4,7 @@ extends StaticBody2D
 # Spawner properties
 @export var max_health: float = 100.0
 @export var spawn_interval: float = 3.0
-@export var max_spawns: int = -1  # -1 = infinite
+@export var max_spawns: int = -1  
 @export var spawn_radius: float = 50.0
 @export var enemy_scenes: Array[PackedScene] = []
 

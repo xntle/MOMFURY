@@ -1,7 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://aminus_spawner"]
+[gd_scene load_steps=3 format=3]
 
-[ext_resource type="PackedScene" uid="uid://spawner_base_01" path="res://scene/Spawner.tscn" id="1_base"]
-[ext_resource type="PackedScene" uid="uid://dr2rntx2yt3e8" path="res://scene/Enemies/A-.tscn" id="2_aminus"]
+[ext_resource type="PackedScene" uid="uid://5jhg5nepxmiu" path="res://scenes/Spawner.tscn" id="1_base"]
+[ext_resource type="PackedScene" uid="uid://dsm7571yb3duy" path="res://scenes/Enemies/A-.tscn" id="2_aminus"]
 
 [node name="AMinusSpawner" instance=ExtResource("1_base")]
 max_health = 70.0
