@@ -1,4 +1,4 @@
-[gd_scene load_steps=71 format=4 uid="uid://kk3crf462xob"]
+[gd_scene load_steps=72 format=4 uid="uid://kk3crf462xob"]
 
 [ext_resource type="Texture2D" uid="uid://pw6gsslykjt3" path="res://assets/background/interior full/basics/wallpapers.png" id="1_vg7sv"]
 [ext_resource type="Texture2D" uid="uid://dh4j3kqtw5i1n" path="res://assets/background/nature free/global.png" id="2_ripxc"]
@@ -31358,6 +31358,7 @@ size = Vector2(62.666695, 15.458337)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hmss5"]
 size = Vector2(32.500004, 15.458337)
+
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_2fque"]
 vertices = PackedVector2Array(964.0625, 748.1797, 973.5625, 981.53906, 438.57813, 958.4219, 877.1172, 749.85156, 437.0625, 754.77344, 616.5, 738.10156, 435.35938, 452.10938, 438.6328, 560.8125, 390.95313, 457.07813, 380.65625, 286.60156, 387.71094, 568.5469, 279.8828, 18.96875, 534.5781, 9.0625, 528.02344, 177.40625, 428.45313, 181.85938, 377.0703, 172.28906, 152.21094, 450.1875, 14.0234375, 456.21875, 8.671875, 281.46875, 75.42969, 284.47656, 136.53125, 288.0625, 144, 626.09375, 7.65625, 634.6797, 7.65625, 564.5625, 146.14844, 567.5469, 192.1875, 622, 771.09375, 454.97656, 875.53906, 620.85156, 614.4922, 622, 692.6328, 457.34375, 629.53125, 50.90625, 965.34375, 59.421875, 975.2969, 342.52344, 747.7422, 339.5, 626.53125, 285.07813, 701.1094, 342.5703, 613.7422, 343.2578, 609.4375, 310.79688, 446.97656, 283.59375, 488.5, 308.85938, 318.21094, 757, 315.46094, 975.53125, 11.59375, 961.46094, 202.75, 757, 17.09375, 753.71094, 160.74219, 749.3203, 71.27344, 181.95313, 7.546875, 179.96094, 11.1171875, 15.21875, 183.0625, 19.117188, 189.60156, 174.78125, 134.49219, 179.10938, 195.50781, 455.57813, 483.5078, 411.5703, 561.65625, 412.25, 561.65625, 450.7578, 967.6719, 463.8828, 962.3281, 619.1797, 613.1875, 564.1875, 618.2031, 457.34375, 273.09375, 157.39063, 197.14844, 564.4531)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(3, 2, 4, 5), PackedInt32Array(6, 7, 8, 9), PackedInt32Array(10, 8, 7), PackedInt32Array(11, 12, 13, 14, 15), PackedInt32Array(16, 17, 18, 19, 20), PackedInt32Array(21, 22, 23, 24, 25), PackedInt32Array(26, 27, 3, 5, 28, 29), PackedInt32Array(30, 31, 32, 33, 34), PackedInt32Array(34, 33, 35, 36, 37), PackedInt32Array(38, 34, 37, 39, 9), PackedInt32Array(40, 41, 42, 43), PackedInt32Array(43, 42, 44, 45), PackedInt32Array(25, 43, 45, 21), PackedInt32Array(46, 47, 48, 49, 50, 51), PackedInt32Array(46, 51, 20, 19), PackedInt32Array(52, 16, 20, 9, 8), PackedInt32Array(53, 54, 55, 6), PackedInt32Array(26, 56, 57, 27), PackedInt32Array(58, 59, 29, 28), PackedInt32Array(15, 60, 11), PackedInt32Array(9, 15, 14, 38), PackedInt32Array(35, 33, 26, 29), PackedInt32Array(7, 58, 28, 25, 10), PackedInt32Array(61, 10, 25, 24), PackedInt32Array(61, 24, 16, 52), PackedInt32Array(53, 6, 9, 39)])
@@ -31491,21 +31492,27 @@ tile_map_data = PackedByteArray("AAACAP//CQAJAA8AAAAGAAAACQARAAkAAAADAP//CQAKAA8
 tile_set = SubResource("TileSet_yvlg1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Furniture2"]
+visible = false
 position = Vector2(248.33333, 334.45837)
 shape = SubResource("RectangleShape2D_5mr0a")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Furniture2"]
+visible = false
 position = Vector2(47.666656, 318.6042)
 shape = SubResource("RectangleShape2D_qdo26")
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="Furniture2"]
+visible = false
 position = Vector2(48.08333, 335)
 shape = SubResource("RectangleShape2D_hmss5")
 
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="Furniture2"]
+visible = false
 position = Vector2(48, 314.33334)
 shape = SubResource("RectangleShape2D_hmss5")
+
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+visible = false
 navigation_polygon = SubResource("NavigationPolygon_2fque")
 use_edge_connections = false
 
