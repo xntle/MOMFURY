@@ -308,6 +308,10 @@ Add addition contributions int he Other Contributions section.
 - **OOP benefits**: Adding new weapons trivial - create WeaponBase subclass, add to enum, update match statements
 - **Course concepts**: Demonstrates inheritance, polymorphism, encapsulation, state pattern
 
+<img width="259" height="154" alt="Screenshot 2025-12-10 at 8 46 24 PM" src="https://github.com/user-attachments/assets/b29114e7-3ee0-4cde-9458-5fca36456dae" />
+<img width="101" height="80" alt="Screenshot 2025-12-10 at 8 45 17 PM" src="https://github.com/user-attachments/assets/f02fbed2-8790-4ec4-815e-3fd450a4f31f" />
+<img width="218" height="100" alt="Screenshot 2025-12-10 at 8 46 01 PM" src="https://github.com/user-attachments/assets/44cff5db-fb4d-479b-9ea5-0e11d0149f31" />
+
 [Weapon enum & polymorphism](https://github.com/xntle/MOMFURY/blob/main/scripts/player.gd#L11-L12) | [Weapon switching FSM](https://github.com/xntle/MOMFURY/blob/main/scripts/player.gd#L448-L463) | [Polymorphic attack](https://github.com/xntle/MOMFURY/blob/main/scripts/player.gd#L431-L445)
 
 **Enemy AI Behaviors** - Developed state machine-based AI with NavigationAgent2D pathfinding:
@@ -321,9 +325,10 @@ Add addition contributions int he Other Contributions section.
 - **Collision layers**: Enemies use layer 2, mask walls/transparent walls for environment navigation
 - **Signal-based communication**: Enemies call `player.take_damage()` on collision, receive `take_damage()` from projectiles - decoupled architecture
 - **Course concepts**: AI state machines, pathfinding, signal-based design patterns
-<img width="259" height="154" alt="Screenshot 2025-12-10 at 8 46 24 PM" src="https://github.com/user-attachments/assets/b29114e7-3ee0-4cde-9458-5fca36456dae" />
-<img width="101" height="80" alt="Screenshot 2025-12-10 at 8 45 17 PM" src="https://github.com/user-attachments/assets/f02fbed2-8790-4ec4-815e-3fd450a4f31f" />
-<img width="218" height="100" alt="Screenshot 2025-12-10 at 8 46 01 PM" src="https://github.com/user-attachments/assets/44cff5db-fb4d-479b-9ea5-0e11d0149f31" />
+![cockroach](https://github.com/user-attachments/assets/0e319dd9-8cb2-44dc-babb-d41082e5dd29)
+<img width="279" height="292" alt="Screenshot 2025-12-10 at 8 52 36 PM" src="https://github.com/user-attachments/assets/801fd74a-b032-4708-89e0-aeb77b13fb8c" />
+<img width="69" height="54" alt="Screenshot 2025-12-10 at 8 57 20 PM" src="https://github.com/user-attachments/assets/30fa8495-5fff-472c-88cb-59a9bf70cf24" />
+
 
 [Cockroach dash AI](https://github.com/xntle/MOMFURY/blob/main/scripts/Enemies/cockroach.gd#L40-L75) | [Navigation pathfinding](https://github.com/xntle/MOMFURY/blob/main/scripts/Enemies/cockroach.gd#L50-L71) | [Warning telegraph](https://github.com/xntle/MOMFURY/blob/main/scripts/Enemies/cockroach.gd#L73-L75)
 
@@ -352,11 +357,23 @@ Add addition contributions int he Other Contributions section.
 
 [Hit effects](https://github.com/xntle/MOMFURY/tree/main/scene/Effects) | [Flash implementation](https://github.com/xntle/MOMFURY/blob/main/scripts/Enemies/Aminus.gd)
 
+enemy flashes when hit:
+<img width="234" height="146" alt="Screenshot 2025-12-10 at 8 55 04 PM" src="https://github.com/user-attachments/assets/86d18666-a4b6-44ec-afe0-a1705db6e057" />
+
+
+red particles on hit:
+  <img width="259" height="222" alt="Screenshot 2025-12-10 at 8 53 46 PM" src="https://github.com/user-attachments/assets/561d0412-a129-440b-96c7-3ba7a921b49d" />
+
+enemy explodes into white particles when killed:
+<img width="226" height="203" alt="Screenshot 2025-12-10 at 8 54 06 PM" src="https://github.com/user-attachments/assets/08d49307-a3f7-44e3-97ed-b8575344bf17" />
+
 **Boss Visual Effects** - Enhanced boss presentation:
 - **Directional facing**: All bosses track and face player position using `direction_to_player`
 - **Visual consistency**: Ensures attacks are properly telegraphed through facing direction
 - **Death effects**: Explosion and death particles integrated for boss defeats
-- **Polish**: Creates more dynamic and responsive boss encounters
+<img width="234" height="146" alt="Screenshot 2025-12-10 at 8 55 04 PM" src="https://github.com/user-attachments/assets/a587ebe8-de10-4605-a10e-f6d7d5116a98" />
+<img width="665" height="365" alt="Screenshot 2025-12-10 at 8 43 43 PM" src="https://github.com/user-attachments/assets/852ee99f-df1e-4335-b58d-eeca66a64b77" />
+
 
 [Boss direction system](https://github.com/xntle/MOMFURY/blob/main/scripts/Bosses/BossDaddy/boss_daddy.gd)
 
