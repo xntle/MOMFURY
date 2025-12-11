@@ -232,6 +232,43 @@ Tutorials:
 - Tilemap/Tileset: https://www.youtube.com/watch?v=ZutpG0_CYrQ
 - ...
 
+# Team Member Contributions - Ben
+
+This section be repeated once for each team member. Each team member should provide their name and GitHub user information.
+
+The general structures is
+
+```
+Team Member 1
+  Main Role
+    Documentation for main role.
+  Sub-Role
+    Documentation for Sub-Role
+  Other contribtions
+    Documentation for contributions to the project outside of the main and sub roles.
+
+Team Member 2
+  Main Role
+    Documentation for main role.
+  Sub-Role
+    Documentation for Sub-Role
+  Other contribtions
+    Documentation for contributions to the project outside of the main and sub roles.
+...
+```
+
+For each team member, you shoudl work of your role and sub-role in terms of the content of the course. Please look at the role sections below for specific instructions for each role.
+
+Below is a template for you to highlight items of your work. These provide the evidence needed for your work to be evaluated. Try to have at least four such descriptions. They will be assessed on the quality of the underlying system and how they are linked to course content.
+
+_Short Description_ - Long description of your work item that includes how it is relevant to topics discussed in class. [link to evidence in your repository](https://github.com/dr-jam/ECS189L/edit/project-description/ProjectDocumentTemplate.md)
+
+Here is an example:  
+_Procedural Terrain_ - The game's background consists of procedurally generated terrain produced with Perlin noise. The game can modify this terrain at run-time via a call to its script methods. The intent is to allow the player to modify the terrain. This system is based on the component design pattern and the procedural content generation portions of the course. [The PCG terrain generation script](https://github.com/dr-jam/CameraControlExercise/blob/513b927e87fc686fe627bf7d4ff6ff841cf34e9f/Obscura/Assets/Scripts/TerrainGenerator.cs#L6).
+
+You should replay any **bold text** with your relevant information. Liberally use the template when necessary and appropriate.
+
+Add addition contributions int he Other Contributions section.
 
 ## An Le (xntle)
 
@@ -323,6 +360,26 @@ Tutorials:
 
 **UI/UX Systems** - Built pause menu with ESC key toggle and process mode management for pause-immune UI. Implemented high score saving system with FileAccess and browser localStorage support for web builds. Created tutorial system and story scene for narrative introduction. [Pause menu](https://github.com/xntle/MOMFURY/blob/main/scripts/pause_menu.gd) | [High score system](https://github.com/xntle/MOMFURY/blob/main/scene/end_screen.gd)
 
+**Sprite Art Assets** - Created pixel art sprites for enemy characters:
+- **A-minus enemy sprite**: Designed the A-minus grade character sprite with animations for idle, movement, and attack states
+- **Cockroach enemy sprite**: Drew cockroach sprite with rotational design to support dynamic facing based on player position
+- **Art style consistency**: Ensured sprites matched game's pixel art aesthetic and color palette for visual cohesion
+- **Animation-ready design**: Created sprites with consideration for animation frame requirements and hitbox clarity
+
+[A-minus sprite](https://github.com/xntle/MOMFURY/blob/main/characters/A.png) | [Cockroach sprite](https://github.com/xntle/MOMFURY/blob/main/characters/cockroach.png)
+
+**Particle Effects System** - Implemented CPUParticles2D-based visual effects for game juice:
+- **Movement trail**: Dynamic particle trail on player movement, intensity scales with speed - 8 particles normal movement, 15 particles during dodge roll with increased scale
+- **Hit impact effects**: `HitImpact.tscn` spawns on projectile collision, provides instant visual feedback for successful attacks
+- **Death particles**: Explosion effect on enemy death using `DeathParticles.tscn`, triggered in enemy `take_damage()` when health reaches 0
+- **Soul escape effect**: `SoulEscape.tscn` particle system that floats upward on enemy death, adds personality and polish
+- **Weapon muzzle flash**: Rice machine gun spawns CPU particles on attack for visual feedback of rapid-fire weapon
+- **Integration**: All particles use auto-cleanup via `queue_free()` after emission completes to prevent memory leaks
+- **Performance**: CPUParticles2D chosen over GPUParticles2D for better compatibility with HTML5 web builds
+- **Course concepts**: Demonstrates game juice, procedural animation, particle systems for enhanced game feel
+
+[Hit effect script](https://github.com/xntle/MOMFURY/blob/main/scripts/Effects/hit_effect.gd) | [Death particles](https://github.com/xntle/MOMFURY/blob/main/scripts/Effects/death_particles.gd) | [Soul escape](https://github.com/xntle/MOMFURY/blob/main/scripts/soul_escape.gd) | [Movement trail integration](https://github.com/xntle/MOMFURY/blob/main/scripts/player.gd#L45)
+
 # Team Member Contributions - Ben
 
 This section be repeated once for each team member. Each team member should provide their name and GitHub user information.
@@ -383,7 +440,7 @@ I also helped with improving and implementing numerous other systems in the game
 
 Collision - Notably, I added the collision layers on the map of the game, as well as most of the collision logic the game runs on. The collision logic is implemented by having separate layers for the player(1), enemies(2), walls(3), player projectiles(4), enemy projectiles(5), transparent walls(used for furniture, 6) and intangible objects(notably the player while rolling, 8). These entities all have masks for walls, as well as any other objects they should detect. In earlier iterations of the game, we ran into many issues where the enemies would push around the player heavily, making movement almost impossible, as both enemies and players used move_and_slide() to move around to ensure consistent behavior with walls. I solved this issue by making the player and enemies not detect each other naturally with their masks, which allows players to pass through enemies without being blocked. To avoid this behavior from happening with bosses(which we deemed unintuitive), I also added [custom logic to bosses](https://github.com/xntle/MOMFURY/blob/main/scripts/Bosses/BossBaby/boss_baby.gd#L322) wherein they would damage players and knock them away if they were touched. I accomplished this by adding an Area2d with mask 1 onto each boss alongside an on_body_entered signal, upon which this logic would run. I also added functions to apply a stun and apply intangibility to the player to be used in this logic. As the collisionobject of the boss does not have mask 1, this also prevented the disruptive pushing behavior from occurring. I also used extremely similar logic for the cockroach enemy, which attempts to directly collide with the player to do damage. Unlike a boss, it doesn't knock the player away, but rather knocks itself back upon collision. 
 
-Rolling - I also helped An with the [roll logic](https://github.com/xntle/MOMFURY/blob/main/scripts/player.gd#L125) for the game. Faithful to other top-down shooters, the roll in the game gives temporary intangibility, allowing you to roll straight through enemies and projectiles. This is accomplished by temporarily changing the players collision layer to 8, which isn't detected by anything in the game except walls. To avoid this logic from interfering with other sources of intangibility(such as the logic ran at the end of a roll ending intangibility from other sources early), there are guardrails in the logic used for other [intangibility sources](https://github.com/xntle/MOMFURY/blob/main/scripts/player.gd#L227) that specifically check if the player is rolling. The logic that turns off intangibility if there is no current intangibility effect, and if the player is not rolling, is also ran continuously to prevent the player from being stuck in layer 8(which would be significantly gamebreaking).
+Rolling - I also added most of the [roll logic](https://github.com/xntle/MOMFURY/blob/main/scripts/player.gd#L125) for the game. Faithful to other top-down shooters, the roll in the game gives temporary intangibility, allowing you to roll straight through enemies and projectiles. This is accomplished by temporarily changing the players collision layer to 8, which isn't detected by anything in the game except walls. To avoid this logic from interfering with other sources of intangibility(such as the logic ran at the end of a roll ending intangibility from other sources early), there are guardrails in the logic used for other [intangibility sources](https://github.com/xntle/MOMFURY/blob/main/scripts/player.gd#L227) that specifically check if the player is rolling. The logic that turns off intangibility if there is no current intangibility effect, and if the player is not rolling, is also ran continuously to prevent the player from being stuck in layer 8(which would be significantly gamebreaking).
 
 # Team Member Contributions - Kyle
 
@@ -475,38 +532,29 @@ Add addition contributions int he Other Contributions section.
 - As the Animation and Visual Design lead, I was responsible for defining the overall look, motion language, and personality of every character in our game. Much of my work centered on creating 16×24 pixel-art sprite sheets for the player, enemies, and bosses.
   
 ### Player Animation / State Control)
-<img width="244" height="328" alt="mom full sprite sheet" src="https://github.com/user-attachments/assets/08e70741-f999-4049-902c-69e1bb031e2a" />
-
 - My primary technical responsibility was architecting and implementing the complete 8-Directional Animation System for the player character, the "Mom." This involved producing a full suite of sprites—including movement, idle, hit-reaction, and special-state frames—for all eight movement directions. A significant design choice was to use the mouse position to determine the player's facing direction in the [_update_animation loop](https://github.com/xntle/MOMFURY/blob/9de11fa44a8213e075b997d1c3231155001684da/scripts/player.gd#L299). This approach, while technically challenging, enhanced game feel by ensuring that attacking and aiming felt immediately responsive, aligning with core principles of clarity and responsiveness.
 
 - To manage this complex visual system, I built a state machine structure using a Priority Hierarchy of conditional logic. This system ensures that `is_dead` is checked first, followed by `is_hit`, and then `is_rolling`. A crucial challenge was designing the logic within the [_get_anim_name](https://github.com/xntle/MOMFURY/blob/9de11fa44a8213e075b997d1c3231155001684da/scripts/player.gd#L236) helper function to reliably translate the continuous mouse vector into the correct discrete 8-directional animation name using directional vector thresholds. I overcame the initial instability of this approach by refining the thresholds to be more tolerant, ensuring that when the character is actively moving (`direction != Vector2.ZERO`), a corresponding movement animation is always selected, rather than defaulting to `idle_down`. I learned the necessity of creating resilient vector comparison logic when matching continuous input (mouse aim) to discrete visual outputs (8-directional sprites).
 
 ### Bosses + Enemies 
-<img width="1440" height="900" alt="boss_animation" src="https://github.com/user-attachments/assets/38cd2e1e-21bf-4fc8-944c-35915c432076" />
-
 - For the boss and enemy animations, I created complete pixel-art sprite sheets that blended visual storytelling with technical precision to support readable, responsive combat feedback. Each character required multiple states—idle, moving, attacking, hit. One of the major technical challenges was maintaining character proportions and alignment across frames, so I built a custom sprite-sheet grid and established anchor rules for feet placement and body pivots. This prevented jittering during playback and ensured smooth transitions between animation states in Godot. To integrate the art into the engine, I sliced the sprite sheets into uniform frames and assigned them to the AnimatedSprite2D node with meticulously labeled animation names so they could be controlled programmatically via state logic in the player and enemy scripts. I also implemented directional variants for bosses and enemies, which required calculating movement vectors and mapping them to eight-direction animation logic.
-- The system uses the animation call inside the final animation block (e.g., `anim.play("baby_throw_diaper`) in BossBaby or `anim.play("daddy_attack"`) in BossDaddy) to signal the attack. Furthermore, I implemented the horizontal flipping logic (e.g., `anim.flip_h = true`) based on the boss's movement or facing direction (`move_dir` or `direction_to_player`) to ensure the boss always faces the correct direction during attacks and movement, thus improving visual clarity and player readability.
+- The system uses the animation call inside the final animation block (e.g., `anim.play("baby_throw_diaper`) in BossBaby or `anim.play("daddy_attack"`) in BossDaddy) to signal the attack. Furthermore, I implemented the horizontal flipping logic (e.g., `anim.flip_h = true`) based on the boss's movement or facing direction (move_dir or direction_to_player) to ensure the boss always faces the correct direction during attacks and movement, thus improving visual clarity and player readability.
 
 ### Hit-Reaction System + Death Animation
-<img width="1440" height="900" alt="death animation" src="https://github.com/user-attachments/assets/d8913a10-9d5d-4aea-8d09-3b95b665dfac" />
+- A critical component of this state hierarchy was the Hit-Reaction System, designed for immediate, unambiguous feedback when the player takes damage. I implemented a dedicated "hit" animation state for each movement direction. When the player receives damage, the script sets the `is_hit` flag, overriding all other states and locking the character into the corresponding hit animation for a fixed `hit_duration`. The red color was chosen specifically because red universally signifies damage, danger, or urgency in game design, instantly communicating the state change to the player. This system is an example of Modular Design, abstracting the hit logic away from enemy and weapon scripts.
 
-- A critical component of this state hierarchy was the Hit-Reaction System, designed for immediate, unambiguous feedback when the player takes damage. I implemented a dedicated "hit" animation state for each movement direction. When the player receives damage, the script sets the `is_hit` flag, overriding all other states and locking the character into the corresponding hit animation for a fixed `hit_duration`. The red color was chosen specifically because red universally signifies damage, danger, or urgency in game design, instantly communicating the state change to the player. 
-- The player experience was polished through the implementation of the Death Animation and Post-Death Flow. When the player's health reaches zero, the `take_damage(amount: int`) function sets the `is_dead` flag to true, locks player movement (`velocity = Vector2.ZERO`), and plays the -shot die animation (`anim.play("die")`). Crucially, this function no longer contains the unstable await keyword for audio or the immediate scene change logic. Instead, the transition is managed by the [_on_animation_finished(anim_name: StringName)](https://github.com/xntle/MOMFURY/blob/9de11fa44a8213e075b997d1c3231155001684da/scripts/player.gd#L397) function, which is connected to the animation signal. Upon detecting that the "die" animation has finished, this function initiates a signal-driven asynchronous delay. It does this by creating a persistent `SceneTreeTimer` and connecting its timeout signal to the scene change logic. This reliable use of the timer enforces a crucial two-second pause. Only after this stable delay does the closure execute, loading the End Screen scene (`end_screen.tscn`), passing necessary data (current_points, current_round), and removing the current game scene (`get_tree().current_scene.queue_free()`). 
+- The player experience was polished through the implementation of the Death Animation and Post-Death Flow. When the player's health reaches zero, the `take_damage(amount: int`) function sets the `is_dead` flag to true, locks player movement (`velocity = Vector2.ZERO`), and plays the -shot die animation (`anim.play("die")`). Crucially, this function no longer contains the unstable await keyword for audio or the immediate scene change logic. Instead, the transition is managed by the [_on_animation_finished(anim_name: StringName)](https://github.com/xntle/MOMFURY/blob/9de11fa44a8213e075b997d1c3231155001684da/scripts/player.gd#L397) function, which is connected to the animation signal. Upon detecting that the "die" animation has finished, this function initiates a signal-driven asynchronous delay. It does this by creating a persistent `SceneTreeTimer` and connecting its timeout signal to the scene change logic. This reliable use of the timer enforces a crucial two-second pause. Only after this stable delay does the closure execute, loading the End Screen scene (`end_screen.tscn`), passing necessary data (current_points, current_round), and removing the current game scene (`get_tree().current_scene.queue_free()`). This demonstrates effective concepts in Animation-driven game state transitions and Scene management and asynchronous delays, ensuring a smooth, reliable conclusion to the player's run.
 
 ### Weapons
-<img width="1440" height="900" alt="weapon_animation" src="https://github.com/user-attachments/assets/5c2ee1cc-7567-494d-8fe1-fa2308e66c07" />
-
-- I designed and implemented the visual system for the player's three unique weapons (Slipper, Rice Machine Gun, Broom), focusing on modularity and dynamic rendering. Each weapon is implemented as an individual Godot scene attached to the player hierarchy via dedicated `Node2D` or `Marker2D` nodes (e.g., `$slip`, `$Ricechine`, `$Broom`). This ensures the weapon's visual resources are different from the player's core logic. Weapon selection is managed by dynamically adjusting the visible property of these components to ensure only the `current_weapon` is displayed.
+- I designed and implemented the visual system for the player's three unique weapons (Slipper, Rice Machine Gun, Broom), focusing on modularity and dynamic rendering. Each weapon is implemented as an individual Godot scene attached to the player hierarchy via dedicated `Node2D` or `Marker2D` nodes (e.g., `$slip`, `$Ricechine`, `$Broom`). This approach follows the Component-Based Architecture principle, ensuring the weapon's visual resources are decoupled from the player's core logic. Weapon selection is managed by dynamically adjusting the visible property of these components to ensure only the `current_weapon` is displayed.
 
 
 ## Sub-Roles - Narrative Design
 
 ### Environmental Storytelling
-- My role in narrative design focused on using animation and visual theming to reinforce the game's core theme. The player character's weaponry—utilizing everyday household objects like brooms and slippers—creates a powerful juxtaposition between the mundane and the action, reinforcing the idea of a hero rising from domestic necessity. The aggressive nature and visual design of the antagonists are designed as narrative representations of familiar domestic stressors.
 
 ### Visual Choices
-- The visual and emotional elements, including color choices and expression, were carefully designed to enhance the narrative. The Mom character's visual design—wearing a red dress with yellow floral accents and glasses —was intentional. The red color of the dress immediately shows the power and ambition in the Mom's role. The glasses and floral dress suggest a familiar, typical Asian presence, which is then subverted by her aggressive actions. The thematic use of color was further crucial in the Hit-Reaction System: the temporary bright red color flash applied to the player when damage occurs instantly communicates the critical state change to the player. Similarly, the expression of the bosses reinforces their thematic role; for instance, the Boss Baby's chaotic, tearful expression in its attack animations directly translates a source of domestic stress into a readable visual cue.
-  
+
 ## Other Contribution
 
 ## Resources Used
