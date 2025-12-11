@@ -400,6 +400,7 @@ eg. player moving backwards but still faces the shoot direction
 - **Documentation**: Created and maintained comprehensive README with gameplay explanations, controls, enemy stats, and project resources
 - **Team coordination**: Managed git workflows, branch management, and pull request reviews
 - **Build management**: Handled export presets and build processes for web distribution
+- **Demo Video**: Created the demo video
 
 [Project structure](https://github.com/xntle/MOMFURY/tree/main/scripts) | [README documentation](https://github.com/xntle/MOMFURY/blob/main/README.md)
 
