@@ -296,9 +296,13 @@ Add addition contributions int he Other Contributions section.
 
 ### Other Contributions
 
+
 **Sound Design & Integration** - Implemented comprehensive audio system including hit sounds, attack sounds for each weapon (slipper throw, rice gun, broom swing), UI interaction sounds (hover, click), and enemy death sound variations with randomization. Created AudioStreamPlayer management with proper cleanup to prevent memory leaks. [Rice bullet sound](https://github.com/xntle/MOMFURY/blob/main/scripts/Weapons/rice_bullet.gd) | [UI sounds](https://github.com/xntle/MOMFURY/blob/main/scene/end_screen.gd) | [Enemy death sounds](https://github.com/xntle/MOMFURY/blob/main/scripts/Enemies/Aminus.gd)
 
 **Producer Role** - Organized project structure and folder hierarchy for the team. Managed HTML5 web deployment to itch.io including export configuration and browser compatibility. Created and maintained comprehensive README documentation with gameplay explanations, controls, and project resources. Coordinated team workflows and git branch management. [Project structure](https://github.com/xntle/MOMFURY/tree/main/scripts) | [README documentation](https://github.com/xntle/MOMFURY/blob/main/README.md)
+
+<img width="660" height="508" alt="Screenshot 2025-12-10 at 7 48 57 PM" src="https://github.com/user-attachments/assets/95401919-f5be-4673-ae81-f0fdd818a55c" />
+
 
 **Visual Assets** - Designed and created the game map through multiple iterations using Godot's tilemap system, creating the house environment layout with proper collision. Created splash screen using AI tool (nano banana) with references to in-game characters (Mom, Daddy, Teen, Baby) to establish visual identity and theming for the game. [Map implementation](https://github.com/xntle/MOMFURY/blob/main/scene/Game.tscn)
 
