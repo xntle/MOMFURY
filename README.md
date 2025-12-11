@@ -631,11 +631,22 @@ Add addition contributions int he Other Contributions section.
 
 ## Sub-Roles - Narrative Design
 
-### Environmental Storytelling
+### Environment and Visual Choices
+<img width="677" height="369" alt="boss-daddy-sprite" src="https://github.com/user-attachments/assets/ea2147f3-1238-401a-b718-5252f5d80d4a" />
+- My job in planning the story was to make sure the game's look, movement, and combat all supported the main idea: the everyday stress and powerful anger of the "Mom. The visual and emotional elements, including color choices and expression, were carefully designed to enhance the narrative. The main setting, the house, features vibrant, sometimes overly saturated colors. This intentional visual choice reinforces the sense of domestic chaos—the home is not a quiet sanctuary but a brightly lit, visually busy environment where stress runs high. The Mom character's visual design—wearing a red dress with yellow floral accents and glasses—was chosen to show a familiar, stable home presence that suddenly gets tough. The thematic use of color was further crucial in the Hit-Reaction System: the temporary bright red color flash applied to the player when damage occurs instantly communicates the critical state change. Similarly, the expression and visual identity of the bosses reinforces their thematic role. For instance, Boss Daddy is visually simple and large, often standing in stark contrast to the more chaotic, crying expression of Boss Baby. This contrast reflects the different types of stress they represent, translating familiar domestic tensions into readable visual cues.
 
-### Visual Choices
 
 ## Other Contribution
+
+### House Map Layout Plan 
+<img width="400" height="400" alt="house map layout" src="https://github.com/user-attachments/assets/5888e78d-b15b-418a-90fc-03386006042f" />
+
+- My initial contribution involved planning and designing the primary game environment which is the house map. This process included sketching the layout of interconnected rooms, designating clear pathways, and integrating the chosen tile-map assets. A key challenge was a design conflict: making the map big enough to support the  enemy count and provide dynamic combat space, while simultaneously keeping it "cozy" to maintain the necessary home-like feeling central to the game's theme.
+
+### Extra Spawn Animation
+<img width="400" height="400" alt="Untitled_design__5_-removebg-preview" src="https://github.com/user-attachments/assets/84ca294b-0c59-4359-a409-9647dcb14e41" />
+
+- I contributed extra visual polish by designing and implementing a specialized that plays specifically when enemies first appear in the level. This effect ensures that the emergence of an enemy from the spawner is marked by a clear visual cue. This follows the game feel principle of Anticipation and Clarity, where the game visually telegraphs events to the player.
 
 ## Resources Used
 - [Making a Player Character with Animations, Movement, and Collisions ~ Godot 4 Tutorial](https://www.youtube.com/watch?v=aJyRIpgh2hI)
