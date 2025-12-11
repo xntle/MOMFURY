@@ -1,5 +1,6 @@
 # MOMFURY
-<img width="360" height="200" alt="Screenshot 2025-12-08 at 4 36 08 AM" src="https://github.com/user-attachments/assets/b26fb211-34d3-40bb-b0b0-13d6e19ba07a" />
+
+<img width="100%" height="200" alt="Screenshot 2025-12-08 at 4 36 08 AM" src="https://github.com/user-attachments/assets/9ff34ffe-be6b-4088-9286-b030adf985fb" />
 
 ## Summary
 
