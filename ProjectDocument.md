@@ -1,5 +1,3 @@
-[ProjectDocumentTemplate.md](https://github.com/user-attachments/files/24088318/ProjectDocumentTemplate.md)
-
 # MOMFURY
 
 ## Summary
